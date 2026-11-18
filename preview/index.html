@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="id" data-dmp-theme="coretax" data-dmp-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preview Tema Coretax - DMP</title>
+<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
+<link rel="stylesheet" href="assets/base/bootstrap.min.css">
+<link rel="stylesheet" href="assets/base/iconkit.min.css">
+<link rel="stylesheet" href="assets/base/theme.min.css">
+<link rel="stylesheet" href="assets/dmp/tokens.css">
+<link rel="stylesheet" href="assets/dmp/theme.css">
+<link rel="stylesheet" href="../dist/coretax.css">
+<script>
+try { var m = localStorage.getItem('ctx-mode'); if (m) document.documentElement.setAttribute('data-dmp-mode', m); } catch (e) {}
+</script>
+</head>
+<body class="dmp-body">
+<div class="wrapper">
+
+    <header class="header-top" header-theme="light">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between">
+                <div class="top-menu d-flex align-items-center">
+                    <button type="button" class="btn-icon mobile-nav-toggle d-lg-none"><span></span></button>
+                    <button type="button" class="nav-link"><i class="ik ik-maximize"></i></button>
+                    <button type="button" class="nav-link ml-2"><i class="ik ik-printer"></i></button>
+                </div>
+                <div class="judul top-menu d-flex align-items-center" id="judul">
+                    <h3><b>DASHBOARD MANAJERIAL PENGAWASAN</b></h3>
+                </div>
+                <div class="top-menu d-flex align-items-center">
+                    <button type="button" class="nav-link mr-2" id="modeToggle" title="Terang / gelap"><i class="ik ik-moon"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-wrap">
+        <aside class="app-sidebar dmp-nav" id="dmpSidebar" data-ciut="0">
+            <div class="dmp-nav__kepala">
+                <a href="#" class="dmp-nav__merek">
+                    <span class="dmp-nav__logo"><i class="ik ik-bar-chart-2"></i></span>
+                    <span class="dmp-nav__merek-teks"><b>DMP</b><small>Dashboard Manajerial Pengawasan</small></span>
+                </a>
+                <button type="button" class="dmp-nav__ciut" id="btnCiut" aria-label="Ciutkan menu"><i class="ik ik-chevrons-left"></i></button>
+            </div>
+
+            <div class="dmp-nav__cari"><i class="ik ik-search"></i><input type="text" placeholder="Cari menu..."></div>
+
+            <nav class="dmp-nav__isi">
+                <div class="dmp-nav__label">Utama</div>
+
+                <div class="dmp-nav__grup paksa-buka">
+                    <button type="button" class="dmp-nav__butir dmp-nav__butir--grup aktif-induk">
+                        <i class="ik ik-clock"></i><span>Dashboard</span>
+                    </button>
+                    <div class="dmp-nav__sub"><div class="dmp-nav__sub-isi">
+                        <a href="#" class="dmp-nav__anak aktif">Beranda (baru)</a>
+                        <a href="#" class="dmp-nav__anak">Corong Kepatuhan (detail)</a>
+                        <a href="#" class="dmp-nav__anak">Nasional</a>
+                        <a href="#" class="dmp-nav__anak">Kanwil/KPP</a>
+                        <a href="#" class="dmp-nav__anak">Seksi/AR</a>
+                    </div></div>
+                </div>
+
+                <div class="dmp-nav__grup">
+                    <button type="button" class="dmp-nav__butir dmp-nav__butir--grup">
+                        <i class="ik ik-aperture"></i><span>Pengawasan Pembayaran</span>
+                    </button>
+                    <div class="dmp-nav__sub"><div class="dmp-nav__sub-isi">
+                        <a href="#" class="dmp-nav__anak">KAP KJS</a>
+                        <a href="#" class="dmp-nav__anak">Pembayaran Masa</a>
+                        <a href="#" class="dmp-nav__anak">Pengawasan Deposit</a>
+                        <a href="#" class="dmp-nav__anak">Lapisan</a>
+                    </div></div>
+                </div>
+
+                <div class="dmp-nav__grup">
+                    <button type="button" class="dmp-nav__butir dmp-nav__butir--grup">
+                        <i class="ik ik-box"></i><span>Pengawasan Lainnya</span>
+                    </button>
+                    <div class="dmp-nav__sub"><div class="dmp-nav__sub-isi">
+                        <a href="#" class="dmp-nav__anak">WP Aktivasi Coretax</a>
+                        <a href="#" class="dmp-nav__anak">Pegawai DJP Aktivasi Coretax</a>
+                    </div></div>
+                </div>
+
+                <div class="dmp-nav__grup">
+                    <button type="button" class="dmp-nav__butir dmp-nav__butir--grup">
+                        <i class="ik ik-crosshair"></i><span>Monitoring Kinerja Pengawasan</span>
+                    </button>
+                    <div class="dmp-nav__sub"><div class="dmp-nav__sub-isi">
+                        <a href="#" class="dmp-nav__anak">WP Bayar</a>
+                        <a href="#" class="dmp-nav__anak">WP Lapor</a>
+                        <a href="#" class="dmp-nav__anak">Rasio Kinerja</a>
+                    </div></div>
+                </div>
+
+                <div class="dmp-nav__label">Lainnya</div>
+                <a href="#" class="dmp-nav__butir"><i class="ik ik-map"></i><span>Kewilayahan</span></a>
+                <a href="#" class="dmp-nav__butir"><i class="ik ik-settings"></i><span>Pengaturan</span></a>
+            </nav>
+
+            <div class="dmp-nav__kaki">
+                <div class="dmp-nav__user">
+                    <span class="dmp-nav__avatar">R</span>
+                    <span class="dmp-nav__user-teks"><b>Pengguna Contoh</b><small>KPDJP</small></span>
+                </div>
+                <a href="#" class="dmp-nav__keluar"><i class="ik ik-power"></i></a>
+            </div>
+        </aside>
+
+        <div class="main-content">
+            <div class="container-fluid">
+
+                <div class="dmp-kpi-grid mb-3">
+                    <div class="dmp-kpi dmp-kpi--aksen"><div class="dmp-kpi__label">Penerimaan Neto</div><div class="dmp-kpi__value">1.248,6 T<span class="dmp-kpi__delta dmp-kpi__delta--naik">+4,2%</span></div></div>
+                    <div class="dmp-kpi"><div class="dmp-kpi__label">WP Aktivasi Coretax</div><div class="dmp-kpi__value">9.482.113<span class="dmp-kpi__delta dmp-kpi__delta--naik">+1,8%</span></div></div>
+                    <div class="dmp-kpi"><div class="dmp-kpi__label">Billing Belum Dibayar</div><div class="dmp-kpi__value">312.904<span class="dmp-kpi__delta dmp-kpi__delta--turun">-0,6%</span></div></div>
+                    <div class="dmp-kpi"><div class="dmp-kpi__label">Rasio Kepatuhan</div><div class="dmp-kpi__value">87,4%</div></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="dmp-card mb-3">
+                            <div class="dmp-card__head">
+                                <h4 class="dmp-card__title">Penerimaan per Kanwil</h4>
+                                <div class="dmp-card__tools"><button class="dmp-btn dmp-btn--kecil dmp-btn--lembut">Unduh</button><button class="dmp-btn dmp-btn--kecil dmp-btn--utama">Segarkan</button></div>
+                            </div>
+                            <div class="dmp-card__body dmp-card__body--flush">
+                                <div class="dmp-table__wrap">
+                                <table class="dmp-table">
+                                    <thead><tr><th>Kanwil</th><th class="dmp-num">Target</th><th class="dmp-num">Realisasi</th><th class="dmp-num">Capaian</th><th>Status</th></tr></thead>
+                                    <tbody>
+                                        <tr><td>Kanwil DJP Contoh A</td><td class="dmp-num">120.400</td><td class="dmp-num">118.220</td><td class="dmp-num">98,2%</td><td><span class="dmp-badge dmp-badge--sukses">Aman</span></td></tr>
+                                        <tr><td>Kanwil DJP Contoh B</td><td class="dmp-num">98.750</td><td class="dmp-num">87.310</td><td class="dmp-num">88,4%</td><td><span class="dmp-badge dmp-badge--awas">Waspada</span></td></tr>
+                                        <tr><td>Kanwil DJP Contoh C</td><td class="dmp-num">64.100</td><td class="dmp-num">47.980</td><td class="dmp-num">74,9%</td><td><span class="dmp-badge dmp-badge--bahaya">Kritis</span></td></tr>
+                                        <tr><td>Kanwil DJP Contoh D</td><td class="dmp-num">45.300</td><td class="dmp-num">45.902</td><td class="dmp-num">101,3%</td><td><span class="dmp-badge dmp-badge--netral">Melampaui</span></td></tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header"><h3>Komponen Lama (Bootstrap)</h3></div>
+                            <div class="card-body">
+                                <div class="form-group"><label>Cari NPWP</label><input class="form-control" placeholder="Masukkan NPWP"></div>
+                                <button class="btn btn-primary">Cari</button>
+                                <table class="table table-sm mt-3"><thead><tr><th>Masa</th><th>Jumlah</th></tr></thead>
+                                    <tbody><tr><td>Jan</td><td>1.000</td></tr><tr><td>Feb</td><td>1.200</td></tr></tbody></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <footer class="footer"><div class="container-fluid"><small>DMP - tema Coretax (preview)</small></div></footer>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    document.querySelectorAll('.dmp-nav__butir--grup').forEach(function (b) {
+        b.addEventListener('click', function () { b.parentNode.classList.toggle('paksa-buka'); });
+    });
+    var root = document.documentElement;
+    document.getElementById('modeToggle').addEventListener('click', function () {
+        var next = root.getAttribute('data-dmp-mode') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-dmp-mode', next);
+        try { localStorage.setItem('ctx-mode', next); } catch (e) {}
+    });
+    var nav = document.getElementById('dmpSidebar');
+    document.getElementById('btnCiut').addEventListener('click', function () {
+        var c = nav.getAttribute('data-ciut') === '1' ? '0' : '1';
+        nav.setAttribute('data-ciut', c);
+        document.body.classList.toggle('dmp-nav-ciut', c === '1');
+    });
+})();
+</script>
+</body>
+</html>

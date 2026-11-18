@@ -1,0 +1,574 @@
+/* =============================================================
+ * tokens.css — Sumber tunggal warna aplikasi DMP
+ * Fase 1.1 · Dibuat 2026-07-31
+ *
+ * CARA KERJA
+ * ----------
+ * Semua warna ditulis sebagai variabel CSS (--dmp-*). Komponen tidak
+ * pernah menulis kode warna langsung, hanya memanggil variabelnya:
+ *
+ *     .dmp-card { background: var(--dmp-surface); }
+ *
+ * Tema diganti dengan mengubah dua atribut di tag <html>:
+ *
+ *     <html data-dmp-theme="teal" data-dmp-mode="dark">
+ *              └─ 8 pilihan warna      └─ light | dark
+ *
+ * 8 warna x 2 mode = 16 tampilan, tanpa proses build.
+ *
+ * ATURAN PENTING
+ * --------------
+ * Dilarang menulis kode warna (#xxxxxx / rgb()) di file CSS lain.
+ * Satu warna mati akan tampak rusak saat pengguna berganti tema.
+ *
+ * DUKUNGAN INTERNET EXPLORER 11
+ * -----------------------------
+ * IE11 tidak mengenal var(). Karena itu setiap komponen menulis
+ * warna cadangan lebih dulu, baru var() di baris berikutnya:
+ *
+ *     background: #ffffff;                  <- dibaca IE11
+ *     background: var(--dmp-surface);       <- diabaikan IE11
+ *
+ * Hasilnya: IE11 tetap terbaca dengan satu tema bawaan (Biru Arsip
+ * terang), hanya tidak bisa berganti tema. Lihat docs/05-ADR-002.
+ * ============================================================= */
+
+
+/* -------------------------------------------------------------
+ * 1. NETRAL — rangka aplikasi
+ *    Sama di semua preset warna. Yang membedakan hanya mode
+ *    terang/gelap. Ini yang membuat tampilan tetap "netral"
+ *    dan aksen warna jadi menonjol.
+ * ----------------------------------------------------------- */
+
+:root,
+[data-dmp-mode="light"] {
+    --dmp-bg:            #f4f6f8;  /* latar paling belakang           */
+    --dmp-surface:       #ffffff;  /* kartu, panel, tabel             */
+    --dmp-surface-2:     #f9fafb;  /* kepala tabel, baris belang      */
+    --dmp-surface-3:     #eef1f4;  /* area tertekan, kolom terkunci   */
+    --dmp-border:        #e2e6eb;  /* garis pemisah                   */
+    --dmp-border-strong: #cbd2da;  /* garis yang perlu lebih terlihat */
+    --dmp-text:          #131820;  /* teks utama                      */
+    --dmp-text-muted:    #5a6472;  /* keterangan, label sekunder      */
+    --dmp-text-faint:    #8b95a3;  /* placeholder, teks nonaktif      */
+
+    /* Bayangan — halus, tidak dramatis */
+    --dmp-shadow-sm: 0 1px 2px rgba(19, 24, 32, .06);
+    --dmp-shadow:    0 2px 8px rgba(19, 24, 32, .08);
+    --dmp-shadow-lg: 0 8px 28px rgba(19, 24, 32, .12);
+
+    /* Warna makna — tidak ikut berubah saat preset diganti,
+       karena "merah = bahaya" harus selalu merah. */
+    --dmp-success:      #16a34a;
+    --dmp-success-soft: #dcfce7;
+    --dmp-warning:      #b45309;
+    --dmp-warning-soft: #fef3c7;
+    --dmp-danger:       #dc2626;
+    --dmp-danger-soft:  #fee2e2;
+    --dmp-info:         #0287cc;
+    --dmp-info-soft:    #e0f2fe;
+
+    /* Latar halaman login — dua lapis gradasi lembut */
+    --dmp-login-bg: #eef1f5;
+
+    color-scheme: light;
+}
+
+[data-dmp-mode="dark"] {
+    --dmp-bg:            #0e1116;
+    --dmp-surface:       #161a20;
+    --dmp-surface-2:     #1d222a;
+    --dmp-surface-3:     #242b34;
+    --dmp-border:        #2a313b;
+    --dmp-border-strong: #3a434f;
+    --dmp-text:          #e9eef4;
+    --dmp-text-muted:    #98a3b0;
+    --dmp-text-faint:    #6b7684;
+
+    --dmp-shadow-sm: 0 1px 2px rgba(0, 0, 0, .40);
+    --dmp-shadow:    0 2px 8px rgba(0, 0, 0, .50);
+    --dmp-shadow-lg: 0 8px 28px rgba(0, 0, 0, .60);
+
+    /* Versi lebih terang agar tetap terbaca di latar gelap */
+    --dmp-success:      #4ade80;
+    --dmp-success-soft: #14321f;
+    --dmp-warning:      #fbbf24;
+    --dmp-warning-soft: #33270a;
+    --dmp-danger:       #f87171;
+    --dmp-danger-soft:  #391616;
+    --dmp-info:         #38bdf8;
+    --dmp-info-soft:    #0c2839;
+
+    --dmp-login-bg: #0b0e12;
+
+    color-scheme: dark;
+}
+
+
+/* -------------------------------------------------------------
+ * 2. AKSEN — 8 preset warna
+ *
+ *    --dmp-accent       warna utama: tombol, tautan, menu aktif
+ *    --dmp-accent-hover saat kursor di atasnya
+ *    --dmp-accent-soft  latar lembut: lencana, sorotan baris
+ *    --dmp-accent-on    warna teks DI ATAS --dmp-accent
+ *    --dmp-accent-ring  cincin fokus keyboard
+ *
+ *    Nilai mode gelap dibuat lebih terang. Warna yang nyaman di
+ *    latar putih akan tampak pekat dan sulit dibaca di latar hitam.
+ * ----------------------------------------------------------- */
+
+/* --- 1. Biru Arsip (BAWAAN) --------------------------------- */
+:root,
+[data-dmp-theme="biru"] {
+    --dmp-accent:       #2f74f0;
+    --dmp-accent-hover: #1d5fe0;
+    --dmp-accent-soft:  #dbeafe;
+    --dmp-accent-on:    #ffffff;
+    --dmp-accent-ring:  rgba(37, 99, 235, .35);
+}
+[data-dmp-mode="dark"][data-dmp-theme="biru"],
+[data-dmp-mode="dark"]:not([data-dmp-theme]) {
+    --dmp-accent:       #60a5fa;
+    --dmp-accent-hover: #93c5fd;
+    --dmp-accent-soft:  #17253d;
+    --dmp-accent-on:    #0b1220;
+    --dmp-accent-ring:  rgba(96, 165, 250, .40);
+}
+
+/* --- 2. Nila Laut ------------------------------------------- */
+[data-dmp-theme="nila"] {
+    --dmp-accent:       #0287cc;
+    --dmp-accent-hover: #026ba6;
+    --dmp-accent-soft:  #e0f2fe;
+    --dmp-accent-on:    #ffffff;
+    --dmp-accent-ring:  rgba(3, 105, 161, .35);
+}
+[data-dmp-mode="dark"][data-dmp-theme="nila"] {
+    --dmp-accent:       #38bdf8;
+    --dmp-accent-hover: #7dd3fc;
+    --dmp-accent-soft:  #0c2839;
+    --dmp-accent-on:    #06121b;
+    --dmp-accent-ring:  rgba(56, 189, 248, .40);
+}
+
+/* --- 3. Teal Rimba ------------------------------------------ */
+[data-dmp-theme="teal"] {
+    --dmp-accent:       #0eb3a3;
+    --dmp-accent-hover: #0c9186;
+    --dmp-accent-soft:  #ccfbf1;
+    --dmp-accent-on:    #ffffff;
+    --dmp-accent-ring:  rgba(13, 148, 136, .35);
+}
+[data-dmp-mode="dark"][data-dmp-theme="teal"] {
+    --dmp-accent:       #2dd4bf;
+    --dmp-accent-hover: #5eead4;
+    --dmp-accent-soft:  #0d2b28;
+    --dmp-accent-on:    #04140f;
+    --dmp-accent-ring:  rgba(45, 212, 191, .40);
+}
+
+/* --- 4. Hijau Padi ------------------------------------------ */
+[data-dmp-theme="hijau"] {
+    --dmp-accent:       #18a34a;
+    --dmp-accent-hover: #12833b;
+    --dmp-accent-soft:  #dcfce7;
+    --dmp-accent-on:    #ffffff;
+    --dmp-accent-ring:  rgba(21, 128, 61, .35);
+}
+[data-dmp-mode="dark"][data-dmp-theme="hijau"] {
+    --dmp-accent:       #4ade80;
+    --dmp-accent-hover: #86efac;
+    --dmp-accent-soft:  #102a1a;
+    --dmp-accent-on:    #04140a;
+    --dmp-accent-ring:  rgba(74, 222, 128, .40);
+}
+
+/* --- 5. Ungu Senja ------------------------------------------ */
+[data-dmp-theme="ungu"] {
+    --dmp-accent:       #8b5cf6;
+    --dmp-accent-hover: #7c3aed;
+    --dmp-accent-soft:  #ede9fe;
+    --dmp-accent-on:    #ffffff;
+    --dmp-accent-ring:  rgba(124, 58, 237, .35);
+}
+[data-dmp-mode="dark"][data-dmp-theme="ungu"] {
+    --dmp-accent:       #a78bfa;
+    --dmp-accent-hover: #c4b5fd;
+    --dmp-accent-soft:  #221a3d;
+    --dmp-accent-on:    #0f0a1c;
+    --dmp-accent-ring:  rgba(167, 139, 250, .40);
+}
+
+/* --- 6. Anggrek --------------------------------------------- */
+[data-dmp-theme="anggrek"] {
+    --dmp-accent:       #c026d3;
+    --dmp-accent-hover: #a21caf;
+    --dmp-accent-soft:  #fae8ff;
+    --dmp-accent-on:    #ffffff;
+    --dmp-accent-ring:  rgba(162, 28, 175, .35);
+}
+[data-dmp-mode="dark"][data-dmp-theme="anggrek"] {
+    --dmp-accent:       #e879f9;
+    --dmp-accent-hover: #f0abfc;
+    --dmp-accent-soft:  #331036;
+    --dmp-accent-on:    #1a0619;
+    --dmp-accent-ring:  rgba(232, 121, 249, .40);
+}
+
+/* --- 7. Merah Bata ------------------------------------------ */
+[data-dmp-theme="bata"] {
+    --dmp-accent:       #e11d48;
+    --dmp-accent-hover: #be123c;
+    --dmp-accent-soft:  #ffe4e6;
+    --dmp-accent-on:    #ffffff;
+    --dmp-accent-ring:  rgba(190, 18, 60, .35);
+}
+[data-dmp-mode="dark"][data-dmp-theme="bata"] {
+    --dmp-accent:       #fb7185;
+    --dmp-accent-hover: #fda4af;
+    --dmp-accent-soft:  #3a1119;
+    --dmp-accent-on:    #1c060b;
+    --dmp-accent-ring:  rgba(251, 113, 133, .40);
+}
+
+/* --- 8. Oranye Bara ----------------------------------------- */
+[data-dmp-theme="oranye"] {
+    --dmp-accent:       #e35411;
+    --dmp-accent-hover: #c2410c;
+    --dmp-accent-soft:  #ffedd5;
+    --dmp-accent-on:    #ffffff;
+    --dmp-accent-ring:  rgba(194, 65, 12, .35);
+}
+[data-dmp-mode="dark"][data-dmp-theme="oranye"] {
+    --dmp-accent:       #fb923c;
+    --dmp-accent-hover: #fdba74;
+    --dmp-accent-soft:  #3a2010;
+    --dmp-accent-on:    #1b0d04;
+    --dmp-accent-ring:  rgba(251, 146, 60, .40);
+}
+
+
+/* -------------------------------------------------------------
+ * 3. PALET CHART
+ *    Dipakai oleh dmp-echart.js sebagai warna deret data.
+ *
+ *    Deret pertama selalu memakai warna aksen tema, sehingga
+ *    chart terasa menyatu dengan aplikasi. Deret 2-8 tetap
+ *    memakai warna baku agar antar-kategori tetap mudah
+ *    dibedakan, termasuk oleh pengguna buta warna.
+ * ----------------------------------------------------------- */
+
+:root,
+[data-dmp-mode="light"] {
+    --dmp-chart-1: var(--dmp-accent);
+    --dmp-chart-2: #f59e0b;
+    --dmp-chart-3: #10b981;
+    --dmp-chart-4: #8b5cf6;
+    --dmp-chart-5: #ef4444;
+    --dmp-chart-6: #06b6d4;
+    --dmp-chart-7: #ec4899;
+    --dmp-chart-8: #84cc16;
+
+    --dmp-chart-grid:  #eaeef2;  /* garis bantu     */
+    --dmp-chart-axis:  #97a1ae;  /* label sumbu     */
+    --dmp-chart-label: #4b5563;  /* teks di chart   */
+}
+
+[data-dmp-mode="dark"] {
+    --dmp-chart-1: var(--dmp-accent);
+    --dmp-chart-2: #fbbf24;
+    --dmp-chart-3: #34d399;
+    --dmp-chart-4: #a78bfa;
+    --dmp-chart-5: #f87171;
+    --dmp-chart-6: #22d3ee;
+    --dmp-chart-7: #f472b6;
+    --dmp-chart-8: #a3e635;
+
+    --dmp-chart-grid:  #262d36;
+    --dmp-chart-axis:  #7d8794;
+    --dmp-chart-label: #b8c2ce;
+}
+
+
+/* -------------------------------------------------------------
+ * 3b. PILIHAN PALET GRAFIK
+ *
+ *     Dipilih terpisah dari warna aksen, lewat atribut:
+ *         <html data-dmp-palette="aman">
+ *
+ *     Kenapa dipisah? Warna aksen mengurus rangka aplikasi - tombol,
+ *     menu aktif, tautan. Palet grafik mengurus hal berbeda: warna
+ *     yang harus MUDAH DIBEDAKAN satu sama lain. Dua kebutuhan yang
+ *     tidak selalu sejalan.
+ *
+ *     Bila atribut tidak diisi, dipakai palet "bawaan" di bagian 3.
+ * ----------------------------------------------------------- */
+
+/* --- Cerah: kontras tinggi, cocok untuk proyektor ruang rapat --- */
+[data-dmp-palette="cerah"] {
+    --dmp-chart-1: #2f74f0;
+    --dmp-chart-2: #ea580c;
+    --dmp-chart-3: #059669;
+    --dmp-chart-4: #8b5cf6;
+    --dmp-chart-5: #dc2626;
+    --dmp-chart-6: #0891b2;
+    --dmp-chart-7: #db2777;
+    --dmp-chart-8: #65a30d;
+}
+[data-dmp-mode="dark"][data-dmp-palette="cerah"] {
+    --dmp-chart-1: #60a5fa;
+    --dmp-chart-2: #fb923c;
+    --dmp-chart-3: #34d399;
+    --dmp-chart-4: #a78bfa;
+    --dmp-chart-5: #f87171;
+    --dmp-chart-6: #22d3ee;
+    --dmp-chart-7: #f472b6;
+    --dmp-chart-8: #a3e635;
+}
+
+/* --- Lembut: untuk halaman padat, agar tidak melelahkan mata --- */
+[data-dmp-palette="lembut"] {
+    --dmp-chart-1: #7d9cc0;
+    --dmp-chart-2: #e0b080;
+    --dmp-chart-3: #86b8a1;
+    --dmp-chart-4: #a99ac4;
+    --dmp-chart-5: #d99a9a;
+    --dmp-chart-6: #8fbcc7;
+    --dmp-chart-7: #d3a2bd;
+    --dmp-chart-8: #b6c68a;
+}
+[data-dmp-mode="dark"][data-dmp-palette="lembut"] {
+    --dmp-chart-1: #8fb0d4;
+    --dmp-chart-2: #edc191;
+    --dmp-chart-3: #97cbb3;
+    --dmp-chart-4: #bcaed6;
+    --dmp-chart-5: #e8adad;
+    --dmp-chart-6: #a2cfda;
+    --dmp-chart-7: #e5b5d0;
+    --dmp-chart-8: #c8d89c;
+}
+
+/* --- Aman buta warna (palet Okabe-Ito) --------------------------
+ * Sekitar 8% pria mengalami buta warna merah-hijau. Palet ini
+ * dirancang agar seluruh warnanya tetap dapat dibedakan pada
+ * deuteranopia, protanopia, dan tritanopia.
+ *
+ * Layak dipilih bila grafik akan dipakai untuk pengambilan
+ * keputusan bersama, bukan sekadar dilihat sendiri.
+ * ------------------------------------------------------------- */
+[data-dmp-palette="aman"] {
+    --dmp-chart-1: #0072b2;
+    --dmp-chart-2: #e69f00;
+    --dmp-chart-3: #009e73;
+    --dmp-chart-4: #cc79a7;
+    --dmp-chart-5: #d55e00;
+    --dmp-chart-6: #56b4e9;
+    --dmp-chart-7: #f0e442;
+    --dmp-chart-8: #6b7280;
+}
+[data-dmp-mode="dark"][data-dmp-palette="aman"] {
+    --dmp-chart-1: #4da3d9;
+    --dmp-chart-2: #f0b840;
+    --dmp-chart-3: #3dbf9a;
+    --dmp-chart-4: #dc9cc0;
+    --dmp-chart-5: #ef8340;
+    --dmp-chart-6: #85caf0;
+    --dmp-chart-7: #f5ec7a;
+    --dmp-chart-8: #98a1ad;
+}
+
+/* --- Bumi: nuansa tanah, tenang dan formal ---------------------- */
+[data-dmp-palette="bumi"] {
+    --dmp-chart-1: #8c6d46;
+    --dmp-chart-2: #c08a4e;
+    --dmp-chart-3: #6b8e5a;
+    --dmp-chart-4: #9e7b6b;
+    --dmp-chart-5: #b5563f;
+    --dmp-chart-6: #5f8a8b;
+    --dmp-chart-7: #a58a5e;
+    --dmp-chart-8: #7a7f5c;
+}
+[data-dmp-mode="dark"][data-dmp-palette="bumi"] {
+    --dmp-chart-1: #b8916a;
+    --dmp-chart-2: #ddaa72;
+    --dmp-chart-3: #8fb37c;
+    --dmp-chart-4: #c0a08f;
+    --dmp-chart-5: #d97a62;
+    --dmp-chart-6: #85b0b1;
+    --dmp-chart-7: #c8ae83;
+    --dmp-chart-8: #a1a67f;
+}
+
+/* --- Satu warna: gradasi dari terang ke gelap -------------------
+ * Untuk data BERURUT - lapisan penerimaan, rentang usia, kelompok
+ * nilai. Palet berwarna-warni justru menyesatkan di sana, karena
+ * warna berbeda menyiratkan kategori berbeda, padahal datanya
+ * bertingkat.
+ * ------------------------------------------------------------- */
+[data-dmp-palette="tunggal"] {
+    --dmp-chart-1: #1e3a8a;
+    --dmp-chart-2: #1d5fe0;
+    --dmp-chart-3: #2f74f0;
+    --dmp-chart-4: #3b82f6;
+    --dmp-chart-5: #60a5fa;
+    --dmp-chart-6: #93c5fd;
+    --dmp-chart-7: #bfdbfe;
+    --dmp-chart-8: #dbeafe;
+}
+[data-dmp-mode="dark"][data-dmp-palette="tunggal"] {
+    --dmp-chart-1: #dbeafe;
+    --dmp-chart-2: #bfdbfe;
+    --dmp-chart-3: #93c5fd;
+    --dmp-chart-4: #60a5fa;
+    --dmp-chart-5: #3b82f6;
+    --dmp-chart-6: #2f74f0;
+    --dmp-chart-7: #1d5fe0;
+    --dmp-chart-8: #1e3a8a;
+}
+
+/* --- Senja: hangat, dari kuning ke ungu ------------------------ */
+[data-dmp-palette="senja"] {
+    --dmp-chart-1: #f59e0b; --dmp-chart-2: #ef7c3c; --dmp-chart-3: #e0566b;
+    --dmp-chart-4: #c13d8c; --dmp-chart-5: #8e3ba3; --dmp-chart-6: #5b3f9e;
+    --dmp-chart-7: #f0b429; --dmp-chart-8: #d94f70;
+}
+[data-dmp-mode="dark"][data-dmp-palette="senja"] {
+    --dmp-chart-1: #fbbf24; --dmp-chart-2: #fb923c; --dmp-chart-3: #f87186;
+    --dmp-chart-4: #e069ac; --dmp-chart-5: #b06bc4; --dmp-chart-6: #8b7ac9;
+    --dmp-chart-7: #fcd34d; --dmp-chart-8: #f08099;
+}
+
+/* --- Laut: biru ke hijau, tenang -------------------------------- */
+[data-dmp-palette="laut"] {
+    --dmp-chart-1: #0c4a6e; --dmp-chart-2: #0369a1; --dmp-chart-3: #0284c7;
+    --dmp-chart-4: #0891b2; --dmp-chart-5: #0d9488; --dmp-chart-6: #14b8a6;
+    --dmp-chart-7: #2dd4bf; --dmp-chart-8: #5eead4;
+}
+[data-dmp-mode="dark"][data-dmp-palette="laut"] {
+    --dmp-chart-1: #7dd3fc; --dmp-chart-2: #38bdf8; --dmp-chart-3: #22d3ee;
+    --dmp-chart-4: #2dd4bf; --dmp-chart-5: #34d399; --dmp-chart-6: #4ade80;
+    --dmp-chart-7: #86efac; --dmp-chart-8: #bbf7d0;
+}
+
+/* --- Hutan: hijau ke cokelat ------------------------------------ */
+[data-dmp-palette="hutan"] {
+    --dmp-chart-1: #14532d; --dmp-chart-2: #166534; --dmp-chart-3: #15803d;
+    --dmp-chart-4: #4d7c0f; --dmp-chart-5: #65a30d; --dmp-chart-6: #849c1f;
+    --dmp-chart-7: #a16207; --dmp-chart-8: #854d0e;
+}
+[data-dmp-mode="dark"][data-dmp-palette="hutan"] {
+    --dmp-chart-1: #86efac; --dmp-chart-2: #4ade80; --dmp-chart-3: #34d399;
+    --dmp-chart-4: #a3e635; --dmp-chart-5: #bef264; --dmp-chart-6: #d9f99d;
+    --dmp-chart-7: #fbbf24; --dmp-chart-8: #d6a55c;
+}
+
+/* --- Permen: cerah dan riang, untuk paparan ke publik ---------- */
+[data-dmp-palette="permen"] {
+    --dmp-chart-1: #ec4899; --dmp-chart-2: #f59e0b; --dmp-chart-3: #22c55e;
+    --dmp-chart-4: #3b82f6; --dmp-chart-5: #a855f7; --dmp-chart-6: #06b6d4;
+    --dmp-chart-7: #f43f5e; --dmp-chart-8: #84cc16;
+}
+[data-dmp-mode="dark"][data-dmp-palette="permen"] {
+    --dmp-chart-1: #f472b6; --dmp-chart-2: #fbbf24; --dmp-chart-3: #4ade80;
+    --dmp-chart-4: #60a5fa; --dmp-chart-5: #c084fc; --dmp-chart-6: #22d3ee;
+    --dmp-chart-7: #fb7185; --dmp-chart-8: #a3e635;
+}
+
+/* --- Kontras: warna berjauhan di roda warna --------------------
+ * Untuk grafik dengan banyak kategori yang harus jelas terpisah.
+ * ------------------------------------------------------------- */
+[data-dmp-palette="kontras"] {
+    --dmp-chart-1: #1d4ed8; --dmp-chart-2: #dc2626; --dmp-chart-3: #15803d;
+    --dmp-chart-4: #d97706; --dmp-chart-5: #7c3aed; --dmp-chart-6: #0d9488;
+    --dmp-chart-7: #be185d; --dmp-chart-8: #4d7c0f;
+}
+[data-dmp-mode="dark"][data-dmp-palette="kontras"] {
+    --dmp-chart-1: #60a5fa; --dmp-chart-2: #f87171; --dmp-chart-3: #4ade80;
+    --dmp-chart-4: #fbbf24; --dmp-chart-5: #a78bfa; --dmp-chart-6: #2dd4bf;
+    --dmp-chart-7: #f472b6; --dmp-chart-8: #a3e635;
+}
+
+/* --- Abu: netral, hanya deret pertama berwarna -----------------
+ * Untuk grafik yang menonjolkan SATU deret dan menjadikan sisanya
+ * sekadar pembanding.
+ * ------------------------------------------------------------- */
+[data-dmp-palette="abu"] {
+    --dmp-chart-1: var(--dmp-accent);
+    --dmp-chart-2: #94a3b8; --dmp-chart-3: #a8b3c1; --dmp-chart-4: #b8c2ce;
+    --dmp-chart-5: #c7cfd9; --dmp-chart-6: #d5dbe3; --dmp-chart-7: #e2e7ec;
+    --dmp-chart-8: #eef1f4;
+}
+[data-dmp-mode="dark"][data-dmp-palette="abu"] {
+    --dmp-chart-1: var(--dmp-accent);
+    --dmp-chart-2: #64748b; --dmp-chart-3: #58657a; --dmp-chart-4: #4c586b;
+    --dmp-chart-5: #414c5d; --dmp-chart-6: #37414f; --dmp-chart-7: #2e3743;
+    --dmp-chart-8: #262e38;
+}
+
+
+/* -------------------------------------------------------------
+ * 4. BENTUK, JARAK, HURUF
+ *    Bukan warna, tapi ikut menentukan "rasa" tampilan.
+ *    Nilainya sama di semua tema.
+ * ----------------------------------------------------------- */
+
+:root {
+    --dmp-radius-sm: 6px;
+    --dmp-radius:    10px;
+    --dmp-radius-lg: 14px;
+    --dmp-radius-pill: 999px;
+
+    --dmp-space-1: 4px;
+    --dmp-space-2: 8px;
+    --dmp-space-3: 12px;
+    --dmp-space-4: 16px;
+    --dmp-space-5: 24px;
+    --dmp-space-6: 32px;
+
+    --dmp-font: "Nunito Sans", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --dmp-font-mono: "Cascadia Mono", Consolas, "Courier New", monospace;
+
+    --dmp-text-xs: 11px;
+    --dmp-text-sm: 13px;
+    --dmp-text-md: 14px;
+    --dmp-text-lg: 16px;
+    --dmp-text-xl: 20px;
+
+    --dmp-sidebar-w:           248px;
+    --dmp-sidebar-w-collapsed:  64px;
+    --dmp-header-h:             56px;
+
+    --dmp-transition: 160ms cubic-bezier(.4, 0, .2, 1);
+}
+
+
+/* -------------------------------------------------------------
+ * 5. AKSESIBILITAS
+ * ----------------------------------------------------------- */
+
+/* Pengguna yang mengaktifkan "kurangi gerakan" di sistem operasinya
+   biasanya sensitif terhadap animasi (mual, pusing, migrain).
+   Hormati pengaturan itu. */
+@media (prefers-reduced-motion: reduce) {
+    :root { --dmp-transition: 0ms; }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Cincin fokus wajib terlihat. Jangan pernah pakai outline:none
+   tanpa menyediakan penanda pengganti - pengguna keyboard akan
+   tersesat karena tidak tahu sedang berada di elemen mana. */
+:focus-visible {
+    outline: 2px solid var(--dmp-accent);
+    outline-offset: 2px;
+    border-radius: var(--dmp-radius-sm);
+}

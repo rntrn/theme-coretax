@@ -1,0 +1,3304 @@
+/* =============================================================
+ * theme.css — Komponen tampilan DMP
+ * Fase 1.3 · Dibuat 2026-07-31
+ *
+ * WAJIB dimuat SESUDAH tokens.css dan SESUDAH theme.min.css lama.
+ * Urutannya menentukan: berkas ini perlu berada paling akhir agar
+ * bisa menimpa aturan warisan tanpa memakai !important.
+ *
+ * ATURAN PENULISAN
+ * ----------------
+ * 1. Semua kelas baru berawalan .dmp- agar tidak bentrok dengan
+ *    Bootstrap 4 dan puluhan plugin yang sudah ada.
+ * 2. Setiap warna ditulis dua kali: nilai cadangan lebih dulu,
+ *    lalu var(). IE11 mengabaikan baris var() dan memakai cadangan,
+ *    sehingga tetap terbaca walau tidak bisa berganti tema.
+ * 3. Dilarang !important kecuali benar-benar buntu, dan bila
+ *    terpaksa wajib disertai komentar alasannya.
+ * ============================================================= */
+
+
+/* -------------------------------------------------------------
+ * 1. DASAR
+ * ----------------------------------------------------------- */
+
+.dmp-scope,
+body.dmp-body {
+    background: #f4f6f8;
+    background: var(--dmp-bg);
+    color: #131820;
+    color: var(--dmp-text);
+    font-family: "Nunito Sans", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-family: var(--dmp-font);
+    font-size: 14px;
+    font-size: var(--dmp-text-md);
+    -webkit-font-smoothing: antialiased;
+}
+
+.dmp-scope *,
+.dmp-scope *::before,
+.dmp-scope *::after { box-sizing: border-box; }
+
+
+/* -------------------------------------------------------------
+ * 2. KARTU
+ *    Wadah dasar hampir semua isi halaman.
+ * ----------------------------------------------------------- */
+
+.dmp-card {
+    background: #ffffff;
+    background: var(--dmp-surface);
+    border: 1px solid #e2e6eb;
+    border: 1px solid var(--dmp-border);
+    border-radius: 10px;
+    border-radius: var(--dmp-radius);
+    box-shadow: 0 1px 2px rgba(19, 24, 32, .06);
+    box-shadow: var(--dmp-shadow-sm);
+    overflow: hidden;
+}
+
+.dmp-card__head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e6eb;
+    border-bottom: 1px solid var(--dmp-border);
+}
+
+.dmp-card__title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: #131820;
+    color: var(--dmp-text);
+}
+
+.dmp-card__sub {
+    margin: 2px 0 0;
+    font-size: 11px;
+    font-size: var(--dmp-text-xs);
+    color: #5a6472;
+    color: var(--dmp-text-muted);
+}
+
+/* Tombol dan aksi di kanan kepala kartu */
+.dmp-card__tools { margin-left: auto; display: flex; gap: 6px; align-items: center; }
+
+.dmp-card__body { padding: 16px; }
+.dmp-card__body--flush { padding: 0; }   /* untuk tabel yang menempel tepi */
+
+
+/* -------------------------------------------------------------
+ * 3. KARTU ANGKA (KPI)
+ * ----------------------------------------------------------- */
+
+.dmp-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 12px;
+}
+
+.dmp-kpi {
+    background: #ffffff;
+    background: var(--dmp-surface);
+    border: 1px solid #e2e6eb;
+    border: 1px solid var(--dmp-border);
+    border-radius: 10px;
+    border-radius: var(--dmp-radius);
+    padding: 14px 16px;
+    box-shadow: 0 1px 2px rgba(19, 24, 32, .06);
+    box-shadow: var(--dmp-shadow-sm);
+}
+
+.dmp-kpi__label {
+    display: block;
+    font-size: 11px;
+    font-size: var(--dmp-text-xs);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: #5a6472;
+    color: var(--dmp-text-muted);
+    margin-bottom: 6px;
+}
+
+.dmp-kpi__value {
+    font-size: 24px;
+    font-weight: 750;
+    line-height: 1.15;
+    letter-spacing: -.02em;
+    color: #131820;
+    color: var(--dmp-text);
+    /* Angka rata lebar agar kolom tidak bergeser saat nilainya berubah */
+    font-variant-numeric: tabular-nums;
+}
+
+.dmp-kpi__delta { font-size: 11px; font-weight: 700; margin-left: 6px; }
+.dmp-kpi__delta--naik  { color: #16a34a; color: var(--dmp-success); }
+.dmp-kpi__delta--turun { color: #dc2626; color: var(--dmp-danger); }
+
+/* Garis aksen tipis di sisi kiri, penanda kelompok */
+.dmp-kpi--aksen {
+    border-left: 3px solid #2563eb;
+    border-left: 3px solid var(--dmp-accent);
+}
+
+
+/* -------------------------------------------------------------
+ * 4. TABEL
+ * ----------------------------------------------------------- */
+
+.dmp-table { width: 100%; border-collapse: collapse; font-size: 13px; font-size: var(--dmp-text-sm); }
+
+.dmp-table thead th {
+    background: #f9fafb;
+    background: var(--dmp-surface-2);
+    color: #5a6472;
+    color: var(--dmp-text-muted);
+    font-weight: 650;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid #cbd2da;
+    border-bottom: 1px solid var(--dmp-border-strong);
+    white-space: nowrap;
+    /* Kepala tabel tetap terlihat saat isi digulir */
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.dmp-table tbody td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #e2e6eb;
+    border-bottom: 1px solid var(--dmp-border);
+    color: #131820;
+    color: var(--dmp-text);
+}
+
+.dmp-table tbody tr:last-child td { border-bottom: 0; }
+
+.dmp-table tbody tr:hover td {
+    background: #f9fafb;
+    background: var(--dmp-surface-2);
+}
+
+/* Kolom angka: rata kanan dan lebar digit seragam supaya mudah dibandingkan */
+.dmp-table .dmp-num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.dmp-table__wrap { overflow: auto; max-height: 520px; }
+
+
+/* -------------------------------------------------------------
+ * 5. LENCANA
+ * ----------------------------------------------------------- */
+
+.dmp-badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 999px;
+    border-radius: var(--dmp-radius-pill);
+    font-size: 11px;
+    font-size: var(--dmp-text-xs);
+    font-weight: 700;
+    line-height: 1.6;
+    background: #dbeafe;
+    background: var(--dmp-accent-soft);
+    color: #2563eb;
+    color: var(--dmp-accent);
+}
+
+.dmp-badge--sukses  { background: #dcfce7; background: var(--dmp-success-soft); color: #16a34a; color: var(--dmp-success); }
+.dmp-badge--awas    { background: #fef3c7; background: var(--dmp-warning-soft); color: #b45309; color: var(--dmp-warning); }
+.dmp-badge--bahaya  { background: #fee2e2; background: var(--dmp-danger-soft);  color: #dc2626; color: var(--dmp-danger); }
+.dmp-badge--netral  { background: #eef1f4; background: var(--dmp-surface-3);    color: #5a6472; color: var(--dmp-text-muted); }
+
+
+/* -------------------------------------------------------------
+ * 6. TOMBOL
+ * ----------------------------------------------------------- */
+
+.dmp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    border-radius: var(--dmp-radius-sm);
+    font-size: 13px;
+    font-size: var(--dmp-text-sm);
+    font-weight: 650;
+    font-family: inherit;
+    line-height: 1.4;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 160ms, border-color 160ms, color 160ms;
+    transition-duration: var(--dmp-transition);
+}
+
+.dmp-btn:disabled,
+.dmp-btn[aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
+
+.dmp-btn--utama {
+    background: #2563eb;
+    background: var(--dmp-accent);
+    color: #ffffff;
+    color: var(--dmp-accent-on);
+}
+.dmp-btn--utama:hover { background: #1d4ed8; background: var(--dmp-accent-hover); }
+
+.dmp-btn--lembut {
+    background: #dbeafe;
+    background: var(--dmp-accent-soft);
+    color: #2563eb;
+    color: var(--dmp-accent);
+}
+
+.dmp-btn--garis {
+    background: transparent;
+    border-color: #cbd2da;
+    border-color: var(--dmp-border-strong);
+    color: #131820;
+    color: var(--dmp-text);
+}
+.dmp-btn--garis:hover { background: #f9fafb; background: var(--dmp-surface-2); }
+
+.dmp-btn--kecil { padding: 5px 11px; font-size: 11px; font-size: var(--dmp-text-xs); }
+
+/* Tombol hanya-ikon, misal tombol "?" pembuka panel Cara Analisa */
+.dmp-btn-ikon {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    display: inline-grid;
+    place-items: center;
+    border: 1px solid #e2e6eb;
+    border: 1px solid var(--dmp-border);
+    border-radius: 6px;
+    border-radius: var(--dmp-radius-sm);
+    background: transparent;
+    color: #5a6472;
+    color: var(--dmp-text-muted);
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1;
+}
+.dmp-btn-ikon:hover {
+    background: #dbeafe;
+    background: var(--dmp-accent-soft);
+    color: #2563eb;
+    color: var(--dmp-accent);
+    border-color: transparent;
+}
+
+
+/* -------------------------------------------------------------
+ * 7. ISIAN FORM
+ * ----------------------------------------------------------- */
+
+.dmp-field { display: block; margin-bottom: 14px; }
+
+.dmp-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 650;
+    margin-bottom: 5px;
+    color: #131820;
+    color: var(--dmp-text);
+}
+
+.dmp-input,
+.dmp-select {
+    width: 100%;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-size: var(--dmp-text-md);
+    font-family: inherit;
+    background: #ffffff;
+    background: var(--dmp-surface);
+    color: #131820;
+    color: var(--dmp-text);
+    border: 1px solid #cbd2da;
+    border: 1px solid var(--dmp-border-strong);
+    border-radius: 6px;
+    border-radius: var(--dmp-radius-sm);
+    transition: border-color 160ms, box-shadow 160ms;
+}
+
+.dmp-input::placeholder { color: #8b95a3; color: var(--dmp-text-faint); }
+
+.dmp-input:focus,
+.dmp-select:focus {
+    outline: none;
+    border-color: #2563eb;
+    border-color: var(--dmp-accent);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .35);
+    box-shadow: 0 0 0 3px var(--dmp-accent-ring);
+}
+
+.dmp-input[aria-invalid="true"] { border-color: #dc2626; border-color: var(--dmp-danger); }
+
+.dmp-help  { font-size: 11px; margin-top: 4px; color: #5a6472; color: var(--dmp-text-muted); }
+.dmp-error { font-size: 11px; margin-top: 4px; color: #dc2626; color: var(--dmp-danger); }
+
+
+/* -------------------------------------------------------------
+ * 8. AREA GRAFIK
+ * ----------------------------------------------------------- */
+
+.dmp-chart { width: 100%; min-height: 280px; position: relative; }
+.dmp-chart--pendek { min-height: 200px; }
+.dmp-chart--tinggi { min-height: 400px; }
+
+/* --- Tombol perbesar di pojok grafik ------------------------- */
+
+.dmp-chart__alat {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 160ms;
+}
+
+/* Muncul saat kursor melintasi kartunya - tidak mengganggu saat
+   grafik sedang dibaca, tapi mudah ditemukan saat dicari. */
+.card:hover .dmp-chart__alat,
+.dmp-chart:hover .dmp-chart__alat,
+.dmp-chart__alat:focus-within { opacity: 1; }
+
+.dmp-chart__perbesar {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 1px solid #e2e6eb;
+    border: 1px solid var(--dmp-border);
+    border-radius: 8px;
+    background: #ffffff;
+    background: var(--dmp-surface);
+    color: #5a6472;
+    color: var(--dmp-text-muted);
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 1px 3px rgba(19, 24, 32, .10);
+    transition: background 160ms, color 160ms;
+}
+
+.dmp-chart__perbesar:hover {
+    background: #2563eb;
+    background: var(--dmp-accent);
+    color: #ffffff;
+    color: var(--dmp-accent-on);
+    border-color: transparent;
+}
+
+/* Selalu terlihat di layar sentuh - di sana tidak ada "kursor
+   melintas", jadi tombol tersembunyi tidak akan pernah ditemukan. */
+@media (hover: none) {
+    .dmp-chart__alat { opacity: 1; }
+}
+
+
+/* --- Jendela grafik besar ------------------------------------ */
+
+.dmp-chart-jendela {
+    position: fixed;
+    inset: 0;
+    z-index: 1060;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3vh 3vw;
+    background: rgba(9, 13, 20, .58);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 200ms, visibility 200ms;
+}
+
+.dmp-chart-jendela[aria-hidden="false"] { opacity: 1; visibility: visible; }
+
+.dmp-chart-jendela__kotak {
+    width: 100%;
+    max-width: 1180px;
+    height: 100%;
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    background: var(--dmp-surface);
+    border-radius: 14px;
+    border-radius: var(--dmp-radius-lg);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .32);
+    overflow: hidden;
+    transform: translateY(8px);
+    transition: transform 200ms;
+}
+
+.dmp-chart-jendela[aria-hidden="false"] .dmp-chart-jendela__kotak {
+    transform: translateY(0);
+}
+
+.dmp-chart-jendela__kepala {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid #e2e6eb;
+    border-bottom: 1px solid var(--dmp-border);
+    background:
+        linear-gradient(rgba(255, 255, 255, .94), rgba(255, 255, 255, .97)),
+        var(--dmp-accent, #2563eb);
+}
+
+[data-dmp-mode="dark"] .dmp-chart-jendela__kepala {
+    background:
+        linear-gradient(rgba(22, 26, 32, .93), rgba(22, 26, 32, .96)),
+        var(--dmp-accent, #60a5fa);
+}
+
+.dmp-chart-jendela__judul {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 750;
+    color: #131820;
+    color: var(--dmp-text);
+    padding-left: 12px;
+    position: relative;
+    flex: 1;
+}
+
+.dmp-chart-jendela__judul::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 3px; height: 16px;
+    border-radius: 2px;
+    background: var(--dmp-accent, #2563eb);
+}
+
+.dmp-chart-jendela__tutup {
+    width: 32px; height: 32px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #5a6472;
+    color: var(--dmp-text-muted);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+}
+.dmp-chart-jendela__tutup:hover {
+    background: #eef1f4;
+    background: var(--dmp-surface-3);
+    color: #131820;
+    color: var(--dmp-text);
+}
+
+.dmp-chart-jendela__isi { flex: 1; min-height: 0; padding: 8px; }
+
+@media (max-width: 640px) {
+    .dmp-chart-jendela { padding: 0; }
+    .dmp-chart-jendela__kotak { max-height: 100vh; border-radius: 0; }
+}
+
+
+/* Ditampilkan saat query tidak mengembalikan baris apa pun.
+   Halaman kosong tanpa keterangan membuat pengguna mengira aplikasi rusak. */
+.dmp-kosong {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 180px;
+    padding: 24px;
+    text-align: center;
+    color: #8b95a3;
+    color: var(--dmp-text-faint);
+}
+.dmp-kosong__judul { font-size: 13px; font-weight: 650; color: #5a6472; color: var(--dmp-text-muted); }
+.dmp-kosong__pesan { font-size: 12px; max-width: 320px; }
+
+
+/* -------------------------------------------------------------
+ * 9. ANIMASI MEMUAT (Fase 2, disiapkan lebih awal)
+ * ----------------------------------------------------------- */
+
+.dmp-skeleton {
+    background: #eef1f4;
+    background: var(--dmp-surface-3);
+    border-radius: 6px;
+    border-radius: var(--dmp-radius-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.dmp-skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, .55) 50%,
+        rgba(255, 255, 255, 0) 100%);
+    animation: dmp-kilau 1.3s infinite;
+}
+
+[data-dmp-mode="dark"] .dmp-skeleton::after {
+    background: linear-gradient(90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, .07) 50%,
+        rgba(255, 255, 255, 0) 100%);
+}
+
+@keyframes dmp-kilau { 100% { transform: translateX(100%); } }
+
+.dmp-skeleton--baris  { height: 12px; margin-bottom: 8px; }
+.dmp-skeleton--judul  { height: 18px; width: 42%; margin-bottom: 14px; }
+.dmp-skeleton--chart  { height: 260px; }
+
+/* Garis progres tipis di puncak halaman saat berpindah halaman */
+.dmp-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0;
+    z-index: 9999;
+    background: #2563eb;
+    background: var(--dmp-accent);
+    transition: width 200ms ease-out, opacity 300ms;
+}
+
+
+/* -------------------------------------------------------------
+ * 10. PANEL GESER — untuk "Cara Analisa" (Fase 3)
+ *     Dipilih panel geser, bukan modal, supaya grafik tetap
+ *     terlihat sambil penjelasannya dibaca.
+ * ----------------------------------------------------------- */
+
+.dmp-panel {
+    position: fixed;
+    top: 0; right: 0;
+    height: 100%;
+    width: 420px;
+    max-width: 92vw;
+    z-index: 1050;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    background: var(--dmp-surface);
+    border-left: 1px solid #e2e6eb;
+    border-left: 1px solid var(--dmp-border);
+    box-shadow: 0 8px 28px rgba(19, 24, 32, .12);
+    box-shadow: var(--dmp-shadow-lg);
+    transform: translateX(100%);
+    transition: transform 240ms cubic-bezier(.4, 0, .2, 1);
+}
+
+.dmp-panel[aria-hidden="false"] { transform: translateX(0); }
+
+.dmp-panel__head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    border-bottom: 1px solid #e2e6eb;
+    border-bottom: 1px solid var(--dmp-border);
+}
+
+.dmp-panel__title { margin: 0; font-size: 14px; font-weight: 700; }
+.dmp-panel__body  { padding: 16px; overflow-y: auto; flex: 1; line-height: 1.65; font-size: 13px; }
+.dmp-panel__body h4 { font-size: 13px; font-weight: 700; margin: 18px 0 6px; }
+.dmp-panel__body h4:first-child { margin-top: 0; }
+.dmp-panel__body ul { padding-left: 18px; margin: 0 0 12px; }
+.dmp-panel__body li { margin-bottom: 4px; }
+
+.dmp-panel__tutup { margin-left: auto; font-size: 20px; line-height: 1; }
+
+.dmp-panel__memuat,
+.dmp-panel__kosong {
+    color: #8b95a3;
+    color: var(--dmp-text-faint);
+    font-size: 12.5px;
+    text-align: center;
+    padding: 28px 12px;
+}
+
+/* --- Isi panduan: satu bagian per grafik -------------------- */
+
+.dmp-analisa__bagian {
+    border-bottom: 1px solid #e2e6eb;
+    border-bottom: 1px solid var(--dmp-border);
+    padding: 4px 0;
+}
+.dmp-analisa__bagian:last-child { border-bottom: 0; }
+
+.dmp-analisa__judul {
+    cursor: pointer;
+    padding: 10px 4px 10px 22px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #131820;
+    color: var(--dmp-text);
+    list-style: none;
+    position: relative;
+    outline: none;
+}
+.dmp-analisa__judul::-webkit-details-marker { display: none; }
+
+/* Panah sendiri, karena penanda bawaan <details> berbeda-beda
+   bentuknya di tiap peramban. */
+.dmp-analisa__judul::before {
+    content: "\25B8";                 /* ▸ */
+    position: absolute;
+    left: 4px;
+    color: var(--dmp-accent, #2563eb);
+    transition: transform 180ms;
+    display: inline-block;
+}
+.dmp-analisa__bagian[open] > .dmp-analisa__judul::before {
+    transform: rotate(90deg);
+}
+
+.dmp-analisa__judul:hover { color: var(--dmp-accent, #2563eb); }
+
+.dmp-analisa__isi {
+    padding: 2px 4px 14px 22px;
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: #5a6472;
+    color: var(--dmp-text-muted);
+}
+.dmp-analisa__isi p  { margin: 0 0 10px; }
+.dmp-analisa__isi h4 {
+    font-size: 12px;
+    font-weight: 700;
+    margin: 14px 0 6px;
+    color: #131820;
+    color: var(--dmp-text);
+}
+.dmp-analisa__isi ul,
+.dmp-analisa__isi ol { padding-left: 18px; margin: 0 0 10px; }
+.dmp-analisa__isi li { margin-bottom: 5px; }
+.dmp-analisa__isi b,
+.dmp-analisa__isi strong { color: #131820; color: var(--dmp-text); }
+
+
+/* --- Tombol mengambang -------------------------------------- */
+
+.dmp-fab {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 1035;
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    height: 48px;
+    padding: 0 14px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--dmp-accent, #2563eb);
+    color: var(--dmp-accent-on, #ffffff);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 650;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(19, 24, 32, .22);
+    transition: gap 200ms, padding 200ms, box-shadow 200ms, transform 160ms;
+}
+
+.dmp-fab i { font-size: 20px; line-height: 1; }
+
+/* Teksnya tersembunyi sampai kursor melintas - lingkaran kecil
+   tidak menutupi isi halaman, tapi maksudnya tetap jelas begitu
+   didekati. */
+.dmp-fab__teks {
+    max-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 0;
+    transition: max-width 220ms, opacity 180ms;
+}
+
+.dmp-fab:hover,
+.dmp-fab:focus-visible {
+    gap: 9px;
+    padding: 0 18px 0 14px;
+    box-shadow: 0 6px 22px rgba(19, 24, 32, .30);
+    transform: translateY(-1px);
+}
+
+.dmp-fab:hover .dmp-fab__teks,
+.dmp-fab:focus-visible .dmp-fab__teks {
+    max-width: 190px;
+    opacity: 1;
+}
+
+/* Saat panel terbuka, tombolnya bergeser supaya tidak tertutup panel */
+.dmp-fab[aria-expanded="true"] { transform: translateX(-8px); }
+
+/* ---------------------------------------------------------------
+   DENYUT - cincin yang membesar lalu memudar (Fase 6.2)
+
+   Dibuat dari ::before, bukan dari box-shadow pada tombolnya
+   sendiri. Alasannya: menganimasikan box-shadow memaksa peramban
+   menggambar ulang tombol setiap bingkai. transform dan opacity
+   pada lapisan terpisah ditangani kartu grafis, jadi denyut yang
+   berjalan terus-menerus ini tidak membebani halaman yang sedang
+   menggambar 14 grafik.
+
+   pointer-events: none WAJIB - tanpa itu cincin yang sedang
+   membesar akan menangkap klik yang ditujukan ke tombol.
+   --------------------------------------------------------------- */
+.dmp-fab::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; right: 0; bottom: 0;
+    border-radius: 999px;
+    background: var(--dmp-accent, #2563eb);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0;
+    animation: dmp-denyut 2600ms ease-out infinite;
+}
+
+@keyframes dmp-denyut {
+    0%   { transform: scale(1);    opacity: .55; }
+    70%  { transform: scale(1.28); opacity: 0; }
+    100% { transform: scale(1.28); opacity: 0; }
+}
+
+/* Denyut berhenti saat tombol sedang dipakai. Cincin yang terus
+   berdenyut di bawah jari yang sedang menggeser terasa seperti
+   kerusakan, dan saat panel terbuka tugasnya menarik perhatian
+   sudah selesai. */
+.dmp-fab:hover::before,
+.dmp-fab:focus-visible::before,
+.dmp-fab--geser::before,
+.dmp-fab[aria-expanded="true"]::before { animation: none; opacity: 0; }
+
+/* Bisa digeser: petunjuknya lewat bentuk kursor */
+.dmp-fab { touch-action: none; }
+.dmp-fab--geser {
+    cursor: grabbing;
+    transition: none;              /* mengikuti kursor tanpa tertinggal */
+    box-shadow: 0 10px 28px rgba(19, 24, 32, .34);
+}
+
+/* Sekali digeser, tombol dikendalikan left/top dari JS. right/bottom
+   bawaan harus dilepas, kalau tidak keduanya saling tarik. */
+.dmp-fab--bebas { right: auto; bottom: auto; }
+
+/* Layar sentuh: teks selalu tampil, karena tidak ada kursor melintas */
+@media (hover: none) {
+    .dmp-fab { gap: 9px; padding: 0 18px 0 14px; }
+    .dmp-fab__teks { max-width: 190px; opacity: 1; }
+}
+
+@media (max-width: 640px) {
+    .dmp-fab { right: 14px; bottom: 14px; height: 44px; }
+    .dmp-fab__teks { display: none; }
+}
+
+/* Tidak ikut tercetak */
+@media print {
+    .dmp-fab { display: none !important; }
+}
+
+/* Menghormati setelan sistem "kurangi animasi". Sebagian orang
+   mengalami pusing atau mual oleh gerakan berulang, dan denyut yang
+   berjalan terus-menerus persis jenis gerakan yang dimaksud. Tombol
+   tetap berfungsi penuh - hanya diam. */
+@media (prefers-reduced-motion: reduce) {
+    .dmp-fab::before { animation: none; opacity: 0; }
+}
+
+.dmp-tirai {
+    position: fixed;
+    inset: 0;
+    z-index: 1040;
+    background: rgba(19, 24, 32, .38);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 240ms, visibility 240ms;
+}
+.dmp-tirai[aria-hidden="false"] { opacity: 1; visibility: visible; }
+
+
+/* -------------------------------------------------------------
+ * 11. PEMILIH TEMA
+ * ----------------------------------------------------------- */
+
+/* Tombol pembuka pemilih tema di header.
+   Versi pertama hanya berupa ikon abu-abu tipis - nyaris tidak
+   terlihat, dan pengguna tidak tahu ada fitur di situ. Sekarang
+   diberi lingkaran berlatar aksen lembut. */
+.wrapper .header-top #dmpTemaToggle {
+    width: 34px;
+    height: 34px;
+    display: inline-grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #dbeafe;
+    background: var(--dmp-accent-soft);
+    color: #2563eb;
+    color: var(--dmp-accent);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 160ms, transform 120ms;
+}
+
+.wrapper .header-top #dmpTemaToggle:hover {
+    background: #2563eb;
+    background: var(--dmp-accent);
+    color: #ffffff;
+    color: var(--dmp-accent-on);
+    transform: translateY(-1px);
+}
+
+/* Titik penanda kecil, isyarat bahwa ini kendali warna */
+.wrapper .header-top #dmpTemaToggle::after {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--dmp-accent, #2563eb);
+    border: 1.5px solid var(--dmp-surface, #fff);
+    transform: translate(11px, -11px);
+}
+
+/* Kotak dropdown pemilih tema.
+   Versi pertama memakai lebar bawaan Bootstrap sehingga isinya
+   terpotong dan nama palet tidak terbaca penuh. */
+.wrapper .header-top .dropdown-menu {
+    min-width: 236px;
+    padding: 0;
+    border: 1px solid #e2e6eb;
+    border: 1px solid var(--dmp-border);
+    border-radius: 12px;
+    background: #ffffff;
+    background: var(--dmp-surface);
+    box-shadow: 0 8px 28px rgba(19, 24, 32, .14);
+    box-shadow: var(--dmp-shadow-lg);
+    overflow: hidden;
+}
+
+.dmp-tema {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 14px;
+}
+
+/* Empat kolom tetap: 8 preset jadi dua baris rapi, bukan
+   membungkus semaunya mengikuti lebar kotak. */
+.dmp-tema__warna {
+    display: grid;
+    grid-template-columns: repeat(4, 26px);
+    gap: 7px;
+}
+
+.dmp-tema__sw {
+    width: 26px; height: 26px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 120ms;
+}
+.dmp-tema__sw:hover { transform: translateY(-2px); }
+.dmp-tema__sw[aria-pressed="true"] {
+    border-color: #131820;
+    border-color: var(--dmp-text);
+}
+
+/* Warna contoh tiap preset. Ditulis harfiah karena justru inilah
+   yang harus tampil berbeda satu sama lain di dalam pemilih. */
+.dmp-tema__sw[data-tema="biru"]    { background: #2563eb; }
+.dmp-tema__sw[data-tema="nila"]    { background: #0369a1; }
+.dmp-tema__sw[data-tema="teal"]    { background: #0d9488; }
+.dmp-tema__sw[data-tema="hijau"]   { background: #15803d; }
+.dmp-tema__sw[data-tema="ungu"]    { background: #7c3aed; }
+.dmp-tema__sw[data-tema="anggrek"] { background: #a21caf; }
+.dmp-tema__sw[data-tema="bata"]    { background: #be123c; }
+.dmp-tema__sw[data-tema="oranye"]  { background: #c2410c; }
+
+.dmp-tema__mode {
+    display: flex;
+    border: 1px solid #cbd2da;
+    border: 1px solid var(--dmp-border-strong);
+    border-radius: 8px;
+    overflow: hidden;
+    flex: none;
+}
+.dmp-tema__mode button {
+    border: 0;
+    background: transparent;
+    padding: 7px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+    color: #5a6472;
+    color: var(--dmp-text-muted);
+}
+.dmp-tema__mode button[aria-pressed="true"] {
+    background: #2563eb;
+    background: var(--dmp-accent);
+    color: #ffffff;
+    color: var(--dmp-accent-on);
+}
+
+/* --- Pemilih palet grafik ------------------------------------ */
+
+.dmp-palet {
+    border-top: 1px solid #e2e6eb;
+    border-top: 1px solid var(--dmp-border);
+    padding: 8px 6px 6px;
+    min-width: 214px;
+}
+
+.dmp-palet__judul {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: #8b95a3;
+    color: var(--dmp-text-faint);
+    padding: 2px 8px 6px;
+}
+
+.dmp-palet__baris {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    padding: 6px 8px;
+    border: 0;
+    background: transparent;
+    border-radius: 6px;
+    border-radius: var(--dmp-radius-sm);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    text-align: left;
+    color: #131820;
+    color: var(--dmp-text);
+}
+.dmp-palet__baris:hover { background: #f9fafb; background: var(--dmp-surface-2); }
+.dmp-palet__baris[aria-pressed="true"] {
+    background: #dbeafe;
+    background: var(--dmp-accent-soft);
+    color: #2563eb;
+    color: var(--dmp-accent);
+    font-weight: 650;
+}
+
+.dmp-palet__contoh { display: inline-flex; gap: 2px; flex: none; }
+.dmp-palet__contoh i {
+    width: 9px;
+    height: 14px;
+    border-radius: 2px;
+    display: block;
+}
+
+/* Warna contoh tiap palet. Ditulis di sini, bukan lewat JavaScript,
+   supaya contohnya tetap benar walau JS gagal dimuat. Palet "bawaan"
+   memakai var(--dmp-accent) sehingga ikut berubah saat aksen diganti. */
+[data-palet-contoh="bawaan"]  i:nth-child(1) { background: var(--dmp-accent, #2563eb); }
+[data-palet-contoh="bawaan"]  i:nth-child(2) { background: #f59e0b; }
+[data-palet-contoh="bawaan"]  i:nth-child(3) { background: #10b981; }
+[data-palet-contoh="bawaan"]  i:nth-child(4) { background: #8b5cf6; }
+[data-palet-contoh="bawaan"]  i:nth-child(5) { background: #ef4444; }
+
+[data-palet-contoh="cerah"]   i:nth-child(1) { background: #2563eb; }
+[data-palet-contoh="cerah"]   i:nth-child(2) { background: #ea580c; }
+[data-palet-contoh="cerah"]   i:nth-child(3) { background: #059669; }
+[data-palet-contoh="cerah"]   i:nth-child(4) { background: #7c3aed; }
+[data-palet-contoh="cerah"]   i:nth-child(5) { background: #dc2626; }
+
+[data-palet-contoh="lembut"]  i:nth-child(1) { background: #7d9cc0; }
+[data-palet-contoh="lembut"]  i:nth-child(2) { background: #e0b080; }
+[data-palet-contoh="lembut"]  i:nth-child(3) { background: #86b8a1; }
+[data-palet-contoh="lembut"]  i:nth-child(4) { background: #a99ac4; }
+[data-palet-contoh="lembut"]  i:nth-child(5) { background: #d99a9a; }
+
+[data-palet-contoh="aman"]    i:nth-child(1) { background: #0072b2; }
+[data-palet-contoh="aman"]    i:nth-child(2) { background: #e69f00; }
+[data-palet-contoh="aman"]    i:nth-child(3) { background: #009e73; }
+[data-palet-contoh="aman"]    i:nth-child(4) { background: #cc79a7; }
+[data-palet-contoh="aman"]    i:nth-child(5) { background: #d55e00; }
+
+[data-palet-contoh="bumi"]    i:nth-child(1) { background: #8c6d46; }
+[data-palet-contoh="bumi"]    i:nth-child(2) { background: #c08a4e; }
+[data-palet-contoh="bumi"]    i:nth-child(3) { background: #6b8e5a; }
+[data-palet-contoh="bumi"]    i:nth-child(4) { background: #9e7b6b; }
+[data-palet-contoh="bumi"]    i:nth-child(5) { background: #b5563f; }
+
+[data-palet-contoh="tunggal"] i:nth-child(1) { background: #1e3a8a; }
+[data-palet-contoh="tunggal"] i:nth-child(2) { background: #2563eb; }
+[data-palet-contoh="tunggal"] i:nth-child(3) { background: #60a5fa; }
+[data-palet-contoh="tunggal"] i:nth-child(4) { background: #93c5fd; }
+[data-palet-contoh="tunggal"] i:nth-child(5) { background: #dbeafe; }
+
+
+[data-palet-contoh="senja"]   i:nth-child(1) { background: #f59e0b; }
+[data-palet-contoh="senja"]   i:nth-child(2) { background: #ef7c3c; }
+[data-palet-contoh="senja"]   i:nth-child(3) { background: #e0566b; }
+[data-palet-contoh="senja"]   i:nth-child(4) { background: #c13d8c; }
+[data-palet-contoh="senja"]   i:nth-child(5) { background: #8e3ba3; }
+
+[data-palet-contoh="laut"]    i:nth-child(1) { background: #0c4a6e; }
+[data-palet-contoh="laut"]    i:nth-child(2) { background: #0284c7; }
+[data-palet-contoh="laut"]    i:nth-child(3) { background: #0891b2; }
+[data-palet-contoh="laut"]    i:nth-child(4) { background: #14b8a6; }
+[data-palet-contoh="laut"]    i:nth-child(5) { background: #5eead4; }
+
+[data-palet-contoh="hutan"]   i:nth-child(1) { background: #14532d; }
+[data-palet-contoh="hutan"]   i:nth-child(2) { background: #15803d; }
+[data-palet-contoh="hutan"]   i:nth-child(3) { background: #65a30d; }
+[data-palet-contoh="hutan"]   i:nth-child(4) { background: #a16207; }
+[data-palet-contoh="hutan"]   i:nth-child(5) { background: #854d0e; }
+
+[data-palet-contoh="permen"]  i:nth-child(1) { background: #ec4899; }
+[data-palet-contoh="permen"]  i:nth-child(2) { background: #f59e0b; }
+[data-palet-contoh="permen"]  i:nth-child(3) { background: #22c55e; }
+[data-palet-contoh="permen"]  i:nth-child(4) { background: #3b82f6; }
+[data-palet-contoh="permen"]  i:nth-child(5) { background: #a855f7; }
+
+[data-palet-contoh="kontras"] i:nth-child(1) { background: #1d4ed8; }
+[data-palet-contoh="kontras"] i:nth-child(2) { background: #dc2626; }
+[data-palet-contoh="kontras"] i:nth-child(3) { background: #15803d; }
+[data-palet-contoh="kontras"] i:nth-child(4) { background: #d97706; }
+[data-palet-contoh="kontras"] i:nth-child(5) { background: #7c3aed; }
+
+[data-palet-contoh="abu"]     i:nth-child(1) { background: var(--dmp-accent, #2f74f0); }
+[data-palet-contoh="abu"]     i:nth-child(2) { background: #94a3b8; }
+[data-palet-contoh="abu"]     i:nth-child(3) { background: #b8c2ce; }
+[data-palet-contoh="abu"]     i:nth-child(4) { background: #d5dbe3; }
+[data-palet-contoh="abu"]     i:nth-child(5) { background: #eef1f4; }
+
+/* Daftar palet jadi 12 - beri tinggi maksimum agar kotaknya tidak
+   memanjang melewati layar, dan bisa digulir. */
+.dmp-palet {
+    max-height: 46vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+/* IE11 tidak mendukung var(), sehingga pemilih tema tidak akan
+   berfungsi di sana. Sembunyikan agar tidak membingungkan.
+   @supports tidak dikenali IE11, jadi isi blok ini diabaikan olehnya. */
+.dmp-tema, .dmp-palet { display: none; }
+@supports (--cek: 0) {
+    .dmp-tema  { display: flex; }
+    .dmp-palet { display: block; }
+}
+
+
+/* =============================================================
+ * 11a. SIDEBAR & HEADER WARISAN
+ *
+ * PENTING — KENAPA MENIMPA KELAS LAMA, BUKAN MENULIS ULANG MARKUP
+ * ---------------------------------------------------------------
+ * Perilaku buka-tutup submenu, tombol ciut, dan gulir sidebar
+ * dikendalikan theme.js yang mencari kelas .nav-item, .has-sub,
+ * .submenu-content, .nav-toggle, dan .app-sidebar.
+ *
+ * Menulis ulang markup dengan kelas .dmp-* akan membuat submenu
+ * berhenti berfungsi. Maka bagian ini hanya MEWARNAI ULANG kelas
+ * yang sudah ada. Markup tidak disentuh sama sekali.
+ *
+ * Selector di sini sengaja dibuat cukup kuat (.wrapper .app-sidebar)
+ * agar menang terhadap theme.min.css tanpa perlu !important.
+ * ============================================================= */
+
+/* --- Kerangka sidebar ---------------------------------------
+ * Markup ditulis ulang di Fase 2 dengan kelas .dmp-nav-*.
+ * Kelas lama (.nav-item, .submenu-content) tidak dipakai lagi.
+ *
+ * Warna sidebar mengikuti tema lewat lapisan gelap semitransparan
+ * DI ATAS warna aksen - satu aturan untuk semua preset.
+ * ----------------------------------------------------------- */
+
+.wrapper .page-wrap .app-sidebar,
+.wrapper .page-wrap .dmp-nav {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: 264px;
+    z-index: 1030;
+    display: flex;
+    flex-direction: column;
+    background: #12161c;
+    background:
+        linear-gradient(rgba(9, 13, 20, .90), rgba(9, 13, 20, .94)),
+        var(--dmp-accent, #2563eb);
+    border-right: 0;
+    transition: width 220ms cubic-bezier(.4, 0, .2, 1), background 260ms;
+    overflow: hidden;
+}
+
+[data-dmp-mode="dark"] .wrapper .page-wrap .dmp-nav {
+    background: #0b0e13;
+    background:
+        linear-gradient(rgba(5, 8, 12, .93), rgba(5, 8, 12, .96)),
+        var(--dmp-accent, #60a5fa);
+}
+
+/* Keadaan ciut: hanya ikon */
+.wrapper .page-wrap .dmp-nav[data-ciut="1"] { width: 68px; }
+
+/* --- Pergeseran isi halaman terhadap sidebar ------------------
+ * Hanya SATU mekanisme yang boleh mengurus pergeseran ini:
+ * margin-left. theme.min.css memakai cara lain untuk sidebar lama
+ * (padding-left: 255px pada .main-content dan 240px pada .header-top).
+ * Bila keduanya hidup bersamaan, isi halaman terdorong dua kali —
+ * itulah penyebab lajur kosong lebar di sisi kiri.
+ *
+ * Maka: padding-left warisan dinolkan, pergeseran diurus margin-left.
+ * ------------------------------------------------------------- */
+
+/* PENTING - pergeseran hanya berlaku DI DALAM .page-wrap.
+ *
+ * .page-wrap dibuka oleh inc/sidebar.php, jadi keberadaannya menandakan
+ * "halaman ini punya sidebar". Beberapa view dimuat ke dalam MODAL dan
+ * ikut memanggil inc/head.php - misalnya ppm/wpskpoc dan ppm/wpsksof.
+ * head.php membuka .wrapper, sehingga isi modal juga berada di dalam
+ * .wrapper, tapi TANPA sidebar.
+ *
+ * Bila selektornya .wrapper .main-content (tanpa .page-wrap), isi modal
+ * ikut tergeser 264px dan muncul lajur kosong lebar di dalamnya.
+ * Itu pernah terjadi dan terlihat sebagai "background modal hilang".
+ */
+.wrapper .header-top,
+.wrapper .page-wrap .main-content,
+.wrapper .page-wrap > .footer {
+    margin-left: 264px;
+    transition: margin-left 220ms cubic-bezier(.4, 0, .2, 1);
+}
+
+/* Menolkan padding warisan theme.min.css.
+   (main-content 255px, header-top 240px, footer 270px) */
+.wrapper .page-wrap .main-content { padding-left: 15px; padding-right: 15px; }
+.wrapper .page-wrap .footer       { padding-left: 16px; }
+.wrapper .header-top              { padding-left: 0; }
+
+/* ISI HALAMAN TIDAK BOLEH MELUAP KE SAMPING
+ * ------------------------------------------
+ * Sidebar memakai position:fixed - ia diam saat halaman digulir.
+ * Bila ada isi yang lebih lebar dari layar (tabel FOLLOW THE MONEY
+ * punya 12 kolom), seluruh HALAMAN mendapat penggulir mendatar.
+ * Menggulir ke kanan lalu membuat isi meluncur MASUK KE BAWAH sidebar,
+ * dan kartu di kiri tampak terpotong.
+ *
+ * Perbaikannya: yang menggulir mendatar cukup kartunya sendiri, bukan
+ * seluruh halaman. Dengan begitu sidebar tidak pernah menimpa apa pun.
+ */
+.wrapper .main-content,
+.wrapper .page-wrap > .main-content {
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;          /* peramban modern */
+}
+
+/* Cadangan untuk peramban tanpa dukungan overflow: clip */
+@supports not (overflow: clip) {
+    .wrapper .main-content,
+    .wrapper .page-wrap > .main-content { overflow-x: hidden; }
+}
+
+/* PENJAGA DI TINGKAT DOKUMEN — bukan cuma .main-content
+ * ------------------------------------------------------
+ * DITEMUKAN 2026-08-20: klik avatar/nama pengguna di pojok kanan atas
+ * (#userDropdown, di header-top) membuat SELURUH layar melebar dan
+ * bergeser - isi di kiri terlihat terpotong, muncul jalur kosong lebar
+ * di kanan. Sama sekali bukan tabel lebar; dropdown-menu Bootstrap
+ * memang position:absolute (tidak ikut memaksa lebar flexbox), TAPI
+ * elemen absolute tetap dihitung ke dalam scrollWidth dokumen kalau ia
+ * merender sedikit saja melewati tepi kanan viewport - dan #userDropdown
+ * duduk paling ujung kanan header, paling rawan kasus ini.
+ *
+ * .main-content di atas TIDAK menolong di sini karena .header-top bukan
+ * anak dari .main-content - keduanya bersaudara (lihat inc/navbar.php
+ * vs inc/head.php). Penjagaan tadi hanya melingkupi isi halaman, bukan
+ * header. Makanya perlu satu lapis lagi di tingkat html/body: apa pun
+ * penyebabnya sekarang atau nanti (dropdown lain, plugin baru, dst),
+ * dokumen tidak pernah boleh menggulir ke samping.
+ */
+html, body {
+    max-width: 100%;
+    overflow-x: clip;          /* peramban modern */
+}
+
+@supports not (overflow: clip) {
+    html, body { overflow-x: hidden; }
+}
+
+/* Cadangan kedua: pastikan dropdown header sendiri tidak pernah
+   merender melewati tepi kanan viewport, apa pun lebar isinya. */
+.wrapper .header-top .dropdown-menu {
+    max-width: calc(100vw - 24px);
+}
+
+/* AKAR MASALAH SEBENARNYA, ditemukan 2026-08-20 lewat laporan bertahap
+ * pemilik proyek (bukan tebakan pertama di atas — itu baru menutup
+ * GEJALANYA, layar tidak lagi melebar, tapi ISI dropdown ikut
+ * terpotong: hanya ujung kirinya yang terlihat dan bisa diklik).
+ *
+ * Popper.js (dimuat di inc/js.php, dipakai Bootstrap 4 untuk dropdown)
+ * MENGHITUNG POSISI SENDIRI lewat inline style `transform` pada elemen
+ * .dropdown-menu saat dibuka — bukan lewat CSS `.dropdown-menu-right`.
+ * Untuk toggle yang duduk PALING UJUNG KANAN header (#userDropdown,
+ * #dmpTemaToggle), perhitungannya keliru: menu digambar seolah
+ * toggle-nya ada di kiri, meluas ke KANAN, sehingga sebagian besar
+ * badannya jatuh di luar viewport. `.dropdown-menu-right` di markup
+ * (lihat inc/navbar.php) TIDAK MENOLONG di sini karena style inline
+ * dari Popper punya prioritas lebih tinggi daripada kelas CSS apa pun
+ * — termasuk kelas ini.
+ *
+ * SATU-SATUNYA cara CSS mengalahkan style inline adalah `!important`
+ * (aturan §3 di kepala berkas ini: dilarang kecuali benar-benar buntu).
+ * Ini kasusnya: memaksa `position/inset/transform` sendiri, menimpa
+ * apa pun yang dihitung Popper, mengembalikan dropdown ke posisi statis
+ * rata-kanan yang sudah benar sejak awal via CSS biasa.
+ */
+.wrapper .header-top .dropdown-menu.show {
+    position: absolute !important;
+    inset: auto !important;
+    top: 100% !important;
+    right: 0 !important;
+    left: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    margin-top: 4px !important;
+}
+
+/* Tabel lebar menggulir di dalam kartunya sendiri.
+   -webkit-overflow-scrolling agar terasa wajar di layar sentuh. */
+.wrapper .card .card-body {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Kartu tidak boleh melebar melebihi kolomnya */
+.wrapper .card { max-width: 100%; }
+.wrapper .row  { margin-left: 0; margin-right: 0; }
+
+body.dmp-nav-ciut .wrapper .header-top,
+body.dmp-nav-ciut .wrapper .page-wrap .main-content,
+body.dmp-nav-ciut .wrapper .page-wrap > .footer { margin-left: 68px; }
+
+@media (max-width: 991px) {
+    .wrapper .page-wrap .dmp-nav { width: 68px; }
+    .wrapper .header-top,
+    .wrapper .page-wrap .main-content,
+    .wrapper .page-wrap > .footer { margin-left: 68px; }
+}
+
+/* Isi modal: pastikan tidak tergeser sama sekali, apa pun yang
+   diwarisi dari halaman induknya. */
+.modal .main-content,
+.modal-body .main-content {
+    margin-left: 0 !important;   /* !important perlu: menimpa aturan di atas yang lebih spesifik */
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* --- Kepala: merek + tombol ciut ------------------------------ */
+
+.dmp-nav__kepala {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 56px;
+    padding: 0 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, .07);
+    flex: none;
+}
+
+.dmp-nav__merek {
+    display: flex; align-items: center; gap: 10px;
+    color: #fff; text-decoration: none; min-width: 0; flex: 1;
+}
+.dmp-nav__merek:hover { color: #fff; text-decoration: none; }
+
+.dmp-nav__logo {
+    width: 34px; height: 34px; flex: none;
+    border-radius: 9px;
+    background: rgba(255, 255, 255, .12);
+    display: grid; place-items: center;
+}
+.dmp-nav__logo img { width: 20px; height: 20px; object-fit: contain; }
+
+.dmp-nav__merek-teks { min-width: 0; line-height: 1.2; }
+.dmp-nav__merek-teks b     { font-size: 14px; font-weight: 750; display: block; }
+.dmp-nav__merek-teks small { font-size: 10px; opacity: .58; display: block; white-space: nowrap; }
+
+.dmp-nav__ciut {
+    width: 28px; height: 28px; flex: none;
+    border: 0; border-radius: 7px;
+    background: rgba(255, 255, 255, .08);
+    color: rgba(255, 255, 255, .7);
+    cursor: pointer; display: grid; place-items: center; font-size: 15px;
+    transition: background 160ms, color 160ms, transform 220ms;
+}
+.dmp-nav__ciut:hover { background: rgba(255, 255, 255, .16); color: #fff; }
+
+[data-ciut="1"] .dmp-nav__merek-teks,
+[data-ciut="1"] .dmp-nav__ciut i { }
+[data-ciut="1"] .dmp-nav__ciut { transform: rotate(180deg); }
+
+/* --- Pencarian menu ------------------------------------------ */
+
+.dmp-nav__cari {
+    position: relative;
+    margin: 12px 12px 6px;
+    flex: none;
+}
+.dmp-nav__cari i {
+    position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+    font-size: 14px; color: rgba(255, 255, 255, .38); pointer-events: none;
+}
+.dmp-nav__cari input {
+    width: 100%;
+    padding: 8px 10px 8px 32px;
+    border: 1px solid rgba(255, 255, 255, .10);
+    border-radius: 9px;
+    background: rgba(255, 255, 255, .07);
+    color: #fff;
+    font-size: 12.5px;
+    font-family: inherit;
+    outline: none;
+}
+.dmp-nav__cari input::placeholder { color: rgba(255, 255, 255, .35); }
+.dmp-nav__cari input:focus {
+    border-color: var(--dmp-accent, #60a5fa);
+    background: rgba(255, 255, 255, .11);
+}
+
+/* --- Daftar menu --------------------------------------------- */
+
+.dmp-nav__isi {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 4px 0 10px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,.18) transparent;
+}
+.dmp-nav__isi::-webkit-scrollbar { width: 6px; }
+.dmp-nav__isi::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, .16); border-radius: 3px;
+}
+
+.dmp-nav__label {
+    font-size: 9.5px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .32);
+    padding: 14px 18px 6px;
+}
+
+.dmp-nav__butir {
+    position: relative;
+    display: flex; align-items: center; gap: 12px;
+    width: calc(100% - 20px);
+    margin: 1px 10px;
+    padding: 9px 12px 9px 14px;
+    border: 0; background: transparent;
+    border-radius: 9px;
+    color: rgba(255, 255, 255, .72);
+    font-size: 12.8px; font-weight: 500; font-family: inherit;
+    line-height: 1.35; text-align: left; text-decoration: none;
+    cursor: pointer;
+    transition: background 160ms, color 160ms;
+}
+.dmp-nav__butir:hover {
+    background: rgba(255, 255, 255, .08); color: #fff; text-decoration: none;
+}
+.dmp-nav__butir i { font-size: 17px; width: 20px; flex: none; text-align: center; opacity: .78; }
+.dmp-nav__butir:hover i { opacity: 1; }
+.dmp-nav__butir span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+
+/* Panah grup */
+.dmp-nav__butir--grup::after {
+    content: "\203A"; margin-left: auto; font-size: 17px; line-height: 1;
+    opacity: .4; transition: transform 200ms;
+}
+.dmp-nav__grup.buka > .dmp-nav__butir--grup::after,
+.dmp-nav__grup.paksa-buka > .dmp-nav__butir--grup::after { transform: rotate(90deg); opacity: .85; }
+
+/* Submenu: tinggi 0 -> otomatis, tanpa JS pengukur tinggi.
+ *
+ * PENTING — kenapa ada .dmp-nav__sub-isi
+ * grid-template-rows: 0fr hanya mengatur baris EKSPLISIT pertama.
+ * Bila anak-anak <a> diletakkan langsung di sini, anak kedua dan
+ * seterusnya jatuh ke baris IMPLISIT yang tingginya auto — sehingga
+ * submenu tampak terbuka terus dan hanya butir pertama yang terpotong.
+ * Itu bug yang terlihat sebagai "menu tidak bisa diciutkan".
+ *
+ * Solusinya: seluruh anak dibungkus SATU elemen, sehingga grid ini
+ * benar-benar hanya punya satu baris. Jangan menaruh <a> langsung
+ * sebagai anak .dmp-nav__sub.
+ */
+.dmp-nav__sub {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 220ms cubic-bezier(.4, 0, .2, 1);
+}
+.dmp-nav__sub > .dmp-nav__sub-isi { overflow: hidden; min-height: 0; }
+.dmp-nav__grup.buka > .dmp-nav__sub,
+.dmp-nav__grup.paksa-buka > .dmp-nav__sub { grid-template-rows: 1fr; }
+
+/* Peramban tanpa dukungan satuan fr pada grid (IE11): tanpa animasi,
+   tapi buka-tutupnya tetap benar. */
+@supports not (grid-template-rows: 0fr) {
+    .dmp-nav__sub { display: none; }
+    .dmp-nav__grup.buka > .dmp-nav__sub,
+    .dmp-nav__grup.paksa-buka > .dmp-nav__sub { display: block; }
+}
+
+.dmp-nav__anak {
+    position: relative;
+    display: block;
+    margin: 1px 10px 1px 10px;
+    padding: 7px 12px 7px 46px;
+    border-radius: 8px;
+    color: rgba(255, 255, 255, .56);
+    font-size: 12.2px; line-height: 1.4; text-decoration: none;
+    transition: background 160ms, color 160ms;
+}
+.dmp-nav__anak::before {
+    content: ""; position: absolute; left: 30px; top: 50%;
+    transform: translateY(-50%);
+    width: 4px; height: 4px; border-radius: 50%;
+    background: currentColor; opacity: .45;
+}
+.dmp-nav__anak:hover {
+    background: rgba(255, 255, 255, .07); color: #fff; text-decoration: none;
+}
+
+/* Menu aktif */
+.dmp-nav__anak.aktif,
+.dmp-nav__butir.aktif {
+    background: rgba(255, 255, 255, .12);
+    color: #fff; font-weight: 650;
+}
+.dmp-nav__anak.aktif::before {
+    background: var(--dmp-accent, #60a5fa); opacity: 1; width: 5px; height: 5px;
+}
+.dmp-nav__butir.aktif::before,
+.dmp-nav__butir--grup.aktif-induk::before {
+    content: ""; position: absolute; left: -10px; top: 50%;
+    transform: translateY(-50%);
+    width: 3px; height: 18px; border-radius: 0 3px 3px 0;
+    background: var(--dmp-accent, #2563eb);
+}
+.dmp-nav__butir--grup.aktif-induk { color: #fff; }
+.dmp-nav__butir--grup.aktif-induk i { color: var(--dmp-accent, #60a5fa); opacity: 1; }
+
+.dmp-nav__kosong {
+    color: rgba(255, 255, 255, .4); font-size: 11.5px;
+    text-align: center; padding: 20px 12px; margin: 0;
+}
+
+/* --- Dasar: pengguna + keluar -------------------------------- */
+
+.dmp-nav__kaki {
+    flex: none;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+    padding: 10px;
+}
+
+.dmp-nav__user {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 6px 10px;
+    min-width: 0;
+}
+.dmp-nav__avatar {
+    width: 32px; height: 32px; flex: none;
+    border-radius: 50%;
+    background: var(--dmp-accent, #2563eb);
+    color: var(--dmp-accent-on, #fff);
+    display: grid; place-items: center;
+    font-size: 13px; font-weight: 750;
+}
+.dmp-nav__user-teks { min-width: 0; line-height: 1.25; }
+.dmp-nav__user-teks b {
+    display: block; font-size: 12px; font-weight: 650; color: #fff;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px;
+}
+.dmp-nav__user-teks small {
+    display: block; font-size: 10px; color: rgba(255, 255, 255, .48);
+}
+
+.dmp-nav__keluar {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 8px; border-radius: 9px;
+    background: rgba(255, 255, 255, .07);
+    color: rgba(255, 255, 255, .78);
+    font-size: 12.5px; font-weight: 650; text-decoration: none;
+    transition: background 160ms, color 160ms;
+}
+.dmp-nav__keluar:hover {
+    background: var(--dmp-danger, #dc2626); color: #fff; text-decoration: none;
+}
+.dmp-nav__keluar i { font-size: 15px; }
+
+/* --- Keadaan ciut: sembunyikan teks, sisakan ikon ------------ */
+
+[data-ciut="1"] .dmp-nav__merek-teks,
+[data-ciut="1"] .dmp-nav__cari,
+[data-ciut="1"] .dmp-nav__label,
+[data-ciut="1"] .dmp-nav__butir span,
+[data-ciut="1"] .dmp-nav__sub,
+[data-ciut="1"] .dmp-nav__user-teks,
+[data-ciut="1"] .dmp-nav__keluar span { display: none; }
+
+[data-ciut="1"] .dmp-nav__butir {
+    justify-content: center;
+    padding: 11px 0;
+    width: calc(100% - 16px);
+    margin: 2px 8px;
+}
+[data-ciut="1"] .dmp-nav__butir--grup::after { display: none; }
+[data-ciut="1"] .dmp-nav__butir i { width: auto; }
+[data-ciut="1"] .dmp-nav__user { justify-content: center; padding: 6px 0 10px; }
+
+/* Nama menu muncul sebagai gelembung saat ciut - tanpa ini,
+   sidebar ciut hanya deretan ikon tanpa keterangan. */
+[data-ciut="1"] .dmp-nav__butir { position: relative; }
+[data-ciut="1"] .dmp-nav__butir:hover::before {
+    content: attr(data-nama);
+}
+[data-ciut="1"] .dmp-nav__butir:hover span {
+    display: block;
+    position: absolute;
+    left: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%);
+    background: #12161c;
+    color: #fff;
+    padding: 6px 11px;
+    border-radius: 8px;
+    font-size: 12px;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .4);
+    z-index: 20;
+    pointer-events: none;
+}
+
+/* --- Header atas --------------------------------------------- */
+
+.wrapper .header-top {
+    background: #ffffff;
+    background: var(--dmp-surface);
+    border-bottom: 1px solid #e2e6eb;
+    border-bottom: 1px solid var(--dmp-border);
+    min-height: 56px;
+    min-height: var(--dmp-header-h);
+    box-shadow: none;
+    position: relative;
+}
+
+/* Garis aksen tipis di puncak header. Penanda tema yang jelas
+   terlihat tanpa mewarnai seluruh batang header - header putih
+   membuat judul dan angka lebih mudah dibaca. */
+.wrapper .header-top::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--dmp-accent, #2563eb);
+}
+
+.wrapper .header-top .judul h3 {
+    font-size: 15px;
+    font-weight: 750;
+    letter-spacing: .01em;
+    margin: 0;
+    color: #131820;
+    color: var(--dmp-text);
+}
+
+/* Judul panjang tidak boleh mendorong menu pengguna keluar layar */
+.wrapper .header-top .judul {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.wrapper .header-top .top-menu .nav-link,
+.wrapper .header-top .top-menu .btn-icon {
+    color: #5a6472;
+    color: var(--dmp-text-muted);
+    border-radius: 6px;
+    border-radius: var(--dmp-radius-sm);
+    transition: background 160ms, color 160ms;
+}
+
+.wrapper .header-top .top-menu .nav-link:hover {
+    background: #dbeafe;
+    background: var(--dmp-accent-soft);
+    color: #2563eb;
+    color: var(--dmp-accent);
+}
+
+.wrapper .header-top .dropdown-toggle {
+    color: #131820;
+    color: var(--dmp-text);
+    font-size: 12.5px;
+    font-weight: 650;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.wrapper .header-top .dropdown-toggle .avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+}
+
+/* --- Area isi ------------------------------------------------ */
+
+.wrapper .main-content,
+.wrapper .container-fluid {
+    background: transparent;
+}
+
+[data-dmp-mode] .wrapper { background: #f4f6f8; background: var(--dmp-bg); }
+
+
+/* =============================================================
+ * 11a-2. KARTU WARISAN — disamakan nuansanya dengan halaman login
+ *
+ * Menimpa kelas .card Bootstrap yang dipakai seluruh dashboard.
+ * Markup tidak disentuh, jadi tombol minimize/close bawaan tema
+ * lama tetap berfungsi.
+ *
+ * Yang membuat nuansanya sama dengan halaman login BUKAN warnanya,
+ * melainkan tiga hal yang lebih halus:
+ *   1. sudut membulat yang sama besar
+ *   2. bayangan tipis, bukan garis tebal
+ *   3. lapisan aksen semitransparan, bukan blok warna pekat
+ * ============================================================= */
+
+.wrapper .card {
+    background: #ffffff;
+    background: var(--dmp-surface);
+    border: 1px solid #e2e6eb;
+    border: 1px solid var(--dmp-border);
+    border-radius: 14px;
+    border-radius: var(--dmp-radius-lg);
+    box-shadow: 0 1px 2px rgba(19, 24, 32, .05);
+    overflow: hidden;
+    transition: box-shadow 200ms ease, transform 200ms ease;
+}
+
+/* Terangkat sedikit saat kursor melintas - isyarat bahwa kartu ini
+   satu kesatuan, bukan sekadar kotak. Halus saja: 1px. */
+.wrapper .card:hover {
+    box-shadow: 0 4px 16px rgba(19, 24, 32, .09);
+    transform: translateY(-1px);
+}
+
+[data-dmp-mode="dark"] .wrapper .card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .45);
+}
+
+/* Kepala kartu: latar aksen sangat tipis, dengan garis aksen di kiri
+   judul. Sama seperti panel kiri halaman login - warna hadir sebagai
+   lapisan, bukan sebagai blok. */
+.wrapper .card .card-header {
+    background: transparent;
+    background:
+        linear-gradient(rgba(255, 255, 255, .94), rgba(255, 255, 255, .97)),
+        var(--dmp-accent, #2563eb);
+    border-bottom: 1px solid #e2e6eb;
+    border-bottom: 1px solid var(--dmp-border);
+    padding: 13px 18px;
+    position: relative;
+}
+
+[data-dmp-mode="dark"] .wrapper .card .card-header {
+    background:
+        linear-gradient(rgba(22, 26, 32, .93), rgba(22, 26, 32, .96)),
+        var(--dmp-accent, #60a5fa);
+}
+
+.wrapper .card .card-header h3,
+.wrapper .card .card-header h5,
+.wrapper .card .card-header .card-title {
+    font-size: 13.5px;
+    font-weight: 750;
+    letter-spacing: .01em;
+    margin: 0;
+    padding-left: 12px;
+    color: #131820;
+    color: var(--dmp-text);
+    position: relative;
+}
+
+/* Batang aksen kecil di kiri judul */
+.wrapper .card .card-header h3::before,
+.wrapper .card .card-header h5::before,
+.wrapper .card .card-header .card-title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 15px;
+    border-radius: 2px;
+    background: var(--dmp-accent, #2563eb);
+}
+
+.wrapper .card .card-body { padding: 16px 18px; }
+
+/* Tombol minimize / close bawaan tema lama */
+.wrapper .card .card-header-right .card-option li i {
+    color: #8b95a3;
+    color: var(--dmp-text-faint);
+    font-size: 14px;
+    transition: color 160ms;
+}
+.wrapper .card .card-header-right .card-option li i:hover {
+    color: #2563eb;
+    color: var(--dmp-accent);
+}
+
+
+/* --- KARTU RINGKASAN (proj-t-card) --------------------------
+ * Empat kartu angka di puncak dashboard. Sebelumnya garis warna
+ * tebal di bagian bawah; kini batang aksen tipis di kiri, sehingga
+ * angkanya yang menonjol, bukan garisnya.
+ * ----------------------------------------------------------- */
+
+.wrapper .card.proj-t-card {
+    border-radius: 14px;
+    border-radius: var(--dmp-radius-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.wrapper .card.proj-t-card::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--dmp-accent, #2563eb);
+}
+
+/* Rona aksen sangat tipis di latar kartu ringkasan, supaya
+   terbedakan dari kartu isi tanpa perlu warna mencolok. */
+.wrapper .card.proj-t-card .card-body {
+    background:
+        linear-gradient(rgba(255, 255, 255, .965), rgba(255, 255, 255, .985)),
+        var(--dmp-accent, #2563eb);
+}
+
+[data-dmp-mode="dark"] .wrapper .card.proj-t-card .card-body {
+    background:
+        linear-gradient(rgba(22, 26, 32, .955), rgba(22, 26, 32, .98)),
+        var(--dmp-accent, #60a5fa);
+}
+
+.wrapper .card.proj-t-card h6 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    font-weight: 700;
+    color: #5a6472;
+    color: var(--dmp-text-muted);
+    margin-bottom: 6px;
+}
+
+.wrapper .card.proj-t-card h3,
+.wrapper .card.proj-t-card h4 {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.02em;
+    font-weight: 750;
+}
+
+
+/* --- BLOK WARNA PEKAT -----------------------------------------
+ * Tiga blok besar (Pembayaran Berjalan / Lalu / Total) memakai
+ * bg-danger, bg-primary, bg-warning dari Bootstrap - tiga warna
+ * jenuh yang saling berebut perhatian, padahal ketiganya setara.
+ *
+ * Diredam menjadi kartu bernuansa aksen dengan intensitas berbeda,
+ * sehingga tetap terbedakan tapi tidak berteriak.
+ * ----------------------------------------------------------- */
+
+.wrapper .card .card-body.bg-danger,
+.wrapper .card .card-body.bg-primary,
+.wrapper .card .card-body.bg-warning,
+.wrapper .card.bg-danger,
+.wrapper .card.bg-primary,
+.wrapper .card.bg-warning {
+    background:
+        linear-gradient(135deg, rgba(0, 0, 0, .10), rgba(0, 0, 0, .26)),
+        var(--dmp-accent, #2563eb) !important;   /* !important: menimpa utilitas Bootstrap yang juga !important */
+    color: #ffffff !important;
+    border: 0;
+}
+
+.wrapper .card .card-body.bg-primary,
+.wrapper .card.bg-primary {
+    background:
+        linear-gradient(135deg, rgba(0, 0, 0, .22), rgba(0, 0, 0, .40)),
+        var(--dmp-accent, #2563eb) !important;
+}
+
+.wrapper .card .card-body.bg-warning,
+.wrapper .card.bg-warning {
+    background:
+        linear-gradient(135deg, rgba(0, 0, 0, .34), rgba(0, 0, 0, .52)),
+        var(--dmp-accent, #2563eb) !important;
+}
+
+.wrapper .card .card-body[class*="bg-"] h3,
+.wrapper .card .card-body[class*="bg-"] h4,
+.wrapper .card .card-body[class*="bg-"] h6 {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.02em;
+}
+
+
+/* --- BARIS PENYARING ------------------------------------------
+ * Baris Kanwil/KPP/Tahun/Bulan di puncak halaman.
+ * ----------------------------------------------------------- */
+
+.wrapper .custom-select,
+.wrapper .form-control {
+    border-radius: 8px;
+    border-radius: var(--dmp-radius-sm);
+    border-color: #cbd2da;
+    border-color: var(--dmp-border-strong);
+    background-color: #ffffff;
+    background-color: var(--dmp-surface);
+    color: #131820;
+    color: var(--dmp-text);
+    font-size: 13px;
+}
+
+.wrapper .custom-select:focus,
+.wrapper .form-control:focus {
+    border-color: #2563eb;
+    border-color: var(--dmp-accent);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .30);
+    box-shadow: 0 0 0 3px var(--dmp-accent-ring);
+}
+
+.wrapper .btn-primary {
+    background: var(--dmp-accent, #2563eb);
+    border-color: transparent;
+    border-radius: 8px;
+    border-radius: var(--dmp-radius-sm);
+    font-weight: 650;
+    font-size: 13px;
+}
+.wrapper .btn-primary:hover { background: var(--dmp-accent-hover, #1d4ed8); }
+
+
+/* --- TABEL WARISAN --------------------------------------------
+ * Tabel besar seperti FOLLOW THE MONEY. Kepala tabel gelap
+ * disamakan dengan sidebar - satu bahasa visual.
+ * ----------------------------------------------------------- */
+
+.wrapper .card table thead th {
+    background: #12161c;
+    background:
+        linear-gradient(rgba(9, 13, 20, .90), rgba(9, 13, 20, .94)),
+        var(--dmp-accent, #2563eb);
+    color: rgba(255, 255, 255, .92);
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: .02em;
+    border: 0;
+    vertical-align: middle;
+}
+
+.wrapper .card table tbody td {
+    font-size: 12.5px;
+    border-color: #e2e6eb;
+    border-color: var(--dmp-border);
+    vertical-align: middle;
+}
+
+.wrapper .card table tbody tr:hover td {
+    background: var(--dmp-accent-soft, #f9fafb);
+}
+
+/* Kolom angka: lebar digit seragam agar mudah dibandingkan sekilas */
+.wrapper .card table td.text-right,
+.wrapper .card table th.text-right,
+.wrapper .card table td.text-center,
+.wrapper .card table th.text-center {
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* -------------------------------------------------------------
+ * 11b. FOOTER + PENANDA VERSI
+ * ----------------------------------------------------------- */
+
+.dmp-footer {
+    background: #ffffff;
+    background: var(--dmp-surface);
+    border-top: 2px solid #e2e6eb;
+    border-top: 2px solid var(--dmp-accent);   /* garis aksen, penanda tema */
+    padding: 10px 16px;
+    font-size: 11px;
+    font-size: var(--dmp-text-xs);
+    color: #5a6472;
+    color: var(--dmp-text-muted);
+}
+
+.dmp-footer__baris {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+}
+
+.dmp-footer__kanan { margin-left: auto; }
+
+.dmp-footer__kanan a {
+    color: #131820;
+    color: var(--dmp-text);
+    text-decoration: none;
+    font-weight: 650;
+}
+.dmp-footer__kanan a:hover { text-decoration: underline; }
+
+/* Penanda versi: dibuat tenang, tidak mencuri perhatian dari isi
+   halaman, tapi tetap terbaca saat pengguna melaporkan masalah. */
+.dmp-footer__versi {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 9px;
+    border-radius: 999px;
+    border-radius: var(--dmp-radius-pill);
+    background: #eef1f4;
+    background: var(--dmp-surface-3);
+    color: #5a6472;
+    color: var(--dmp-text-muted);
+    font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+    font-family: var(--dmp-font-mono);
+    font-size: 10.5px;
+    letter-spacing: .01em;
+    cursor: default;
+}
+
+/* Titik hijau kecil, penanda "versi ini sedang berjalan" */
+.dmp-footer__titik {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #16a34a;
+    background: var(--dmp-success);
+    flex: none;
+}
+
+
+/* -------------------------------------------------------------
+ * 11c. HALAMAN LOGIN
+ * ----------------------------------------------------------- */
+
+.dmp-login {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    background: #eef1f5;
+    background: var(--dmp-login-bg);
+}
+
+/* Panel kiri: identitas. Tidak memuat isian apa pun, jadi boleh
+   disembunyikan di layar sempit tanpa kehilangan fungsi. */
+.dmp-login__kiri {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px;
+    color: #ffffff;
+    background: #12305e;   /* cadangan IE11 */
+    background:
+        radial-gradient(120% 90% at 10% 0%, rgba(255, 255, 255, .14) 0%, rgba(255, 255, 255, 0) 55%),
+        linear-gradient(150deg, #12305e 0%, var(--dmp-accent, #2563eb) 100%);
+}
+
+/* DEPRECATED (Fase 28.3b): Komponen berikut dihapus karena logo sekarang full-screen
+.dmp-login__merek { ... }
+.dmp-login__kata { ... }
+*/
+
+.dmp-login__gambar { position: relative; z-index: 2; margin: 24px 0; }
+.dmp-login__gambar svg { width: 100%; height: auto; max-height: 340px; display: block; }
+
+/* Logo Penuh: gambar yang bisa diupload admin (Fase 28.3) */
+.dmp-login__logo-penuh {
+    max-width: 100%;
+    max-height: 340px;
+    width: auto;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+}
+
+/* Fallback saat logo tidak tersedia (jarang terjadi, hanya saat deploy tanpa folder logo) */
+.dmp-login__logo-kosong {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 340px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* Fase 28.3b: Logo full-screen mengisi seluruh panel kiri */
+.dmp-login__gambar--full {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dmp-login__gambar--full .dmp-login__logo-penuh {
+    max-height: none;
+    max-width: 90%;
+    height: 90%;
+}
+
+.dmp-login__gambar--full .dmp-login__logo-kosong {
+    width: 100%;
+    height: 100%;
+}
+
+/* Panel kanan: isian */
+.dmp-login__kanan {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    background: #ffffff;
+    background: var(--dmp-surface);
+}
+
+.dmp-login__form { width: 100%; max-width: 340px; }
+.dmp-login__form h1 { font-size: 20px; font-weight: 750; margin: 0 0 4px; color: #131820; color: var(--dmp-text); }
+.dmp-login__form > p { font-size: 13px; color: #5a6472; color: var(--dmp-text-muted); margin: 0 0 24px; }
+
+/* Ikon di dalam kotak isian */
+.dmp-login__isian { position: relative; }
+.dmp-login__isian .dmp-input { padding-left: 38px; }
+.dmp-login__isian i {
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #8b95a3;
+    color: var(--dmp-text-faint);
+    pointer-events: none;
+}
+
+.dmp-login__tombol { width: 100%; padding: 11px; font-size: 14px; margin-top: 4px; }
+
+.dmp-login__pesan {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    border-radius: 6px;
+    border-radius: var(--dmp-radius-sm);
+    background: #fee2e2;
+    background: var(--dmp-danger-soft);
+    color: #dc2626;
+    color: var(--dmp-danger);
+    font-size: 12.5px;
+    line-height: 1.5;
+}
+
+.dmp-login__kaki {
+    margin-top: 28px;
+    padding-top: 16px;
+    border-top: 1px solid #e2e6eb;
+    border-top: 1px solid var(--dmp-border);
+    font-size: 11px;
+    color: #8b95a3;
+    color: var(--dmp-text-faint);
+    text-align: center;
+    line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+    .dmp-login { grid-template-columns: 1fr; }
+    .dmp-login__kiri { display: none; }
+}
+
+
+/* -------------------------------------------------------------
+ * 11d. ANGKA
+ *      Dipakai oleh dmp_singkat(), dmp_rupiah(), dmp_delta().
+ * ----------------------------------------------------------- */
+
+.dmp-angka {
+    /* Semua digit selebar sama, sehingga kolom angka tidak bergeser
+       saat nilainya berubah dan lebih mudah dibandingkan sekilas. */
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+/* Garis putus halus sebagai isyarat "ada nilai penuh di balik ini".
+   Tanpa isyarat, tidak ada yang tahu perlu menyorotnya dengan kursor. */
+.dmp-angka[data-penuh] {
+    border-bottom: 1px dotted #cbd2da;
+    border-bottom: 1px dotted var(--dmp-border-strong);
+    cursor: help;
+}
+
+.dmp-angka[data-penuh]:hover {
+    border-bottom-color: #2563eb;
+    border-bottom-color: var(--dmp-accent);
+}
+
+.dmp-angka--kosong { color: #8b95a3; color: var(--dmp-text-faint); }
+
+.dmp-delta--naik  { color: #16a34a; color: var(--dmp-success); font-weight: 650; }
+.dmp-delta--turun { color: #dc2626; color: var(--dmp-danger);  font-weight: 650; }
+.dmp-delta--tetap { color: #5a6472; color: var(--dmp-text-muted); }
+
+/* Saat dicetak, tooltip tidak bisa disorot - tampilkan nilai penuh
+   di dalam kurung agar hasil cetak tetap lengkap. */
+@media print {
+    .dmp-angka[data-penuh] { border-bottom: 0; }
+    .dmp-angka[data-penuh]::after {
+        content: " (" attr(data-penuh) ")";
+        font-size: .85em;
+    }
+}
+
+
+/* =============================================================
+ * 11e. CMS ADMINISTRATOR (Fase 7)
+ *
+ * Kerangka berdiri sendiri, tidak memakai .wrapper dashboard.
+ * Sengaja begitu supaya pengguna sadar sedang berada di area
+ * berbeda, dan supaya CSS warisan tidak ikut campur.
+ * ============================================================= */
+
+.dmp-adm {
+    display: grid;
+    grid-template-columns: 244px 1fr;
+    min-height: 100vh;
+    background: #f4f6f8;
+    background:
+        linear-gradient(rgba(255, 255, 255, .955), rgba(255, 255, 255, .975)),
+        var(--dmp-accent, #2f74f0);
+}
+
+[data-dmp-mode="dark"] .dmp-adm {
+    background: #0e1116;
+    background:
+        linear-gradient(rgba(11, 14, 19, .955), rgba(11, 14, 19, .975)),
+        var(--dmp-accent, #60a5fa);
+}
+
+/* --- Menu samping ------------------------------------------- */
+
+.dmp-adm__nav {
+    display: flex;
+    flex-direction: column;
+    background: #12161c;
+    background:
+        linear-gradient(rgba(9, 13, 20, .90), rgba(9, 13, 20, .94)),
+        var(--dmp-accent, #2f74f0);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+.dmp-adm__merek {
+    display: flex; align-items: center; gap: 11px;
+    padding: 16px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+    color: #fff;
+}
+.dmp-adm__logo {
+    width: 36px; height: 36px; flex: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .13);
+    display: grid; place-items: center; font-size: 18px;
+}
+.dmp-adm__merek b     { display: block; font-size: 13.5px; font-weight: 750; }
+.dmp-adm__merek small { display: block; font-size: 10px; opacity: .55; line-height: 1.3; }
+
+.dmp-adm__menu { flex: 1; padding: 12px 0; overflow-y: auto; }
+
+.dmp-adm__butir {
+    display: flex; align-items: center; gap: 12px;
+    margin: 2px 10px;
+    padding: 10px 14px;
+    border-radius: 9px;
+    color: rgba(255, 255, 255, .72);
+    font-size: 13px; font-weight: 500; text-decoration: none;
+    transition: background 160ms, color 160ms;
+}
+.dmp-adm__butir:hover {
+    background: rgba(255, 255, 255, .08); color: #fff; text-decoration: none;
+}
+.dmp-adm__butir i { font-size: 17px; width: 20px; text-align: center; opacity: .8; }
+.dmp-adm__butir.aktif {
+    background: rgba(255, 255, 255, .12); color: #fff; font-weight: 650;
+}
+.dmp-adm__butir.aktif i { color: var(--dmp-accent, #60a5fa); opacity: 1; }
+
+.dmp-adm__kaki {
+    border-top: 1px solid rgba(255, 255, 255, .08);
+    padding: 10px;
+}
+.dmp-adm__kembali {
+    display: flex; align-items: center; gap: 9px;
+    padding: 9px 12px; border-radius: 9px;
+    background: rgba(255, 255, 255, .07);
+    color: rgba(255, 255, 255, .78);
+    font-size: 12.5px; font-weight: 650; text-decoration: none;
+    margin-bottom: 10px;
+}
+.dmp-adm__kembali:hover { background: rgba(255, 255, 255, .14); color: #fff; text-decoration: none; }
+
+.dmp-adm__user { display: flex; align-items: center; gap: 10px; padding: 4px 6px; }
+.dmp-adm__user-teks { min-width: 0; line-height: 1.25; }
+.dmp-adm__user-teks b {
+    display: block; font-size: 12px; color: #fff;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px;
+}
+.dmp-adm__user-teks small { display: block; font-size: 10px; color: rgba(255,255,255,.5); }
+
+/* --- Area isi ------------------------------------------------ */
+
+.dmp-adm__isi { padding: 26px 30px 40px; min-width: 0; }
+
+.dmp-adm__kepala { margin-bottom: 22px; }
+.dmp-adm__kepala h1 {
+    font-size: 22px; font-weight: 750; margin: 0 0 4px;
+    letter-spacing: -.01em;
+    color: #131820; color: var(--dmp-text);
+}
+.dmp-adm__kepala p {
+    margin: 0; font-size: 13px;
+    color: #5a6472; color: var(--dmp-text-muted);
+}
+
+.dmp-adm__pesan {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px; margin-bottom: 20px;
+    border-radius: 10px; font-size: 13px;
+}
+.dmp-adm__pesan i { font-size: 17px; flex: none; }
+.dmp-adm__pesan--sukses {
+    background: #dcfce7; background: var(--dmp-success-soft);
+    color: #16a34a; color: var(--dmp-success);
+}
+.dmp-adm__pesan--gagal {
+    background: #fee2e2; background: var(--dmp-danger-soft);
+    color: #dc2626; color: var(--dmp-danger);
+}
+
+.dmp-adm__versi {
+    margin-top: 30px; text-align: center;
+    font-size: 10.5px;
+    color: #8b95a3; color: var(--dmp-text-faint);
+    font-family: var(--dmp-font-mono);
+}
+
+/* --- Kartu pintasan di beranda ------------------------------- */
+
+.dmp-adm__pintasan {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 14px;
+}
+.dmp-adm__kartu {
+    display: block; padding: 18px;
+    border: 1px solid #e2e6eb; border: 1px solid var(--dmp-border);
+    border-radius: 12px; text-decoration: none;
+    transition: border-color 160ms, transform 160ms, box-shadow 160ms;
+}
+.dmp-adm__kartu:hover {
+    border-color: var(--dmp-accent, #2f74f0);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(19, 24, 32, .08);
+    text-decoration: none;
+}
+.dmp-adm__kartu i {
+    font-size: 22px; display: block; margin-bottom: 10px;
+    color: var(--dmp-accent, #2f74f0);
+}
+.dmp-adm__kartu b {
+    display: block; font-size: 14px; margin-bottom: 5px;
+    color: #131820; color: var(--dmp-text);
+}
+.dmp-adm__kartu span {
+    font-size: 12px; line-height: 1.6;
+    color: #5a6472; color: var(--dmp-text-muted);
+}
+
+.dmp-adm__rencana { margin: 0; padding-left: 18px; font-size: 12.5px; line-height: 1.8; }
+.dmp-adm__rencana li { color: #5a6472; color: var(--dmp-text-muted); margin-bottom: 6px; }
+.dmp-adm__rencana b  { color: #131820; color: var(--dmp-text); }
+
+/* --- Formulir ------------------------------------------------ */
+
+.dmp-adm__baris {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0 16px;
+}
+
+.dmp-select {
+    width: 100%; padding: 9px 12px;
+    font-size: 13px; font-family: inherit;
+    background: #ffffff; background: var(--dmp-surface);
+    color: #131820; color: var(--dmp-text);
+    border: 1px solid #cbd2da; border: 1px solid var(--dmp-border-strong);
+    border-radius: 6px;
+}
+
+.dmp-adm__hasil {
+    border: 1px solid #e2e6eb; border: 1px solid var(--dmp-border);
+    border-radius: 10px; overflow: hidden; margin-bottom: 16px;
+    max-height: 280px; overflow-y: auto;
+}
+.dmp-adm__hasil-butir {
+    display: block; width: 100%; text-align: left;
+    padding: 10px 14px; border: 0; background: transparent;
+    border-bottom: 1px solid #e2e6eb; border-bottom: 1px solid var(--dmp-border);
+    cursor: pointer; font-family: inherit;
+}
+.dmp-adm__hasil-butir:last-child { border-bottom: 0; }
+.dmp-adm__hasil-butir:hover { background: var(--dmp-accent-soft, #f9fafb); }
+.dmp-adm__hasil-butir b     { display: block; font-size: 13px; color: var(--dmp-text, #131820); }
+.dmp-adm__hasil-butir small { font-size: 11px; color: var(--dmp-text-muted, #5a6472); }
+
+.dmp-adm__terpilih {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; margin-bottom: 16px;
+    border-radius: 9px;
+    background: var(--dmp-accent-soft, #dbeafe);
+    color: var(--dmp-accent, #2f74f0);
+    font-size: 13px; font-weight: 650;
+}
+.dmp-adm__terpilih button { margin-left: auto; }
+
+.dmp-adm__nonaktif { opacity: .55; }
+
+/* --- Penyunting panduan -------------------------------------- */
+
+.dmp-adm__sunting {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 18px;
+    align-items: start;
+}
+@media (max-width: 1100px) {
+    .dmp-adm__sunting { grid-template-columns: 1fr; }
+}
+
+.dmp-adm__editor {
+    font-family: var(--dmp-font-mono, monospace);
+    font-size: 12.5px; line-height: 1.6; resize: vertical;
+}
+
+.dmp-adm__pratinjau-kotak {
+    margin-top: 16px; padding: 14px;
+    border: 1px dashed #cbd2da; border: 1px dashed var(--dmp-border-strong);
+    border-radius: 10px;
+    background: #f9fafb; background: var(--dmp-surface-2);
+}
+.dmp-adm__pratinjau-judul {
+    font-size: 10px; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; margin-bottom: 8px;
+    color: #8b95a3; color: var(--dmp-text-faint);
+}
+
+.dmp-adm__kunci {
+    display: inline-block; padding: 4px 9px; border-radius: 6px;
+    background: #eef1f4; background: var(--dmp-surface-3);
+    font-size: 12px;
+}
+
+/* --- Query Monitor ------------------------------------------- */
+
+.dmp-qm__sql {
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    background: #12161c;
+    color: #e9eef4;
+    font-family: var(--dmp-font-mono, monospace);
+    font-size: 11.5px;
+    line-height: 1.6;
+    /* SQL panjang harus tetap terbaca tanpa menggulir mendatar */
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.dmp-adm__saklar { display: flex; align-items: center; gap: 9px; font-size: 12.5px; cursor: pointer; }
+.dmp-adm__saklar input { width: 16px; height: 16px; accent-color: var(--dmp-accent, #2f74f0); }
+
+@media (max-width: 860px) {
+    .dmp-adm { grid-template-columns: 1fr; }
+    .dmp-adm__nav { position: static; height: auto; }
+    .dmp-adm__isi { padding: 18px 16px 32px; }
+}
+
+
+/* -------------------------------------------------------------
+ * 12. UTILITAS
+ * ----------------------------------------------------------- */
+
+.dmp-mt-0 { margin-top: 0; }
+.dmp-mt-3 { margin-top: 12px; }
+.dmp-mb-3 { margin-bottom: 12px; }
+.dmp-mb-4 { margin-bottom: 16px; }
+.dmp-gap-3 { gap: 12px; }
+.dmp-flex { display: flex; }
+.dmp-flex-wrap { flex-wrap: wrap; }
+.dmp-items-center { align-items: center; }
+.dmp-ml-auto { margin-left: auto; }
+.dmp-num-tab { font-variant-numeric: tabular-nums; }
+.dmp-muted { color: #5a6472; color: var(--dmp-text-muted); }
+
+/* Terbaca oleh pembaca layar, tidak terlihat di layar.
+   Dipakai untuk judul dan keterangan yang membantu pengguna
+   tunanetra memahami struktur halaman. */
+.dmp-sr {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+
+/* -------------------------------------------------------------
+ * 13. CETAK
+ *     Halaman ini sering dicetak untuk bahan rapat.
+ * ----------------------------------------------------------- */
+
+@media print {
+    .dmp-tema,
+    .dmp-panel,
+    .dmp-tirai,
+    .dmp-progress,
+    .dmp-btn,
+    .dmp-btn-ikon { display: none !important; }  /* !important perlu: menimpa gaya cetak plugin lama */
+
+    .dmp-card {
+        border: 1px solid #999;
+        box-shadow: none;
+        break-inside: avoid;
+    }
+
+    .dmp-table thead th { position: static; }   /* sticky merusak tata letak cetak */
+    .dmp-table__wrap { max-height: none; overflow: visible; }
+}
+
+/* ===================================================================
+   MODAL PENGUMUMAN (Fase 8.3)
+
+   Muncul setelah pengguna berhasil masuk, memuat tautan ke menu baru.
+   Markupnya HANYA dikirim bila ada berita yang layak tayang - lihat
+   app/Views/inc/berita.php.
+   =================================================================== */
+
+/* Latar halaman dikunci selama modal terbuka, supaya menggulir tidak
+   menggerakkan dashboard di belakangnya. Dipasang pada body lewat JS. */
+.dmp-terkunci { overflow: hidden; }
+
+.dmp-berita {
+    position: fixed;
+    left: 0; top: 0; right: 0; bottom: 0;
+    z-index: 1060;                 /* di atas panel analisa (1035) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(9, 13, 20, .55);
+
+    /* Mulai tersembunyi. JS menambahkan .tampil setelah halaman siap,
+       supaya modal tidak berkedip saat dashboard masih menyusun tata
+       letaknya. */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 200ms ease, visibility 200ms;
+}
+
+.dmp-berita.tampil { opacity: 1; visibility: visible; }
+
+.dmp-berita__kotak {
+    width: 100%;
+    max-width: 560px;
+    max-height: 84vh;
+    display: flex;
+    flex-direction: column;
+    border-radius: 14px;
+    background: #ffffff;
+    background: var(--dmp-surface-1, #ffffff);
+    box-shadow: 0 24px 60px rgba(9, 13, 20, .34);
+
+    /* Naik sedikit saat muncul - gerakan kecil yang memberi tahu mata
+       bahwa ini lapisan baru, bukan bagian halaman di belakangnya. */
+    transform: translateY(14px);
+    transition: transform 220ms cubic-bezier(.2, .8, .3, 1);
+}
+
+.dmp-berita.tampil .dmp-berita__kotak { transform: translateY(0); }
+
+.dmp-berita__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 18px 12px;
+    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--dmp-garis, #e5e7eb);
+}
+
+.dmp-berita__lencana {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    background: #eff6ff;
+    background: var(--dmp-accent-lembut, #eff6ff);
+    color: #2563eb;
+    color: var(--dmp-accent, #2563eb);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+}
+
+.dmp-berita__body {
+    padding: 4px 18px;
+    overflow-y: auto;              /* isi panjang bergulir, kepala tetap */
+}
+
+.dmp-berita__item { padding: 16px 0; }
+
+/* Garis pemisah HANYA antar berita, bukan setelah yang terakhir */
+.dmp-berita__item + .dmp-berita__item {
+    border-top: 1px solid #e5e7eb;
+    border-top: 1px solid var(--dmp-garis, #e5e7eb);
+}
+
+.dmp-berita__judul {
+    margin: 0 0 8px;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: #111827;
+    color: var(--dmp-teks-1, #111827);
+}
+
+.dmp-berita__isi {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: #4b5563;
+    color: var(--dmp-teks-2, #4b5563);
+}
+
+.dmp-berita__isi p  { margin: 0 0 10px; }
+.dmp-berita__isi p:last-child { margin-bottom: 0; }
+.dmp-berita__isi ul,
+.dmp-berita__isi ol { margin: 0 0 10px; padding-left: 20px; }
+.dmp-berita__isi li { margin-bottom: 5px; }
+.dmp-berita__isi h4 { margin: 14px 0 6px; font-size: 13.5px; font-weight: 700; }
+
+.dmp-berita__aksi { margin-top: 14px; gap: 7px; }
+
+.dmp-berita__kaki {
+    display: flex;
+    justify-content: flex-end;
+    padding: 12px 18px 16px;
+    border-top: 1px solid #e5e7eb;
+    border-top: 1px solid var(--dmp-garis, #e5e7eb);
+}
+
+@media (max-width: 640px) {
+    .dmp-berita { padding: 12px; align-items: flex-end; }
+    .dmp-berita__kotak { max-height: 90vh; }
+}
+
+/* Tidak ikut tercetak */
+@media print {
+    .dmp-berita { display: none !important; }
+}
+
+/* Menghormati setelan "kurangi animasi" - modal langsung tampil
+   di tempatnya, tanpa gerakan naik. */
+@media (prefers-reduced-motion: reduce) {
+    .dmp-berita,
+    .dmp-berita__kotak { transition: none; }
+    .dmp-berita__kotak { transform: none; }
+}
+
+/* ===================================================================
+   LENCANA STATUS + tombol bahaya (Fase 8.4)
+   =================================================================== */
+
+.dmp-lencana {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: .01em;
+    text-transform: capitalize;
+    white-space: nowrap;
+}
+
+/* Warna ditulis dua kali: nilai tetap dulu, lalu var(). Peramban lama
+   mengabaikan baris kedua dan tetap mendapat warna yang benar. */
+.dmp-lencana--hijau { background: #dcfce7; color: #166534; }
+.dmp-lencana--biru  { background: #dbeafe; color: #1e40af; }
+.dmp-lencana--abu   { background: #f1f3f5; color: #6b7280; }
+
+[data-dmp-mode="dark"] .dmp-lencana--hijau { background: #14532d; color: #bbf7d0; }
+[data-dmp-mode="dark"] .dmp-lencana--biru  { background: #1e3a8a; color: #bfdbfe; }
+[data-dmp-mode="dark"] .dmp-lencana--abu   { background: #2a2f37; color: #9ca3af; }
+
+/* Keterangan yang sengaja diredupkan: "tanpa batas", tanda hubung,
+   NIP pengubah. Informasi pelengkap, bukan yang dicari mata lebih dulu. */
+.dmp-redup {
+    color: #9ca3af;
+    color: var(--dmp-teks-3, #9ca3af);
+}
+
+/* Tombol tindakan yang tidak bisa dibatalkan.
+
+   Sengaja BUKAN merah penuh. Tombol merah menyala di dalam tabel
+   menarik mata lebih dulu daripada isi barisnya, dan yang paling
+   sering diklik di baris itu adalah "Sunting" - bukan "Hapus".
+   Merahnya baru penuh saat kursor benar-benar di atasnya. */
+.dmp-btn--bahaya {
+    border-color: #fecaca;
+    background: #fff5f5;
+    color: #b91c1c;
+}
+
+.dmp-btn--bahaya:hover,
+.dmp-btn--bahaya:focus-visible {
+    border-color: #dc2626;
+    background: #dc2626;
+    color: #ffffff;
+}
+
+[data-dmp-mode="dark"] .dmp-btn--bahaya {
+    border-color: #7f1d1d;
+    background: #2a1416;
+    color: #fca5a5;
+}
+
+/* Sel berisi lebih dari satu tombol tindakan (Fase 22).
+
+   Perlu karena tombol Hapus dibungkus <form> agar bisa dikirim lewat
+   POST, dan <form> itu elemen blok - tanpa penataan ini ia jatuh ke
+   baris berikutnya, terpisah dari tombol Sunting di sebelahnya.
+
+   white-space: nowrap menjaga keduanya tetap sebaris pada tabel yang
+   sempit; kolom tindakan lebih baik melebar daripada tombolnya
+   bertumpuk. */
+.dmp-adm__aksi {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.dmp-adm__aksi form {
+    display: inline;
+    margin: 0;
+}
+
+/* ===================================================================
+ * PETA MENU & GRAFIK (Fase 22)
+ * =================================================================== */
+
+/* Kode yang bisa diklik untuk disalin.
+
+   Sengaja diberi garis putus-putus, bukan warna tautan. Warna tautan
+   berarti "membuka halaman lain"; di sini yang terjadi menyalin ke
+   papan klip, dan janji yang keliru lebih buruk daripada tidak ada
+   petunjuk sama sekali. */
+.dmp-salin {
+    cursor: copy;
+    border-bottom: 1px dashed #b6c0cc;
+    border-bottom-color: var(--dmp-border, #b6c0cc);
+    user-select: all;
+}
+
+.dmp-salin:hover {
+    background: #eef1f4;
+    background: var(--dmp-surface-3, #eef1f4);
+}
+
+/* Umpan balik setelah disalin. Hijau, bukan sekadar berubah teks -
+   perubahan teks saja mudah terlewat kalau mata sedang di tempat
+   lain saat mengklik. */
+.dmp-salin--ok {
+    border-bottom-style: solid;
+    border-bottom-color: #16a34a;
+    border-bottom-color: var(--dmp-success, #16a34a);
+    color: #16a34a;
+    color: var(--dmp-success, #16a34a);
+    cursor: default;
+}
+
+/* Satu id grafik + lencana statusnya. inline-flex supaya keduanya
+   tidak pernah terpisah baris, dan tetap membungkus ke bawah bila
+   satu halaman punya banyak grafik. */
+.dmp-pg__grafik {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0 8px 4px 0;
+}
+
+.dmp-pg__samar {
+    margin-top: 6px;
+}
+
+/* ===================================================================
+ * CORONG KEPATUHAN — 5 PILAR (Fase 28.1)
+ *
+ * Diterjemahkan dari rancangan Claude Design alternatif 1a.
+ * Seluruh warna memakai var(--dmp-*) supaya ikut berganti saat
+ * pengguna memilih tema; rancangan aslinya memakai hex tetap dan
+ * akan rusak di mode gelap.
+ * =================================================================== */
+
+.dmp-pilar { padding: 4px 0 24px; }
+
+.dmp-pilar__kepala {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+.dmp-pilar__judul { margin: 0; font-size: 20px; font-weight: 600; }
+
+.dmp-pilar__sub {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: var(--dmp-text-muted);
+}
+
+.dmp-pilar__cat { color: var(--dmp-text-faint); font-size: 12px; }
+
+/* Baris penyaring. flex-wrap supaya pada 1366 piksel ia turun ke
+   baris kedua, bukan memotong pilihan terakhir. */
+.dmp-pilar__saring {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    background: var(--dmp-surface);
+    border: 1px solid var(--dmp-border);
+    border-radius: 10px;
+}
+
+.dmp-pilar__saring label { display: flex; flex-direction: column; gap: 4px; margin: 0; }
+.dmp-pilar__saring label span { font-size: 12px; color: var(--dmp-text-muted); }
+
+.dmp-pilar__kabar {
+    padding: 14px 16px;
+    margin-bottom: 18px;
+    border-radius: 10px;
+    border: 1px solid var(--dmp-border);
+    background: var(--dmp-surface-2);
+}
+
+.dmp-pilar__kabar p { margin: 6px 0 0; font-size: 13px; color: var(--dmp-text-muted); }
+
+.dmp-pilar__kabar--awas {
+    border-color: var(--dmp-warning);
+    background: var(--dmp-warning-soft);
+}
+
+/* ---- corong ---- */
+
+.dmp-corong { display: flex; flex-direction: column; align-items: center; }
+
+.dmp-corong__dasar {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding: 10px 16px;
+    border: 1.5px dashed var(--dmp-border-strong);
+    border-radius: 10px;
+    background: var(--dmp-surface-2);
+}
+
+.dmp-corong__dasar-label { font-size: 13px; color: var(--dmp-text-muted); }
+.dmp-corong__dasar-nilai { font-size: 22px; font-weight: 600; }
+
+/* Keterangan konversi di antara dua tangga. Inilah angka terpenting
+   di halaman ini - persentase yang menunjukkan berapa banyak WP
+   berhenti di tangga sebelumnya. */
+.dmp-corong__antara {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 8px 0;
+    font-size: 13px;
+    color: var(--dmp-text-muted);
+}
+
+.dmp-corong__panah { color: var(--dmp-border-strong); font-size: 11px; }
+
+/* Banyaknya WP yang berhenti di tangga ini. Angka inilah yang dipakai
+   menentukan "penurunan terbesar" - lihat catatan di corong.php. */
+.dmp-corong__hilang {
+    font-size: 12px;
+    color: var(--dmp-danger);
+    font-variant-numeric: tabular-nums;
+}
+
+.dmp-corong__delta { font-size: 12px; }
+.dmp-corong__delta.naik  { color: var(--dmp-success); }
+.dmp-corong__delta.turun { color: var(--dmp-danger); }
+.dmp-corong__delta small { color: var(--dmp-text-faint); }
+
+.dmp-corong__baris { width: 100%; display: flex; justify-content: center; }
+
+/* Batang tangga. Lebarnya sebanding jumlah WP terhadap populasi,
+   dengan batas bawah 22% supaya tangga terkecil tetap bisa memuat
+   tombolnya - batang yang menyusut sampai tidak terbaca membuat
+   tombol di dalamnya tidak bisa diklik. */
+.dmp-corong__bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    min-width: 280px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: var(--dmp-info);
+    color: #ffffff;
+    box-shadow: var(--dmp-shadow-sm);
+}
+
+.dmp-corong__bar.sorot { background: var(--dmp-warning); }
+
+/* Tangga tanpa data: garis putus-putus, bukan batang penuh berwarna
+   pudar. Batang pudar tetap terbaca sebagai "ada nilainya, kecil";
+   garis putus-putus terbaca sebagai "tidak ada". */
+.dmp-corong__bar.kosong {
+    background: transparent;
+    color: var(--dmp-text-muted);
+    border: 1.5px dashed var(--dmp-border-strong);
+    box-shadow: none;
+}
+
+.dmp-corong__no {
+    flex: 0 0 auto;
+    width: 22px; height: 22px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .22);
+    font-size: 12px; font-weight: 600;
+}
+
+.dmp-corong__bar.kosong .dmp-corong__no {
+    background: var(--dmp-surface-3);
+    color: var(--dmp-text-muted);
+}
+
+.dmp-corong__nama { font-weight: 600; }
+.dmp-corong__jml  { font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+.dmp-corong__pop { font-size: 12px; opacity: .88; }
+.dmp-corong__pop small { display: block; opacity: .8; }
+
+.dmp-corong__aksi { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; }
+
+/* Tombol di dalam batang berwarna. Dibuat tembus dengan garis putih
+   supaya kontrasnya cukup pada latar biru maupun jingga. */
+.dmp-corong__bar:not(.kosong) .dmp-btn--lembut {
+    background: rgba(255, 255, 255, .16);
+    border-color: rgba(255, 255, 255, .55);
+    color: #ffffff;
+}
+
+.dmp-corong__bar:not(.kosong) .dmp-btn--lembut:hover {
+    background: rgba(255, 255, 255, .28);
+}
+
+.dmp-corong__nota {
+    width: 100%;
+    text-align: center;
+    padding: 6px 0 0;
+    font-size: 12px;
+    color: var(--dmp-text-muted);
+}
+
+@media (max-width: 900px) {
+    /* Di layar sempit corongnya kehilangan makna - lebar batang tidak
+       lagi sebanding. Dijadikan lebar penuh semua, dan yang tersisa
+       adalah urutan serta angkanya. */
+    .dmp-corong__bar { width: 100% !important; }
+}
+
+/* ===================================================================
+ * LAYAR LOGO APLIKASI (Fase 23)
+ * =================================================================== */
+
+.dmp-logo__baris {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+/* Latar kotak-kotak. Logo hampir selalu PNG dengan latar tembus
+   pandang, dan di atas kartu putih polos bagian tembus itu TIDAK
+   TERLIHAT sebagai tembus - ia terbaca sebagai putih. Akibatnya
+   logo tanpa latar dan logo berlatar putih tampak persis sama, dan
+   yang salah baru ketahuan setelah dipasang di sidebar gelap. */
+.dmp-logo__pratinjau {
+    flex: 0 0 auto;
+    width: 160px;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    border: 1px solid #dfe3e8;
+    border-color: var(--dmp-border, #dfe3e8);
+    border-radius: 10px;
+    background-color: #ffffff;
+    background-image:
+        linear-gradient(45deg, #eef1f4 25%, transparent 25%),
+        linear-gradient(-45deg, #eef1f4 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #eef1f4 75%),
+        linear-gradient(-45deg, transparent 75%, #eef1f4 75%);
+    background-size: 14px 14px;
+    background-position: 0 0, 0 7px, 7px -7px, -7px 0;
+}
+
+.dmp-logo__pratinjau img {
+    max-width: 100%;
+    max-height: 100px;
+    height: auto;
+}
+
+.dmp-logo__aksi {
+    flex: 1 1 260px;
+    min-width: 0;
+}
+
+.dmp-logo__balik {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #dfe3e8;
+    border-top-color: var(--dmp-border, #dfe3e8);
+}
+
+/* Logo di kop layar admin. Ukurannya dipatok agar unggahan yang
+   kelewat besar tidak merusak susunan sidebar - ia dikecilkan,
+   bukan mendorong menu ke bawah. */
+.dmp-adm__logo--gambar {
+    padding: 0;
+    overflow: hidden;
+    background: transparent;
+}
+
+.dmp-adm__logo--gambar img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    display: block;
+}
+
+/* ===================================================================
+   REMAH JEJAK DRILLDOWN (Fase 9.3b)
+
+   Disisipkan tepat DI ATAS wadah grafik oleh DmpChart.drill().
+   Tidak boleh ditaruh di dalam wadah: ECharts menguasai isi wadahnya
+   dan akan menghapus apa pun yang ada di sana.
+
+   Disembunyikan saat berada di tingkat akar - tidak ada yang perlu
+   ditunjukkan, dan baris kosong hanya menggeser grafik ke bawah.
+   =================================================================== */
+
+.dmp-drill {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2px;
+    margin: 0 0 8px;
+    font-size: 12px;
+}
+
+.dmp-drill__butir {
+    padding: 3px 8px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: #2563eb;
+    color: var(--dmp-accent, #2563eb);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.dmp-drill__butir:hover,
+.dmp-drill__butir:focus-visible {
+    background: #eff6ff;
+    background: var(--dmp-accent-lembut, #eff6ff);
+}
+
+/* Tingkat yang sedang dilihat: bukan tombol, jadi tidak boleh
+   tampak dapat diklik. */
+.dmp-drill__butir--kini {
+    color: #4b5563;
+    color: var(--dmp-teks-2, #4b5563);
+    font-weight: 700;
+    cursor: default;
+}
+
+.dmp-drill__pisah {
+    color: #9ca3af;
+    color: var(--dmp-teks-3, #9ca3af);
+    user-select: none;
+}
+
+/* ===================================================================
+   PERINGATAN "BELUM AKTIF" DI CMS (Fase 15a)
+
+   Dipakai app/Views/admin/analisa_sunting.php. Warna kuning peringatan,
+   bukan merah: ini bukan kesalahan, hanya keadaan yang perlu diketahui.
+   =================================================================== */
+
+.dmp-adm__ingat {
+    margin-bottom: 16px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #f0c36d;
+    border-left-width: 4px;
+    background: #fdf6e3;
+    color: #6b4e10;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.dmp-adm__ingat code {
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: rgba(107, 78, 16, .12);
+    font-size: 12px;
+}
+
+/* ===================================================================
+   TABEL LEBAR & PANJANG (Fase 12)
+
+   Dipasang otomatis oleh public/theme/dmp/dmp-tabel.js - tidak perlu
+   menyunting satu pun view.
+   =================================================================== */
+
+/* min-width:0 WAJIB, bukan sekadar kehati-hatian.
+
+   Nilai bawaan min-width untuk item flex/grid adalah `auto`, artinya
+   "jangan pernah lebih sempit dari isiku". Selama itu berlaku,
+   overflow-x tidak pernah aktif: yang meluap justru halamannya.
+   Dalam CSS min-width menang atas max-width, jadi max-width:100%
+   saja tidak cukup. */
+.dmp-tabel-bingkai {
+    position: relative;
+    max-width: 100%;
+    min-width: 0;
+}
+
+/* Dipasang oleh dmp-tabel.js pada rantai induk tabel yang dibungkus.
+   Tidak berefek pada elemen blok biasa - hanya berbicara pada elemen
+   yang memang item flex atau grid. */
+.dmp-tabel-induk { min-width: 0; }
+
+.dmp-tabel-gulir {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;   /* inersia di layar sentuh */
+}
+
+/* Penggulir dibuat SELALU TERLIHAT, bukan yang disembunyikan sistem.
+   Bawaan macOS dan sebagian Windows 11 menyembunyikan penggulir sampai
+   kursor bergerak di atasnya - dan pembaca yang tidak tahu ada kolom
+   tersembunyi tidak akan pernah menggerakkan kursornya ke sana. */
+.dmp-tabel-gulir { scrollbar-width: thin; }
+
+.dmp-tabel-gulir::-webkit-scrollbar { height: 10px; }
+
+.dmp-tabel-gulir::-webkit-scrollbar-track {
+    background: #f1f3f5;
+    background: var(--dmp-surface-2, #f1f3f5);
+    border-radius: 6px;
+}
+
+.dmp-tabel-gulir::-webkit-scrollbar-thumb {
+    background: #c3c9d2;
+    border-radius: 6px;
+}
+
+.dmp-tabel-gulir::-webkit-scrollbar-thumb:hover { background: #9aa3b0; }
+
+/* Bayangan tepi dipasang pada BINGKAI, bukan pada elemen yang
+   menggulir. Pseudo-element pada elemen yang menggulir ikut bergeser
+   bersama isinya - ia justru hilang tepat saat paling diperlukan.
+
+   Muncul hanya pada tepi yang MASIH menyembunyikan sesuatu, jadi ia
+   terbaca sebagai petunjuk arah, bukan hiasan tetap. */
+.dmp-tabel-bingkai::before,
+.dmp-tabel-bingkai::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 28px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 150ms;
+    z-index: 2;
+}
+
+.dmp-tabel-bingkai::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(19, 24, 32, .18), transparent);
+}
+
+.dmp-tabel-bingkai::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(19, 24, 32, .18), transparent);
+}
+
+.dmp-tabel-bingkai--kiri::before  { opacity: 1; }
+.dmp-tabel-bingkai--kanan::after  { opacity: 1; }
+
+/* Tabel di dalamnya tidak boleh dipaksa menyusut - biarkan ia selebar
+   isinya, lalu pembungkusnya yang menggulir. Tanpa ini kolom saling
+   menghimpit sampai teksnya terpotong per huruf. */
+.dmp-tabel-gulir > table { width: auto; min-width: 100%; }
+
+/* ---- Penomoran halaman ------------------------------------------- */
+
+.dmp-tabel-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 2px 2px;
+    font-size: 12px;
+}
+
+.dmp-tabel-nav__ket {
+    color: #6b7280;
+    color: var(--dmp-teks-2, #6b7280);
+}
+
+.dmp-tabel-nav__tombol { display: flex; gap: 6px; }
+
+/* Pemilih jumlah baris per halaman (Fase 21). */
+.dmp-tabel-nav__pilih {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #6b7280;
+    color: var(--dmp-teks-2, #6b7280);
+}
+
+.dmp-tabel-nav__jml {
+    padding: 3px 24px 3px 8px;
+    border: 1px solid #d7dbe0;
+    border: 1px solid var(--dmp-border, #d7dbe0);
+    border-radius: 6px;
+    background: #fff;
+    background: var(--dmp-surface, #fff);
+    color: inherit;
+    font-size: 12px;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+@media print {
+    /* Saat dicetak seluruh baris ditampilkan, jadi pemilihnya tidak
+       bermakna apa-apa di atas kertas. */
+    .dmp-tabel-nav__pilih { display: none !important; }
+}
+
+/* Tombol yang tidak bisa dipakai HARUS terlihat begitu. Tombol mati
+   yang tampak hidup membuat orang mengkliknya berulang dan mengira
+   halamannya rusak. */
+.dmp-tabel-nav__tombol .dmp-btn:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+@media print {
+    /* Saat dicetak, seluruh baris ditampilkan - kertas tidak menggulir. */
+    .dmp-tabel-nav { display: none !important; }
+    .dmp-tabel-gulir { overflow: visible !important; }
+    .dmp-tabel-bingkai::before,
+    .dmp-tabel-bingkai::after { display: none !important; }
+    .dmp-tabel-gulir tbody tr { display: table-row !important; }
+}

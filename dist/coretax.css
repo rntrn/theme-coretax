@@ -1,0 +1,346 @@
+/*!
+ * Tema "Coretax" untuk DMP
+ *
+ * Layout, menu, dan markup DMP TIDAK diubah. Berkas ini hanya mengganti
+ * warna dan detail tampilan: preset warna ke-9 + skin untuk kelas DMP
+ * yang sudah ada (.dmp-nav, .header-top, .dmp-card, .dmp-kpi, .dmp-table ...).
+ *
+ * Aktif bila <html data-dmp-theme="coretax">. Muat SETELAH:
+ *     public/theme/dmp/tokens.css
+ *     public/theme/dmp/theme.css
+ *
+ * Aturan DMP tetap berlaku: tidak ada kode warna di luar blok token.
+ * Komponen hanya memakai var(--dmp-*) dan var(--ctx-*) di bawah.
+ */
+
+/* ============================================================
+ * 1. TOKEN - biru Coretax + oranye penanda
+ * ========================================================== */
+
+/* Terang (juga bila data-dmp-mode tidak diisi) */
+[data-dmp-theme="coretax"] {
+    --dmp-accent:       #1a5fb4;
+    --dmp-accent-hover: #144b92;
+    --dmp-accent-soft:  #e3edfb;
+    --dmp-accent-on:    #ffffff;
+    --dmp-accent-ring:  rgba(26, 95, 180, .35);
+
+    --dmp-bg:            #eff3f9;
+    --dmp-surface:       #ffffff;
+    --dmp-surface-2:     #f6f8fc;
+    --dmp-surface-3:     #e9eef6;
+    --dmp-border:        #dbe3ee;
+    --dmp-border-strong: #bfcadb;
+    --dmp-text:          #17212f;
+    --dmp-text-muted:    #56657c;
+    --dmp-text-faint:    #8997ab;
+
+    --dmp-radius-sm: 4px;
+    --dmp-radius:    8px;
+    --dmp-radius-lg: 12px;
+
+    --dmp-shadow-sm: 0 1px 2px rgba(15, 39, 71, .07);
+    --dmp-shadow:    0 2px 10px rgba(15, 39, 71, .09);
+    --dmp-shadow-lg: 0 10px 30px rgba(15, 39, 71, .18);
+
+    --ctx-highlight:     #f08a1c;
+    --ctx-sidebar-top:   #12315a;
+    --ctx-sidebar-bot:   #0b2040;
+    --ctx-sidebar-text:  rgba(255, 255, 255, .74);
+    --ctx-sidebar-hover: rgba(255, 255, 255, .08);
+    --ctx-sidebar-aktif: #1a5fb4;
+    --ctx-sidebar-aktif-teks: #ffffff;
+}
+
+/* Gelap */
+[data-dmp-theme="coretax"][data-dmp-mode="dark"] {
+    --dmp-accent:       #5b9dff;
+    --dmp-accent-hover: #84b6ff;
+    --dmp-accent-soft:  #15263f;
+    --dmp-accent-on:    #07111f;
+    --dmp-accent-ring:  rgba(91, 157, 255, .40);
+
+    --dmp-bg:            #0c1118;
+    --dmp-surface:       #141b25;
+    --dmp-surface-2:     #1a2330;
+    --dmp-surface-3:     #212c3b;
+    --dmp-border:        #27313f;
+    --dmp-border-strong: #394556;
+    --dmp-text:          #e6ecf4;
+    --dmp-text-muted:    #93a1b5;
+    --dmp-text-faint:    #667489;
+
+    --dmp-shadow-sm: 0 1px 2px rgba(0, 0, 0, .45);
+    --dmp-shadow:    0 2px 10px rgba(0, 0, 0, .55);
+    --dmp-shadow-lg: 0 10px 30px rgba(0, 0, 0, .65);
+
+    --ctx-sidebar-top:   #0b1829;
+    --ctx-sidebar-bot:   #070f1a;
+    --ctx-sidebar-aktif: #2a63b8;
+}
+
+/* Warna "makna" (sukses/bahaya) bawaan DMP sengaja tidak diubah. */
+
+
+/* ============================================================
+ * 2. SIDEBAR - navy pekat, menu aktif biru + penanda oranye
+ *    Ditulis satu tingkat lebih spesifik daripada theme.css
+ *    (.wrapper .page-wrap .dmp-nav) tanpa !important.
+ * ========================================================== */
+
+[data-dmp-theme="coretax"] .wrapper .page-wrap .dmp-nav,
+[data-dmp-theme="coretax"][data-dmp-mode="dark"] .wrapper .page-wrap .dmp-nav {
+    background: #12315a;
+    background: linear-gradient(180deg, var(--ctx-sidebar-top), var(--ctx-sidebar-bot));
+    box-shadow: 2px 0 12px rgba(7, 15, 26, .18);
+}
+
+[data-dmp-theme="coretax"] .dmp-nav__kepala {
+    border-bottom-color: rgba(255, 255, 255, .10);
+}
+[data-dmp-theme="coretax"] .dmp-nav__logo {
+    box-shadow: inset 0 -3px 0 #f08a1c;
+    box-shadow: inset 0 -3px 0 var(--ctx-highlight);
+}
+
+[data-dmp-theme="coretax"] .dmp-nav__label {
+    color: rgba(255, 255, 255, .42);
+    letter-spacing: .12em;
+}
+
+[data-dmp-theme="coretax"] .dmp-nav__butir,
+[data-dmp-theme="coretax"] .dmp-nav__anak {
+    color: rgba(255, 255, 255, .74);
+    color: var(--ctx-sidebar-text);
+    border-radius: 4px;
+    border-radius: var(--dmp-radius-sm);
+}
+[data-dmp-theme="coretax"] .dmp-nav__butir:hover,
+[data-dmp-theme="coretax"] .dmp-nav__anak:hover {
+    background: rgba(255, 255, 255, .08);
+    background: var(--ctx-sidebar-hover);
+    color: #fff;
+}
+
+[data-dmp-theme="coretax"] .dmp-nav__anak.aktif,
+[data-dmp-theme="coretax"] .dmp-nav__butir.aktif {
+    background: #1a5fb4;
+    background: var(--ctx-sidebar-aktif);
+    color: #fff;
+    color: var(--ctx-sidebar-aktif-teks);
+    box-shadow: var(--dmp-shadow-sm);
+}
+/* Penanda kiri: oranye, bukan warna aksen */
+[data-dmp-theme="coretax"] .dmp-nav__butir.aktif::before,
+[data-dmp-theme="coretax"] .dmp-nav__butir--grup.aktif-induk::before {
+    background: #f08a1c;
+    background: var(--ctx-highlight);
+}
+[data-dmp-theme="coretax"] .dmp-nav__anak.aktif::before {
+    background: #f08a1c;
+    background: var(--ctx-highlight);
+}
+[data-dmp-theme="coretax"] .dmp-nav__butir--grup.aktif-induk i {
+    color: #f08a1c;
+    color: var(--ctx-highlight);
+}
+
+[data-dmp-theme="coretax"] .dmp-nav__cari input {
+    background: rgba(255, 255, 255, .07);
+    border-color: rgba(255, 255, 255, .12);
+    border-radius: 4px;
+    border-radius: var(--dmp-radius-sm);
+}
+[data-dmp-theme="coretax"] .dmp-nav__kaki {
+    border-top-color: rgba(255, 255, 255, .10);
+    background: rgba(0, 0, 0, .14);
+}
+
+
+/* ============================================================
+ * 3. HEADER ATAS - putih, garis atas biru ke oranye
+ * ========================================================== */
+
+[data-dmp-theme="coretax"] .wrapper .header-top {
+    box-shadow: 0 1px 3px rgba(15, 39, 71, .08);
+    box-shadow: var(--dmp-shadow-sm);
+}
+[data-dmp-theme="coretax"] .wrapper .header-top::before {
+    height: 3px;
+    background: #1a5fb4;
+    background: linear-gradient(90deg,
+        var(--dmp-accent) 0%, var(--dmp-accent) 78%, var(--ctx-highlight) 100%);
+}
+[data-dmp-theme="coretax"] .wrapper .header-top .judul h3 {
+    font-weight: 800;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #1a5fb4;
+    color: var(--dmp-accent);
+}
+[data-dmp-theme="coretax"][data-dmp-mode="dark"] .wrapper .header-top .judul h3 {
+    color: var(--dmp-text);
+}
+
+
+/* ============================================================
+ * 4. KARTU, KPI, TABEL, TOMBOL, LENCANA
+ * ========================================================== */
+
+[data-dmp-theme="coretax"] .dmp-card {
+    border-radius: 8px;
+    border-radius: var(--dmp-radius);
+    border-top: 3px solid #1a5fb4;
+    border-top: 3px solid var(--dmp-accent);
+}
+[data-dmp-theme="coretax"] .dmp-card__head {
+    background: #f6f8fc;
+    background: var(--dmp-surface-2);
+}
+[data-dmp-theme="coretax"] .dmp-card__title {
+    font-weight: 800;
+    color: #17212f;
+    color: var(--dmp-text);
+}
+
+[data-dmp-theme="coretax"] .dmp-kpi {
+    border-radius: 8px;
+    border-radius: var(--dmp-radius);
+    border-top: 3px solid #1a5fb4;
+    border-top: 3px solid var(--dmp-accent);
+}
+[data-dmp-theme="coretax"] .dmp-kpi__value { font-weight: 800; }
+[data-dmp-theme="coretax"] .dmp-kpi--aksen {
+    border-left: 1px solid #dbe3ee;
+    border-left: 1px solid var(--dmp-border);
+    border-top-color: #f08a1c;
+    border-top-color: var(--ctx-highlight);
+}
+
+[data-dmp-theme="coretax"] .dmp-table thead th {
+    text-transform: uppercase;
+    font-size: 11.5px;
+    letter-spacing: .05em;
+    font-weight: 800;
+    border-bottom: 2px solid #bfcadb;
+    border-bottom: 2px solid var(--dmp-border-strong);
+}
+[data-dmp-theme="coretax"] .dmp-table tbody tr:hover td {
+    background: #e3edfb;
+    background: var(--dmp-accent-soft);
+}
+
+[data-dmp-theme="coretax"] .dmp-btn { border-radius: 4px; border-radius: var(--dmp-radius-sm); }
+[data-dmp-theme="coretax"] .dmp-btn--utama {
+    box-shadow: 0 1px 2px rgba(15, 39, 71, .25);
+}
+[data-dmp-theme="coretax"] .dmp-btn:focus-visible {
+    box-shadow: 0 0 0 3px rgba(26, 95, 180, .35);
+    box-shadow: 0 0 0 3px var(--dmp-accent-ring);
+}
+
+[data-dmp-theme="coretax"] .dmp-badge { border-radius: 999px; font-weight: 800; letter-spacing: .02em; }
+
+
+/* ============================================================
+ * 5. KOMPONEN BOOTSTRAP LAMA (card, form, dropdown, tabel)
+ *    Halaman lama masih memakai kelas Bootstrap 4 - agar tidak
+ *    terlihat "dari tema lain", warnanya ikut token.
+ * ========================================================== */
+
+[data-dmp-theme="coretax"] .wrapper .card {
+    border-top: 3px solid #1a5fb4;
+    border-top: 3px solid var(--dmp-accent);
+    border-radius: 8px;
+    border-radius: var(--dmp-radius);
+}
+[data-dmp-theme="coretax"] .wrapper .card .card-header {
+    background: #f6f8fc;
+    background: var(--dmp-surface-2);
+    border-bottom: 1px solid #dbe3ee;
+    border-bottom: 1px solid var(--dmp-border);
+}
+[data-dmp-theme="coretax"] .wrapper .card .card-header h3 {
+    font-weight: 800;
+    letter-spacing: .01em;
+}
+
+[data-dmp-theme="coretax"] .wrapper .btn-primary {
+    background: #1a5fb4;
+    background: var(--dmp-accent);
+    border-color: #1a5fb4;
+    border-color: var(--dmp-accent);
+    color: #ffffff;
+    color: var(--dmp-accent-on);
+}
+[data-dmp-theme="coretax"] .wrapper .btn-primary:hover {
+    background: #144b92;
+    background: var(--dmp-accent-hover);
+    border-color: #144b92;
+    border-color: var(--dmp-accent-hover);
+}
+
+[data-dmp-theme="coretax"] .wrapper .form-control:focus {
+    border-color: #1a5fb4;
+    border-color: var(--dmp-accent);
+    box-shadow: 0 0 0 3px rgba(26, 95, 180, .35);
+    box-shadow: 0 0 0 3px var(--dmp-accent-ring);
+}
+
+[data-dmp-theme="coretax"] .wrapper .table thead th {
+    background: #f6f8fc;
+    background: var(--dmp-surface-2);
+    color: #56657c;
+    color: var(--dmp-text-muted);
+    text-transform: uppercase;
+    font-size: 11.5px;
+    letter-spacing: .05em;
+    border-bottom: 2px solid #bfcadb;
+    border-bottom: 2px solid var(--dmp-border-strong);
+}
+
+
+/* ============================================================
+ * 6. LATAR HALAMAN & MODE GELAP
+ *    CSS dasar (theme.min.css) menetapkan header, footer, dan
+ *    area konten putih/abu secara paksa. Di sini dikembalikan
+ *    ke token supaya ikut berganti terang/gelap.
+ * ========================================================== */
+
+[data-dmp-theme="coretax"] .wrapper .page-wrap .main-content {
+    background: #eff3f9;
+    background: var(--dmp-bg);
+}
+[data-dmp-theme="coretax"] .wrapper .page-wrap > .footer,
+[data-dmp-theme="coretax"] .wrapper .footer {
+    background: #ffffff;
+    background: var(--dmp-surface);
+    color: #56657c;
+    color: var(--dmp-text-muted);
+    border-top: 1px solid #dbe3ee;
+    border-top: 1px solid var(--dmp-border);
+}
+
+[data-dmp-theme="coretax"][data-dmp-mode="dark"] .wrapper .header-top,
+[data-dmp-theme="coretax"][data-dmp-mode="dark"] .wrapper .header-top[header-theme="light"] {
+    background: var(--dmp-surface);
+    color: var(--dmp-text);
+    border-bottom-color: var(--dmp-border);
+}
+[data-dmp-theme="coretax"][data-dmp-mode="dark"] .wrapper .table,
+[data-dmp-theme="coretax"][data-dmp-mode="dark"] .wrapper .table td,
+[data-dmp-theme="coretax"][data-dmp-mode="dark"] .wrapper .table th,
+[data-dmp-theme="coretax"][data-dmp-mode="dark"] .wrapper .card .card-body,
+[data-dmp-theme="coretax"][data-dmp-mode="dark"] .wrapper label {
+    color: var(--dmp-text);
+}
+[data-dmp-theme="coretax"][data-dmp-mode="dark"] .wrapper .table td,
+[data-dmp-theme="coretax"][data-dmp-mode="dark"] .wrapper .table th {
+    border-color: var(--dmp-border);
+}
+[data-dmp-theme="coretax"][data-dmp-mode="dark"] .wrapper .form-control {
+    background: var(--dmp-surface-2);
+    color: var(--dmp-text);
+    border-color: var(--dmp-border-strong);
+}
