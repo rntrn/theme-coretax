@@ -1,0 +1,101 @@
+<!doctype html>
+<html class="no-js ct" lang="id" data-dmp-theme="biru" data-dmp-mode="light" data-dmp-palette="laut">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Masuk | CTX</title>
+    <link rel="icon" href="../assets/ct/logo.svg">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/vendor/iconkit/css/iconkit.min.css">
+        <link rel="stylesheet" href="../assets/ct/tokens.css">
+    <link rel="stylesheet" href="../assets/ct/theme.css">
+    <link rel="stylesheet" href="../assets/ct/coretax.css">
+    <link rel="stylesheet" href="../assets/ct/ct-starter.css">
+    </head>
+<body class="dmp-body">
+<div class="ct-pita-demo">MODE DEMO</div>
+<main class="dmp-login">
+        <section class="dmp-login__kiri">
+        <div class="ct-login-kiri">
+            <div class="ct-login-kiri__merek">
+                <img src="../assets/ct/logo.svg" alt="">
+                <span><b>CTX</b><small>Tema Dasar Coretax</small></span>
+            </div>
+            <div>
+                <h2>Aplikasi Coretax Starter</h2>
+                <p>Kerangka aplikasi bergaya Coretax: header navy, menu mendatar dengan panel
+                   jelajah, laci menu, dan pencarian Ctrl+K - siap dipakai untuk aplikasi baru.</p>
+                <ul>
+                    <li><i class="ik ik-check-circle"></i>Satu daftar menu di <code style="color:inherit">config/menu.php</code></li>
+                    <li><i class="ik ik-check-circle"></i>Mode terang &amp; gelap, delapan tema warna</li>
+                    <li><i class="ik ik-check-circle"></i>Login mandiri &amp; lewat aplikasi induk</li>
+                </ul>
+            </div>
+            <div class="ct-login-kiri__kaki">&copy;2026 Nama Organisasi &middot; v1.0.0</div>
+        </div>
+    </section>
+
+        <section class="dmp-login__kanan">
+        <div class="dmp-login__form">
+            <h1>Masuk</h1>
+            <p>Gunakan nama pengguna dan kata sandi Anda.</p>
+
+                        
+                                            <form action="login.html" method="post" autocomplete="on">
+                    <input type="hidden" name="_ct" value="statis">                    <div class="dmp-field">
+                        <label class="dmp-label" for="username">Nama Pengguna</label>
+                        <div class="dmp-login__isian">
+                            <i class="ik ik-user"></i>
+                            <input type="text" class="dmp-input" id="username" name="username" value=""
+                                   autocomplete="username" autofocus required>
+                        </div>
+                    </div>
+                    <div class="dmp-field">
+                        <label class="dmp-label" for="password">Kata Sandi</label>
+                        <div class="dmp-login__isian dmp-login__isian--sandi">
+                            <i class="ik ik-lock"></i>
+                            <input type="password" class="dmp-input" id="password" name="password" autocomplete="current-password" required>
+                            <button type="button" class="dmp-login__intip" id="ctIntip" aria-pressed="false" aria-label="Tampilkan kata sandi">
+                                <i class="ik ik-eye" aria-hidden="true"></i><i class="ik ik-eye-off" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="submit" class="dmp-btn dmp-btn--utama dmp-login__tombol">Masuk</button>
+                </form>
+            
+                            <div class="ct-atau">atau</div>                <a class="ct-sso" href="sso.html">
+                    <span class="ct-logo4" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+                    Masuk lewat Coretax                </a>
+            
+                            <div class="ct-akun-demo">
+                    Akun demo: <code>admin</code>/<code>admin</code> atau <code>user</code>/<code>user</code>.
+                    Matikan dengan <code>'demo' =&gt; false</code> di <code>config/app.php</code>.
+                </div>
+            
+            <div class="dmp-login__kaki">Nama Organisasi<br><span style="opacity:.7">v1.0.0</span></div>
+        </div>
+    </section>
+</main>
+
+<script>
+// Tombol intip kata sandi: password <-> text. Fokus & posisi kursor
+// dikembalikan supaya pengguna bisa langsung lanjut mengetik.
+(function () {
+    var s = document.getElementById('password'), b = document.getElementById('ctIntip');
+    if (!s || !b) { return; }
+    b.addEventListener('click', function () {
+        var tampil = s.type === 'text';
+        s.type = tampil ? 'password' : 'text';
+        b.setAttribute('aria-pressed', String(!tampil));
+        b.setAttribute('aria-label', tampil ? 'Tampilkan kata sandi' : 'Sembunyikan kata sandi');
+        s.focus(); s.setSelectionRange(s.value.length, s.value.length);
+    });
+})();
+</script>
+</body>
+</html>

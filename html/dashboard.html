@@ -1,0 +1,425 @@
+<!doctype html>
+<html class="no-js ct" lang="id" data-dmp-theme="biru" data-dmp-mode="light" data-dmp-palette="laut">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ringkasan | CTX</title>
+    <link rel="icon" href="../assets/ct/logo.svg">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/vendor/iconkit/css/iconkit.min.css">
+        <link rel="stylesheet" href="../assets/vendor/themekit/theme.min.css">
+        <link rel="stylesheet" href="../assets/ct/tokens.css">
+    <link rel="stylesheet" href="../assets/ct/theme.css">
+    <link rel="stylesheet" href="../assets/ct/coretax.css">
+    <link rel="stylesheet" href="../assets/ct/ct-starter.css">
+    </head>
+<body>
+<div class="ct-pita-demo" title="config/app.php: 'demo' => true">MODE DEMO</div>
+<div class="ct-muat" id="ctMuat" role="status" aria-live="polite">
+    <div class="ct-muat__kartu">
+        <div class="ct-muat__merek">
+            <img src="../assets/ct/logo.svg" alt="" width="34" height="34">
+            <span><b>CTX</b></span>
+        </div>
+        <span class="ct-muat__putar" aria-hidden="true"></span>
+        <strong>Memuat halaman</strong>
+        <small>Mohon tunggu&hellip;</small>
+    </div>
+</div>
+
+<div class="wrapper">
+<header class="header-top ct-kepala" header-theme="light">
+    <div class="container-fluid">
+        <div class="ct-kepala__baris">
+            <div class="ct-kepala__kiri">
+                <a class="ct-merek" href="dashboard.html" title="Ke halaman awal">
+                    <img class="ct-merek__logo" src="../assets/ct/logo.svg" alt="" width="30" height="30">
+                    <span class="ct-merek__garis" aria-hidden="true"></span>
+                </a>
+                <div class="judul ct-merek__judul" id="judul">
+                    <h3><b><strong>APLIKASI CORETAX STARTER</strong></b></h3>
+                </div>
+            </div>
+
+            <div class="ct-kepala__tengah">
+                <button type="button" class="ct-cari" id="ctCariBuka" aria-haspopup="dialog" title="Cari menu (Ctrl+K)">
+                    <i class="ik ik-search" aria-hidden="true"></i>
+                    <span class="ct-cari__teks">Cari Menu atau Laporan</span>
+                    <span class="ct-cari__kbd" aria-hidden="true"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+                </button>
+            </div>
+
+            <div class="top-menu ct-kepala__kanan d-flex align-items-center">
+                <button type="button" id="navbar-fullscreen" class="nav-link" title="Layar penuh" aria-label="Layar penuh"><i class="ik ik-maximize"></i></button>
+                <button type="button" id="navbar-print" class="nav-link" title="Cetak halaman" aria-label="Cetak halaman"><i class="ik ik-printer"></i></button>
+
+                <div class="dropdown ct-bahasa">
+                    <button type="button" class="ct-bahasa__tombol" id="ctBahasaToggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" title="Bahasa" aria-label="Bahasa">
+                        <span class="ct-bendera ct-bendera--id" aria-hidden="true"></span><b>ID</b>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right p-0" aria-labelledby="ctBahasaToggle">
+                        <div class="ct-bahasa__daftar" role="group">
+                            <button type="button" data-ct-bahasa="id" aria-pressed="true"><span class="ct-bendera ct-bendera--id" aria-hidden="true"></span>Bahasa Indonesia</button>
+                            <button type="button" data-ct-bahasa="en" aria-pressed="false"><span class="ct-bendera ct-bendera--en" aria-hidden="true"></span>English</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button type="button" class="nav-link" id="dmpTemaToggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" title="Mode terang / gelap" aria-label="Mode terang atau gelap">
+                        <i class="ik ik-sun"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right p-0" aria-labelledby="dmpTemaToggle">
+                        <div class="dmp-tema">
+                            <div class="dmp-tema__mode" role="group" aria-label="Mode terang atau gelap">
+                                <button type="button" data-mode="light" aria-pressed="false"><i class="ik ik-sun" aria-hidden="true"></i> Terang</button>
+                                <button type="button" data-mode="dark" aria-pressed="false"><i class="ik ik-moon" aria-hidden="true"></i> Gelap</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <a class="dropdown-toggle ct-pengguna" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="ik ik-user ct-pengguna__ikon" aria-hidden="true"></i>
+                        <span class="ct-pengguna__teks">
+                            <small>admin</small>
+                            <b>ADMIN CONTOH</b>
+                        </span>
+                        <span class="ct-pengguna__lencana">ADM</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="profil.html"><i class="ik ik-user dropdown-icon"></i> Profil</a>
+                                                <a class="dropdown-item" href="admin/index.html"><i class="ik ik-settings dropdown-icon"></i> Menu Admin</a>
+                                                <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="login.html"><i class="ik ik-power dropdown-icon"></i> Keluar</a>
+                    </div>
+                </div>
+
+                <a class="ct-keluar" href="login.html" title="Keluar" aria-label="Keluar">
+                    <i class="ik ik-log-out" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<script>
+// Konfigurasi untuk skrip tema - diberikan server, bukan ditebak di
+// peramban, karena aplikasi bisa dilayani di subfolder mana saja.
+window.DMP_TEMA = {   // dibaca dmp-theme.js: tombol terang/gelap disimpan ke sesi
+    url: "",
+    csrfNama: '_ct', csrfNilai: "statis"};
+window.DMP_CT = {     // dibaca coretax.js: blok "Menu Rekomendasi" di laci Buka Menu
+    menuPopuler: ""};
+</script>
+
+<div class="page-wrap">
+<aside class="app-sidebar dmp-nav" id="dmpSidebar" data-ciut="0">
+    <div class="dmp-nav__kepala">
+        <a class="dmp-nav__merek" href="dashboard.html">
+            <span class="dmp-nav__logo"><img src="../assets/ct/logo.svg" alt="" width="32" height="32"></span>
+            <span class="dmp-nav__merek-teks">
+                <b>CTX</b>
+                <small>Tema Dasar Coretax</small>
+            </span>
+        </a>
+        <button type="button" class="dmp-nav__ciut" id="dmpNavCiut" title="Ciutkan menu" aria-label="Ciutkan menu">
+            <i class="ik ik-chevrons-left"></i>
+        </button>
+    </div>
+
+    <div class="dmp-nav__cari">
+        <i class="ik ik-search"></i>
+        <input type="text" id="dmpNavCari" placeholder="Cari menu&hellip;" autocomplete="off" aria-label="Cari menu">
+    </div>
+
+    <nav class="dmp-nav__isi" id="dmpNavIsi">
+        <div class="dmp-nav__label">Utama</div>
+        <div class="dmp-nav__grup">
+            <button type="button" class="dmp-nav__butir dmp-nav__butir--grup">
+                <i class="ik ik-bar-chart-2"></i><span>Dashboard</span>
+            </button>
+            <div class="dmp-nav__sub"><div class="dmp-nav__sub-isi">
+                <a href="dashboard.html" class="dmp-nav__anak">Ringkasan</a>
+<a href="grafik.html" class="dmp-nav__anak">Grafik ECharts <span class="dmp-badge dmp-badge--sukses" style="margin-left:6px">BARU</span></a>
+            </div></div>
+        </div>
+        <div class="dmp-nav__grup">
+            <button type="button" class="dmp-nav__butir dmp-nav__butir--grup">
+                <i class="ik ik-layers"></i><span>Antarmuka</span>
+            </button>
+            <div class="dmp-nav__sub"><div class="dmp-nav__sub-isi">
+                <a href="komponen.html" class="dmp-nav__anak">Komponen</a>
+<a href="komponen.html#ikon" class="dmp-nav__anak">Ikon</a>
+<a href="formulir.html" class="dmp-nav__anak">Formulir</a>
+<a href="tabel.html" class="dmp-nav__anak">Tabel Data</a>
+            </div></div>
+        </div>
+        <div class="dmp-nav__grup">
+            <button type="button" class="dmp-nav__butir dmp-nav__butir--grup">
+                <i class="ik ik-file-text"></i><span>Halaman Contoh</span>
+            </button>
+            <div class="dmp-nav__sub"><div class="dmp-nav__sub-isi">
+                <a href="kosong.html" class="dmp-nav__anak">Halaman Kosong</a>
+<a href="profil.html" class="dmp-nav__anak">Profil Pengguna</a>
+<a href="404.html" class="dmp-nav__anak">Halaman 404</a>
+<a href="login.html" class="dmp-nav__anak" target="_blank" rel="noopener">Halaman Login</a>
+            </div></div>
+        </div>
+        <a href="kosong.html" class="dmp-nav__butir"><i class="ik ik-link"></i><span>Tautan Tunggal</span></a>
+        <div class="dmp-nav__label" data-ct-kumpul="Alat Bantu">Alat Bantu</div>
+        <a href="dokumentasi.html" class="dmp-nav__butir"><i class="ik ik-book-open"></i><span>Dokumentasi</span></a>
+        <a href="admin/index.html" class="dmp-nav__butir"><i class="ik ik-settings"></i><span>Menu Admin</span></a>
+        <p class="dmp-nav__kosong" id="dmpNavKosong" hidden>Tidak ada menu yang cocok.</p>
+    </nav>
+
+    <div class="dmp-nav__kaki">
+        <div class="dmp-nav__user">
+            <span class="dmp-nav__avatar">A</span>
+            <span class="dmp-nav__user-teks">
+                <b>ADMIN CONTOH</b>
+                <small>Administrator &middot; admin</small>
+            </span>
+        </div>
+        <a href="login.html" class="dmp-nav__keluar" title="Keluar">
+            <i class="ik ik-power"></i><span>Keluar</span>
+        </a>
+    </div>
+</aside>
+
+<script>
+// Kamus terjemahan menu dari config/menu.php (kunci 'en'), dibaca
+// coretax-bahasa.js. Bentuk: { 'Teks Indonesia': ['English', 'Jawa'] }.
+window.CT_KAMUS = {"Utama":["Main","Utama"],"Dashboard":["Dashboard","Dashboard"],"Ringkasan":["Overview","Ringkasan"],"Grafik ECharts":["ECharts","Grafik ECharts"],"Antarmuka":["Interface","Antarmuka"],"Komponen":["Components","Komponen"],"Ikon":["Icons","Ikon"],"Formulir":["Forms","Formulir"],"Tabel Data":["Data Table","Tabel Data"],"Halaman Contoh":["Sample Pages","Halaman Contoh"],"Halaman Kosong":["Blank Page","Halaman Kosong"],"Profil Pengguna":["User Profile","Profil Pengguna"],"Halaman 404":["404 Page","Halaman 404"],"Halaman Login":["Login Page","Halaman Login"],"Tautan Tunggal":["Single Link","Tautan Tunggal"],"Alat Bantu":["Tools","Alat Bantu"],"Dokumentasi":["Documentation","Dokumentasi"],"Menu Admin":["Admin Menu","Menu Admin"]};
+
+(function () {
+    'use strict';
+    var sb = document.getElementById('dmpSidebar'), isi = document.getElementById('dmpNavIsi');
+    var cari = document.getElementById('dmpNavCari'), ciut = document.getElementById('dmpNavCiut');
+    var kosong = document.getElementById('dmpNavKosong');
+    if (!sb || !isi) { return; }
+
+    // ---------- Buka-tutup submenu ----------
+    var grup = isi.querySelectorAll('.dmp-nav__grup');
+    Array.prototype.forEach.call(grup, function (g) {
+        var tbl = g.querySelector('.dmp-nav__butir--grup');
+        if (!tbl) { return; }
+        tbl.addEventListener('click', function () {
+            var terbuka = g.classList.toggle('buka');
+            tbl.setAttribute('aria-expanded', terbuka ? 'true' : 'false');
+        });
+    });
+
+    // ---------- Tandai menu aktif dari alamat ----------
+    // Dicocokkan dari yang TERPANJANG lebih dulu, supaya "admin/pintu"
+    // tidak kalah oleh "admin". Bagian #... dan ?... diabaikan.
+    (function () {
+        var kini = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+        var juara = null, panjang = -1;
+        Array.prototype.forEach.call(isi.querySelectorAll('a[href]'), function (a) {
+            var h;
+            try { h = new URL(a.getAttribute('href'), window.location.href).pathname; } catch (e) { return; }
+            h = h.toLowerCase().replace(/\/+$/, '');
+            if (h && h.length > panjang && (kini === h || kini.indexOf(h + '/') === 0)) { juara = a; panjang = h.length; }
+        });
+        if (juara) {
+            juara.classList.add('aktif');
+            var g = juara.closest('.dmp-nav__grup');
+            if (g) {
+                g.classList.add('buka');
+                var t = g.querySelector('.dmp-nav__butir--grup');
+                if (t) { t.classList.add('aktif-induk'); }
+            }
+        }
+    })();
+
+    // ---------- Ciutkan (hanya berarti bila coretax.js tidak berjalan) ----------
+    function terapkanCiut(nilai) {
+        sb.setAttribute('data-ciut', nilai ? '1' : '0');
+        document.body.classList.toggle('dmp-nav-ciut', !!nilai);
+        try { localStorage.setItem('dmp_nav_ciut', nilai ? '1' : '0'); } catch (e) {}
+    }
+    if (ciut) { ciut.addEventListener('click', function () { terapkanCiut(sb.getAttribute('data-ciut') !== '1'); }); }
+    try { if (localStorage.getItem('dmp_nav_ciut') === '1') { terapkanCiut(true); } } catch (e) {}
+
+    // ---------- Pencarian di sidebar ----------
+    if (cari) {
+        cari.addEventListener('input', function () {
+            var q = this.value.trim().toLowerCase();
+            var semua = isi.querySelectorAll('.dmp-nav__butir, .dmp-nav__anak, .dmp-nav__grup, .dmp-nav__label');
+            if (!q) {
+                Array.prototype.forEach.call(semua, function (el) { el.hidden = false; });
+                Array.prototype.forEach.call(grup, function (g) { g.classList.remove('paksa-buka'); });
+                if (kosong) { kosong.hidden = true; }
+                return;
+            }
+            var ketemu = 0;
+            Array.prototype.forEach.call(isi.querySelectorAll(':scope > .dmp-nav__butir'), function (a) {
+                var c = a.textContent.toLowerCase().indexOf(q) !== -1;
+                a.hidden = !c; if (c) { ketemu++; }
+            });
+            Array.prototype.forEach.call(grup, function (g) {
+                var judul = g.querySelector('.dmp-nav__butir--grup');
+                var cj = judul && judul.textContent.toLowerCase().indexOf(q) !== -1, n = 0;
+                Array.prototype.forEach.call(g.querySelectorAll('.dmp-nav__anak'), function (a) {
+                    var c = cj || a.textContent.toLowerCase().indexOf(q) !== -1;
+                    a.hidden = !c; if (c) { n++; }
+                });
+                g.hidden = !(cj || n); g.classList.toggle('paksa-buka', !!(cj || n)); ketemu += n;
+            });
+            Array.prototype.forEach.call(isi.querySelectorAll('.dmp-nav__label'), function (l) { l.hidden = true; });
+            if (kosong) { kosong.hidden = ketemu > 0; }
+        });
+        cari.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') { this.value = ''; this.dispatchEvent(new Event('input')); }
+        });
+    }
+})();
+</script>
+
+<div class="main-content"><div class="container-fluid">
+    <div class="ct-judul">
+        <div>
+            <h1>Ringkasan</h1>
+            <p>Contoh dashboard: kartu angka, grafik ECharts, dan tabel ringkas.</p>        </div>
+                <nav aria-label="Remah roti">
+            <ol class="ct-remah">
+                                                            <li><a href="dashboard.html">Dashboard</a></li>
+                                                                                <li aria-current="page">Ringkasan</li>
+                                                </ol>
+        </nav>
+            </div>
+
+    
+<div class="dmp-kpi-grid dmp-mb-4">
+            <div class="dmp-kpi dmp-kpi--aksen">
+            <span class="dmp-kpi__label">Total Transaksi</span>
+            <span class="dmp-kpi__value">2.464<span class="dmp-kpi__delta dmp-kpi__delta--naik">+12,4%</span></span>
+        </div>
+            <div class="dmp-kpi">
+            <span class="dmp-kpi__label">Pengguna Aktif</span>
+            <span class="dmp-kpi__value">1.208<span class="dmp-kpi__delta dmp-kpi__delta--naik">+3,1%</span></span>
+        </div>
+            <div class="dmp-kpi">
+            <span class="dmp-kpi__label">Rata-rata Waktu</span>
+            <span class="dmp-kpi__value">4,2 mnt<span class="dmp-kpi__delta dmp-kpi__delta--naik">-0,6 mnt</span></span>
+        </div>
+            <div class="dmp-kpi">
+            <span class="dmp-kpi__label">Tiket Terbuka</span>
+            <span class="dmp-kpi__value">37<span class="dmp-kpi__delta dmp-kpi__delta--turun">+5</span></span>
+        </div>
+    </div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header"><h3>Tren Bulanan</h3></div>
+            <div class="card-body"><div id="grafikTren" class="dmp-chart"></div></div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header"><h3>Komposisi Layanan</h3></div>
+            <div class="card-body"><div id="grafikKomposisi" class="dmp-chart"></div></div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-7">
+        <div class="card">
+            <div class="card-header"><h3>Aktivitas Terbaru</h3></div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead><tr><th>Waktu</th><th>Pengguna</th><th>Kegiatan</th><th>Status</th></tr></thead>
+                        <tbody>
+                                                    <tr><td>08:12</td><td>Budi</td><td>Mengunggah dokumen</td>
+                                <td><span class="dmp-badge dmp-badge--sukses">Selesai</span></td></tr>
+                                                    <tr><td>08:40</td><td>Sari</td><td>Memperbarui profil</td>
+                                <td><span class="dmp-badge dmp-badge--sukses">Selesai</span></td></tr>
+                                                    <tr><td>09:05</td><td>Andi</td><td>Mengajukan tiket</td>
+                                <td><span class="dmp-badge dmp-badge--awas">Menunggu</span></td></tr>
+                                                    <tr><td>09:31</td><td>Rina</td><td>Ekspor laporan</td>
+                                <td><span class="dmp-badge dmp-badge--bahaya">Gagal</span></td></tr>
+                                                    <tr><td>10:02</td><td>Dewi</td><td>Masuk aplikasi</td>
+                                <td><span class="dmp-badge dmp-badge--netral">Info</span></td></tr>
+                                                </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-header"><h3>Capaian Target</h3></div>
+            <div class="card-body">
+                                    <div class="d-flex justify-content-between small mb-1"><span>Penyelesaian tiket</span><b>82%</b></div>
+                    <div class="progress mb-3" style="height:8px">
+                        <div class="progress-bar bg-success" style="width:82%"></div>
+                    </div>
+                                    <div class="d-flex justify-content-between small mb-1"><span>Kepuasan pengguna</span><b>91%</b></div>
+                    <div class="progress mb-3" style="height:8px">
+                        <div class="progress-bar bg-success" style="width:91%"></div>
+                    </div>
+                                    <div class="d-flex justify-content-between small mb-1"><span>Ketepatan waktu</span><b>64%</b></div>
+                    <div class="progress mb-3" style="height:8px">
+                        <div class="progress-bar bg-primary" style="width:64%"></div>
+                    </div>
+                                    <div class="d-flex justify-content-between small mb-1"><span>Kelengkapan data</span><b>47%</b></div>
+                    <div class="progress mb-3" style="height:8px">
+                        <div class="progress-bar bg-warning" style="width:47%"></div>
+                    </div>
+                            </div>
+        </div>
+    </div>
+</div>
+
+</div></div>
+<footer class="footer dmp-footer">
+    <div class="w-100 clearfix dmp-footer__baris">
+        <span class="dmp-footer__kiri">&copy;2026 Nama Organisasi. Hak cipta dilindungi.</span>
+        <span class="dmp-footer__versi" title="Versi aplikasi"><span class="dmp-footer__titik" aria-hidden="true"></span>v1.0.0</span>
+        <span class="dmp-footer__kanan">Tema Dasar Coretax</span>
+    </div>
+</footer>
+</div></div>
+<script src="../assets/vendor/jquery/jquery.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/vendor/echarts/echarts.min.js"></script>
+<script src="../assets/ct/dmp-echart.js"></script>
+<script src="../assets/ct/coretax-bahasa.js" defer></script>
+<script src="../assets/ct/coretax.js" defer></script>
+<script src="../assets/ct/dmp-theme.js" defer></script>
+<script src="../assets/ct/dmp-urut.js" defer></script>
+<script src="../assets/ct/ct-app.js" defer></script>
+<script>
+// Semua grafik lewat DmpChart (assets/ct/dmp-echart.js): warna ikut
+// tema + mode gelap, angka berformat Indonesia, ukuran ikut layar.
+DmpChart.buat('grafikTren', {
+    tooltip: { trigger: 'axis' },
+    legend:  { data: ['2026', '2025'] },
+    xAxis:   { type: 'category', data: ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"] },
+    yAxis:   { type: 'value' },
+    series: [
+        { name: '2026',     type: 'bar',  data: [120,132,101,134,190,230,210,182,191,234,260,280] },
+        { name: '2025', type: 'line', smooth: true, data: [98,110,95,120,150,180,175,160,170,190,210,240] }
+    ]
+});
+DmpChart.buat('grafikKomposisi', {
+    tooltip: { trigger: 'item' },
+    legend:  { bottom: 0 },
+    series: [{ type: 'pie', radius: ['38%', '60%'], center: ['50%', '42%'], label: { show: false },
+               data: [{"name":"Layanan A","value":335},{"name":"Layanan B","value":234},{"name":"Layanan C","value":154},{"name":"Layanan D","value":98}] }]
+});
+</script>
+</body>
+</html>

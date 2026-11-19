@@ -572,3 +572,108 @@
     outline-offset: 2px;
     border-radius: var(--dmp-radius-sm);
 }
+
+
+/* -------------------------------------------------------------
+ * 6. PALET CORETAX (Fase 113)
+ *
+ * Dipakai public/theme/dmp/coretax.css. Kodenya diambil dengan
+ * membaca piksel tangkapan layar Coretax, bukan dikira-kira:
+ *   header & baris menu   #1A2E6A
+ *   kepala tabel          #222D5E
+ *   menu terbuka          #334579
+ *   aksen kuning          #FDCA2A  (menu aktif #FDD655)
+ *   latar halaman         #F0EFF4  (layar memuat #F5F4EF)
+ *   tombol keluar         #E4484D
+ *
+ * Ditaruh di sini, bukan di coretax.css, karena aturan berkas ini:
+ * kode warna hanya boleh ditulis di tokens.css.
+ *
+ * Hanya berlaku bila <html> punya kelas .ct (lihat inc/head.php).
+ * Tanpa kelas itu, seluruh blok ini diam dan tema lama berlaku.
+ * ----------------------------------------------------------- */
+
+.ct {
+    --ct-navy:          #1a2e6a;
+    --ct-navy-gelap:    #13235a;
+    --ct-navy-tabel:    #222d5e;
+    --ct-navy-buka:     #334579;
+    --ct-navy-tinta:    #23294f;
+    --ct-kuning:        #fdca2a;
+    --ct-kuning-aktif:  #fdd655;
+    --ct-kuning-lembut: #fef1c9;
+    --ct-kuning-tinta:  #7a5a00;
+    --ct-oranye:        #f7941d;
+    --ct-merah:         #e4484d;
+    --ct-latar:         #f0eff4;
+    --ct-latar-muat:    #f5f4ef;
+    --ct-panel:         #ffffff;
+    --ct-panel-2:       #f5f6fa;
+    --ct-garis:         #e6e8f0;
+    --ct-teks:          #23294f;
+    --ct-teks-redup:    #6b7090;
+    --ct-baris-belang:  #f6f6f9;
+    --ct-baris-sorot:   #fff6d6;
+    --ct-putih:         #ffffff;
+
+    /* Bendera pemilih bahasa (Fase 113.6). Bendera emoji tidak dipakai:
+       Windows menampilkannya sebagai dua huruf ("ID", "GB"), bukan gambar. */
+    --ct-bendera-merah: #e4002b;   /* Merah Putih          */
+    --ct-bendera-biru:  #012169;   /* Union Jack - biru    */
+    --ct-bendera-silang:#c8102e;   /* Union Jack - merah   */
+    --ct-bendera-jawa:  #5b3a1e;   /* sogan batik          */
+
+    --ct-bayang:     0 1px 2px rgba(26, 46, 106, .05), 0 8px 24px rgba(26, 46, 106, .07);
+    --ct-bayang-lg:  0 18px 44px rgba(15, 25, 60, .18);
+
+    --ct-font: "Plus Jakarta Sans", "Nunito Sans", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+    --ct-kepala-h:  52px;   /* baris 1: merek, cari, pengguna      */
+    --ct-menu-h:    40px;   /* baris 2: menu mendatar              */
+    --ct-atas:      92px;   /* jumlah keduanya - batas atas isi    */
+    --ct-konteks-w: 244px;  /* panel submenu di kiri               */
+}
+
+/* Aksen DIPAKU ke navy Coretax untuk kedelapan preset. Selektornya
+   sengaja lebih spesifik dari [data-dmp-theme="..."] di atas. */
+.ct[data-dmp-theme],
+.ct:not([data-dmp-theme]) {
+    --dmp-accent:       #1a2e6a;
+    --dmp-accent-hover: #13235a;
+    --dmp-accent-soft:  #e8ecf7;
+    --dmp-accent-on:    #ffffff;
+    --dmp-accent-ring:  rgba(26, 46, 106, .28);
+    --dmp-font:         var(--ct-font);
+}
+
+.ct[data-dmp-mode="light"],
+.ct:not([data-dmp-mode]) {
+    --dmp-bg:         #f0eff4;
+    --dmp-text:       #23294f;
+    --dmp-text-muted: #5e6483;
+    --dmp-border:     #e6e8f0;
+}
+
+/* Mode gelap: rangka tetap navy, panel mengikuti permukaan gelap. */
+.ct[data-dmp-mode="dark"][data-dmp-theme],
+.ct[data-dmp-mode="dark"]:not([data-dmp-theme]) {
+    --dmp-accent:       #8fa6f0;
+    --dmp-accent-hover: #b3c3f7;
+    --dmp-accent-soft:  #1c2442;
+    --dmp-accent-on:    #0b1020;
+    --dmp-accent-ring:  rgba(143, 166, 240, .40);
+
+    --ct-navy:          #111b44;
+    --ct-navy-gelap:    #0c1434;
+    --ct-navy-tabel:    #1a2554;
+    --ct-navy-buka:     #26356b;
+    --ct-latar:         #0e1116;
+    --ct-latar-muat:    #0e1116;
+    --ct-panel:         #161a20;
+    --ct-panel-2:       #1d222a;
+    --ct-garis:         #2a303a;
+    --ct-teks:          #e6e9f2;
+    --ct-teks-redup:    #9aa1b8;
+    --ct-baris-belang:  #1a1f27;
+    --ct-baris-sorot:   #2c2710;
+}

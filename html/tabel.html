@@ -1,0 +1,547 @@
+<!doctype html>
+<html class="no-js ct" lang="id" data-dmp-theme="biru" data-dmp-mode="light" data-dmp-palette="laut">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tabel Data | CTX</title>
+    <link rel="icon" href="../assets/ct/logo.svg">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/vendor/iconkit/css/iconkit.min.css">
+        <link rel="stylesheet" href="../assets/vendor/themekit/theme.min.css">
+        <link rel="stylesheet" href="../assets/ct/tokens.css">
+    <link rel="stylesheet" href="../assets/ct/theme.css">
+    <link rel="stylesheet" href="../assets/ct/coretax.css">
+    <link rel="stylesheet" href="../assets/ct/ct-starter.css">
+    </head>
+<body>
+<div class="ct-pita-demo" title="config/app.php: 'demo' => true">MODE DEMO</div>
+<div class="ct-muat" id="ctMuat" role="status" aria-live="polite">
+    <div class="ct-muat__kartu">
+        <div class="ct-muat__merek">
+            <img src="../assets/ct/logo.svg" alt="" width="34" height="34">
+            <span><b>CTX</b></span>
+        </div>
+        <span class="ct-muat__putar" aria-hidden="true"></span>
+        <strong>Memuat halaman</strong>
+        <small>Mohon tunggu&hellip;</small>
+    </div>
+</div>
+
+<div class="wrapper">
+<header class="header-top ct-kepala" header-theme="light">
+    <div class="container-fluid">
+        <div class="ct-kepala__baris">
+            <div class="ct-kepala__kiri">
+                <a class="ct-merek" href="dashboard.html" title="Ke halaman awal">
+                    <img class="ct-merek__logo" src="../assets/ct/logo.svg" alt="" width="30" height="30">
+                    <span class="ct-merek__garis" aria-hidden="true"></span>
+                </a>
+                <div class="judul ct-merek__judul" id="judul">
+                    <h3><b><strong>APLIKASI CORETAX STARTER</strong></b></h3>
+                </div>
+            </div>
+
+            <div class="ct-kepala__tengah">
+                <button type="button" class="ct-cari" id="ctCariBuka" aria-haspopup="dialog" title="Cari menu (Ctrl+K)">
+                    <i class="ik ik-search" aria-hidden="true"></i>
+                    <span class="ct-cari__teks">Cari Menu atau Laporan</span>
+                    <span class="ct-cari__kbd" aria-hidden="true"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+                </button>
+            </div>
+
+            <div class="top-menu ct-kepala__kanan d-flex align-items-center">
+                <button type="button" id="navbar-fullscreen" class="nav-link" title="Layar penuh" aria-label="Layar penuh"><i class="ik ik-maximize"></i></button>
+                <button type="button" id="navbar-print" class="nav-link" title="Cetak halaman" aria-label="Cetak halaman"><i class="ik ik-printer"></i></button>
+
+                <div class="dropdown ct-bahasa">
+                    <button type="button" class="ct-bahasa__tombol" id="ctBahasaToggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" title="Bahasa" aria-label="Bahasa">
+                        <span class="ct-bendera ct-bendera--id" aria-hidden="true"></span><b>ID</b>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right p-0" aria-labelledby="ctBahasaToggle">
+                        <div class="ct-bahasa__daftar" role="group">
+                            <button type="button" data-ct-bahasa="id" aria-pressed="true"><span class="ct-bendera ct-bendera--id" aria-hidden="true"></span>Bahasa Indonesia</button>
+                            <button type="button" data-ct-bahasa="en" aria-pressed="false"><span class="ct-bendera ct-bendera--en" aria-hidden="true"></span>English</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button type="button" class="nav-link" id="dmpTemaToggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" title="Mode terang / gelap" aria-label="Mode terang atau gelap">
+                        <i class="ik ik-sun"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right p-0" aria-labelledby="dmpTemaToggle">
+                        <div class="dmp-tema">
+                            <div class="dmp-tema__mode" role="group" aria-label="Mode terang atau gelap">
+                                <button type="button" data-mode="light" aria-pressed="false"><i class="ik ik-sun" aria-hidden="true"></i> Terang</button>
+                                <button type="button" data-mode="dark" aria-pressed="false"><i class="ik ik-moon" aria-hidden="true"></i> Gelap</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <a class="dropdown-toggle ct-pengguna" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="ik ik-user ct-pengguna__ikon" aria-hidden="true"></i>
+                        <span class="ct-pengguna__teks">
+                            <small>admin</small>
+                            <b>ADMIN CONTOH</b>
+                        </span>
+                        <span class="ct-pengguna__lencana">ADM</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="profil.html"><i class="ik ik-user dropdown-icon"></i> Profil</a>
+                                                <a class="dropdown-item" href="admin/index.html"><i class="ik ik-settings dropdown-icon"></i> Menu Admin</a>
+                                                <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="login.html"><i class="ik ik-power dropdown-icon"></i> Keluar</a>
+                    </div>
+                </div>
+
+                <a class="ct-keluar" href="login.html" title="Keluar" aria-label="Keluar">
+                    <i class="ik ik-log-out" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<script>
+// Konfigurasi untuk skrip tema - diberikan server, bukan ditebak di
+// peramban, karena aplikasi bisa dilayani di subfolder mana saja.
+window.DMP_TEMA = {   // dibaca dmp-theme.js: tombol terang/gelap disimpan ke sesi
+    url: "",
+    csrfNama: '_ct', csrfNilai: "statis"};
+window.DMP_CT = {     // dibaca coretax.js: blok "Menu Rekomendasi" di laci Buka Menu
+    menuPopuler: ""};
+</script>
+
+<div class="page-wrap">
+<aside class="app-sidebar dmp-nav" id="dmpSidebar" data-ciut="0">
+    <div class="dmp-nav__kepala">
+        <a class="dmp-nav__merek" href="dashboard.html">
+            <span class="dmp-nav__logo"><img src="../assets/ct/logo.svg" alt="" width="32" height="32"></span>
+            <span class="dmp-nav__merek-teks">
+                <b>CTX</b>
+                <small>Tema Dasar Coretax</small>
+            </span>
+        </a>
+        <button type="button" class="dmp-nav__ciut" id="dmpNavCiut" title="Ciutkan menu" aria-label="Ciutkan menu">
+            <i class="ik ik-chevrons-left"></i>
+        </button>
+    </div>
+
+    <div class="dmp-nav__cari">
+        <i class="ik ik-search"></i>
+        <input type="text" id="dmpNavCari" placeholder="Cari menu&hellip;" autocomplete="off" aria-label="Cari menu">
+    </div>
+
+    <nav class="dmp-nav__isi" id="dmpNavIsi">
+        <div class="dmp-nav__label">Utama</div>
+        <div class="dmp-nav__grup">
+            <button type="button" class="dmp-nav__butir dmp-nav__butir--grup">
+                <i class="ik ik-bar-chart-2"></i><span>Dashboard</span>
+            </button>
+            <div class="dmp-nav__sub"><div class="dmp-nav__sub-isi">
+                <a href="dashboard.html" class="dmp-nav__anak">Ringkasan</a>
+<a href="grafik.html" class="dmp-nav__anak">Grafik ECharts <span class="dmp-badge dmp-badge--sukses" style="margin-left:6px">BARU</span></a>
+            </div></div>
+        </div>
+        <div class="dmp-nav__grup">
+            <button type="button" class="dmp-nav__butir dmp-nav__butir--grup">
+                <i class="ik ik-layers"></i><span>Antarmuka</span>
+            </button>
+            <div class="dmp-nav__sub"><div class="dmp-nav__sub-isi">
+                <a href="komponen.html" class="dmp-nav__anak">Komponen</a>
+<a href="komponen.html#ikon" class="dmp-nav__anak">Ikon</a>
+<a href="formulir.html" class="dmp-nav__anak">Formulir</a>
+<a href="tabel.html" class="dmp-nav__anak">Tabel Data</a>
+            </div></div>
+        </div>
+        <div class="dmp-nav__grup">
+            <button type="button" class="dmp-nav__butir dmp-nav__butir--grup">
+                <i class="ik ik-file-text"></i><span>Halaman Contoh</span>
+            </button>
+            <div class="dmp-nav__sub"><div class="dmp-nav__sub-isi">
+                <a href="kosong.html" class="dmp-nav__anak">Halaman Kosong</a>
+<a href="profil.html" class="dmp-nav__anak">Profil Pengguna</a>
+<a href="404.html" class="dmp-nav__anak">Halaman 404</a>
+<a href="login.html" class="dmp-nav__anak" target="_blank" rel="noopener">Halaman Login</a>
+            </div></div>
+        </div>
+        <a href="kosong.html" class="dmp-nav__butir"><i class="ik ik-link"></i><span>Tautan Tunggal</span></a>
+        <div class="dmp-nav__label" data-ct-kumpul="Alat Bantu">Alat Bantu</div>
+        <a href="dokumentasi.html" class="dmp-nav__butir"><i class="ik ik-book-open"></i><span>Dokumentasi</span></a>
+        <a href="admin/index.html" class="dmp-nav__butir"><i class="ik ik-settings"></i><span>Menu Admin</span></a>
+        <p class="dmp-nav__kosong" id="dmpNavKosong" hidden>Tidak ada menu yang cocok.</p>
+    </nav>
+
+    <div class="dmp-nav__kaki">
+        <div class="dmp-nav__user">
+            <span class="dmp-nav__avatar">A</span>
+            <span class="dmp-nav__user-teks">
+                <b>ADMIN CONTOH</b>
+                <small>Administrator &middot; admin</small>
+            </span>
+        </div>
+        <a href="login.html" class="dmp-nav__keluar" title="Keluar">
+            <i class="ik ik-power"></i><span>Keluar</span>
+        </a>
+    </div>
+</aside>
+
+<script>
+// Kamus terjemahan menu dari config/menu.php (kunci 'en'), dibaca
+// coretax-bahasa.js. Bentuk: { 'Teks Indonesia': ['English', 'Jawa'] }.
+window.CT_KAMUS = {"Utama":["Main","Utama"],"Dashboard":["Dashboard","Dashboard"],"Ringkasan":["Overview","Ringkasan"],"Grafik ECharts":["ECharts","Grafik ECharts"],"Antarmuka":["Interface","Antarmuka"],"Komponen":["Components","Komponen"],"Ikon":["Icons","Ikon"],"Formulir":["Forms","Formulir"],"Tabel Data":["Data Table","Tabel Data"],"Halaman Contoh":["Sample Pages","Halaman Contoh"],"Halaman Kosong":["Blank Page","Halaman Kosong"],"Profil Pengguna":["User Profile","Profil Pengguna"],"Halaman 404":["404 Page","Halaman 404"],"Halaman Login":["Login Page","Halaman Login"],"Tautan Tunggal":["Single Link","Tautan Tunggal"],"Alat Bantu":["Tools","Alat Bantu"],"Dokumentasi":["Documentation","Dokumentasi"],"Menu Admin":["Admin Menu","Menu Admin"]};
+
+(function () {
+    'use strict';
+    var sb = document.getElementById('dmpSidebar'), isi = document.getElementById('dmpNavIsi');
+    var cari = document.getElementById('dmpNavCari'), ciut = document.getElementById('dmpNavCiut');
+    var kosong = document.getElementById('dmpNavKosong');
+    if (!sb || !isi) { return; }
+
+    // ---------- Buka-tutup submenu ----------
+    var grup = isi.querySelectorAll('.dmp-nav__grup');
+    Array.prototype.forEach.call(grup, function (g) {
+        var tbl = g.querySelector('.dmp-nav__butir--grup');
+        if (!tbl) { return; }
+        tbl.addEventListener('click', function () {
+            var terbuka = g.classList.toggle('buka');
+            tbl.setAttribute('aria-expanded', terbuka ? 'true' : 'false');
+        });
+    });
+
+    // ---------- Tandai menu aktif dari alamat ----------
+    // Dicocokkan dari yang TERPANJANG lebih dulu, supaya "admin/pintu"
+    // tidak kalah oleh "admin". Bagian #... dan ?... diabaikan.
+    (function () {
+        var kini = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+        var juara = null, panjang = -1;
+        Array.prototype.forEach.call(isi.querySelectorAll('a[href]'), function (a) {
+            var h;
+            try { h = new URL(a.getAttribute('href'), window.location.href).pathname; } catch (e) { return; }
+            h = h.toLowerCase().replace(/\/+$/, '');
+            if (h && h.length > panjang && (kini === h || kini.indexOf(h + '/') === 0)) { juara = a; panjang = h.length; }
+        });
+        if (juara) {
+            juara.classList.add('aktif');
+            var g = juara.closest('.dmp-nav__grup');
+            if (g) {
+                g.classList.add('buka');
+                var t = g.querySelector('.dmp-nav__butir--grup');
+                if (t) { t.classList.add('aktif-induk'); }
+            }
+        }
+    })();
+
+    // ---------- Ciutkan (hanya berarti bila coretax.js tidak berjalan) ----------
+    function terapkanCiut(nilai) {
+        sb.setAttribute('data-ciut', nilai ? '1' : '0');
+        document.body.classList.toggle('dmp-nav-ciut', !!nilai);
+        try { localStorage.setItem('dmp_nav_ciut', nilai ? '1' : '0'); } catch (e) {}
+    }
+    if (ciut) { ciut.addEventListener('click', function () { terapkanCiut(sb.getAttribute('data-ciut') !== '1'); }); }
+    try { if (localStorage.getItem('dmp_nav_ciut') === '1') { terapkanCiut(true); } } catch (e) {}
+
+    // ---------- Pencarian di sidebar ----------
+    if (cari) {
+        cari.addEventListener('input', function () {
+            var q = this.value.trim().toLowerCase();
+            var semua = isi.querySelectorAll('.dmp-nav__butir, .dmp-nav__anak, .dmp-nav__grup, .dmp-nav__label');
+            if (!q) {
+                Array.prototype.forEach.call(semua, function (el) { el.hidden = false; });
+                Array.prototype.forEach.call(grup, function (g) { g.classList.remove('paksa-buka'); });
+                if (kosong) { kosong.hidden = true; }
+                return;
+            }
+            var ketemu = 0;
+            Array.prototype.forEach.call(isi.querySelectorAll(':scope > .dmp-nav__butir'), function (a) {
+                var c = a.textContent.toLowerCase().indexOf(q) !== -1;
+                a.hidden = !c; if (c) { ketemu++; }
+            });
+            Array.prototype.forEach.call(grup, function (g) {
+                var judul = g.querySelector('.dmp-nav__butir--grup');
+                var cj = judul && judul.textContent.toLowerCase().indexOf(q) !== -1, n = 0;
+                Array.prototype.forEach.call(g.querySelectorAll('.dmp-nav__anak'), function (a) {
+                    var c = cj || a.textContent.toLowerCase().indexOf(q) !== -1;
+                    a.hidden = !c; if (c) { n++; }
+                });
+                g.hidden = !(cj || n); g.classList.toggle('paksa-buka', !!(cj || n)); ketemu += n;
+            });
+            Array.prototype.forEach.call(isi.querySelectorAll('.dmp-nav__label'), function (l) { l.hidden = true; });
+            if (kosong) { kosong.hidden = ketemu > 0; }
+        });
+        cari.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') { this.value = ''; this.dispatchEvent(new Event('input')); }
+        });
+    }
+})();
+</script>
+
+<div class="main-content"><div class="container-fluid">
+    <div class="ct-judul">
+        <div>
+            <h1>Tabel Data</h1>
+            <p>Klik judul kolom untuk mengurutkan. Saringan hanya berlaku untuk halaman yang tampil.</p>        </div>
+                <nav aria-label="Remah roti">
+            <ol class="ct-remah">
+                                                            <li aria-current="page">Antarmuka</li>
+                                                                                <li aria-current="page">Tabel Data</li>
+                                                </ol>
+        </nav>
+            </div>
+
+    <div class="card">
+    <div class="card-header d-flex flex-wrap align-items-center justify-content-between" style="gap:8px">
+        <h3>Daftar Pengajuan</h3>
+        <div class="d-flex flex-wrap align-items-center" style="gap:8px">
+            <input type="search" class="dmp-input" style="width:220px" placeholder="Saring baris..." data-ct-saring="#tblData" data-ct-info="#infoSaring">
+            <a class="dmp-btn dmp-btn--garis dmp-btn--kecil" href="tabel.html"><i class="ik ik-download"></i> CSV</a>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover table-striped mb-0" id="tblData">
+                <thead><tr><th>No</th><th>Nama</th><th>Unit</th><th class="text-right">Nilai (Rp)</th><th>Tanggal</th><th>Status</th></tr></thead>
+                <tbody>
+                                    <tr>
+                        <td><code>PGJ-0001</code></td>
+                        <td>Pemohon 1</td>
+                        <td>Unit C</td>
+                        <td class="text-right" data-urut-nilai="77250000">77.250.000</td>
+                        <td>03/11/2026</td>
+                        <td><span class="dmp-badge dmp-badge--bahaya">Ditolak</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0002</code></td>
+                        <td>Pemohon 2</td>
+                        <td>Unit C</td>
+                        <td class="text-right" data-urut-nilai="54375000">54.375.000</td>
+                        <td>23/08/2026</td>
+                        <td><span class="dmp-badge dmp-badge--sukses">Aktif</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0003</code></td>
+                        <td>Pemohon 3</td>
+                        <td>Unit C</td>
+                        <td class="text-right" data-urut-nilai="108375000">108.375.000</td>
+                        <td>23/08/2026</td>
+                        <td><span class="dmp-badge dmp-badge--bahaya">Ditolak</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0004</code></td>
+                        <td>Pemohon 4</td>
+                        <td>Unit C</td>
+                        <td class="text-right" data-urut-nilai="48500000">48.500.000</td>
+                        <td>20/05/2026</td>
+                        <td><span class="dmp-badge dmp-badge--sukses">Aktif</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0005</code></td>
+                        <td>Pemohon 5</td>
+                        <td>Unit D</td>
+                        <td class="text-right" data-urut-nilai="64750000">64.750.000</td>
+                        <td>05/09/2026</td>
+                        <td><span class="dmp-badge dmp-badge--bahaya">Ditolak</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0006</code></td>
+                        <td>Pemohon 6</td>
+                        <td>Unit B</td>
+                        <td class="text-right" data-urut-nilai="50625000">50.625.000</td>
+                        <td>07/10/2026</td>
+                        <td><span class="dmp-badge dmp-badge--netral">Draf</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0007</code></td>
+                        <td>Pemohon 7</td>
+                        <td>Unit D</td>
+                        <td class="text-right" data-urut-nilai="37750000">37.750.000</td>
+                        <td>31/08/2026</td>
+                        <td><span class="dmp-badge dmp-badge--awas">Ditinjau</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0008</code></td>
+                        <td>Pemohon 8</td>
+                        <td>Unit D</td>
+                        <td class="text-right" data-urut-nilai="250000">250.000</td>
+                        <td>17/05/2026</td>
+                        <td><span class="dmp-badge dmp-badge--sukses">Aktif</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0009</code></td>
+                        <td>Pemohon 9</td>
+                        <td>Unit D</td>
+                        <td class="text-right" data-urut-nilai="123625000">123.625.000</td>
+                        <td>02/07/2026</td>
+                        <td><span class="dmp-badge dmp-badge--sukses">Aktif</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0010</code></td>
+                        <td>Pemohon 10</td>
+                        <td>Unit D</td>
+                        <td class="text-right" data-urut-nilai="66000000">66.000.000</td>
+                        <td>01/10/2026</td>
+                        <td><span class="dmp-badge dmp-badge--bahaya">Ditolak</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0011</code></td>
+                        <td>Pemohon 11</td>
+                        <td>Unit C</td>
+                        <td class="text-right" data-urut-nilai="116375000">116.375.000</td>
+                        <td>07/09/2026</td>
+                        <td><span class="dmp-badge dmp-badge--netral">Draf</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0012</code></td>
+                        <td>Pemohon 12</td>
+                        <td>Unit D</td>
+                        <td class="text-right" data-urut-nilai="69750000">69.750.000</td>
+                        <td>17/07/2026</td>
+                        <td><span class="dmp-badge dmp-badge--bahaya">Ditolak</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0013</code></td>
+                        <td>Pemohon 13</td>
+                        <td>Unit B</td>
+                        <td class="text-right" data-urut-nilai="27375000">27.375.000</td>
+                        <td>17/10/2026</td>
+                        <td><span class="dmp-badge dmp-badge--awas">Ditinjau</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0014</code></td>
+                        <td>Pemohon 14</td>
+                        <td>Unit C</td>
+                        <td class="text-right" data-urut-nilai="5750000">5.750.000</td>
+                        <td>15/07/2026</td>
+                        <td><span class="dmp-badge dmp-badge--netral">Draf</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0015</code></td>
+                        <td>Pemohon 15</td>
+                        <td>Unit D</td>
+                        <td class="text-right" data-urut-nilai="15375000">15.375.000</td>
+                        <td>24/10/2026</td>
+                        <td><span class="dmp-badge dmp-badge--sukses">Aktif</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0016</code></td>
+                        <td>Pemohon 16</td>
+                        <td>Unit C</td>
+                        <td class="text-right" data-urut-nilai="56750000">56.750.000</td>
+                        <td>21/05/2026</td>
+                        <td><span class="dmp-badge dmp-badge--sukses">Aktif</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0017</code></td>
+                        <td>Pemohon 17</td>
+                        <td>Unit C</td>
+                        <td class="text-right" data-urut-nilai="73875000">73.875.000</td>
+                        <td>01/07/2026</td>
+                        <td><span class="dmp-badge dmp-badge--sukses">Aktif</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0018</code></td>
+                        <td>Pemohon 18</td>
+                        <td>Unit D</td>
+                        <td class="text-right" data-urut-nilai="23500000">23.500.000</td>
+                        <td>26/06/2026</td>
+                        <td><span class="dmp-badge dmp-badge--awas">Ditinjau</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0019</code></td>
+                        <td>Pemohon 19</td>
+                        <td>Unit A</td>
+                        <td class="text-right" data-urut-nilai="24625000">24.625.000</td>
+                        <td>20/08/2026</td>
+                        <td><span class="dmp-badge dmp-badge--awas">Ditinjau</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0020</code></td>
+                        <td>Pemohon 20</td>
+                        <td>Unit D</td>
+                        <td class="text-right" data-urut-nilai="92500000">92.500.000</td>
+                        <td>21/05/2026</td>
+                        <td><span class="dmp-badge dmp-badge--netral">Draf</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0021</code></td>
+                        <td>Pemohon 21</td>
+                        <td>Unit C</td>
+                        <td class="text-right" data-urut-nilai="28750000">28.750.000</td>
+                        <td>13/08/2026</td>
+                        <td><span class="dmp-badge dmp-badge--netral">Draf</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0022</code></td>
+                        <td>Pemohon 22</td>
+                        <td>Unit C</td>
+                        <td class="text-right" data-urut-nilai="103875000">103.875.000</td>
+                        <td>16/10/2026</td>
+                        <td><span class="dmp-badge dmp-badge--sukses">Aktif</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0023</code></td>
+                        <td>Pemohon 23</td>
+                        <td>Unit D</td>
+                        <td class="text-right" data-urut-nilai="64375000">64.375.000</td>
+                        <td>18/06/2026</td>
+                        <td><span class="dmp-badge dmp-badge--netral">Draf</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0024</code></td>
+                        <td>Pemohon 24</td>
+                        <td>Unit B</td>
+                        <td class="text-right" data-urut-nilai="56000000">56.000.000</td>
+                        <td>12/07/2026</td>
+                        <td><span class="dmp-badge dmp-badge--awas">Ditinjau</span></td>
+                    </tr>
+                                    <tr>
+                        <td><code>PGJ-0025</code></td>
+                        <td>Pemohon 25</td>
+                        <td>Unit B</td>
+                        <td class="text-right" data-urut-nilai="4375000">4.375.000</td>
+                        <td>19/08/2026</td>
+                        <td><span class="dmp-badge dmp-badge--sukses">Aktif</span></td>
+                    </tr>
+                                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer d-flex flex-wrap align-items-center justify-content-between" style="gap:8px">
+        <small class="text-muted"><span id="infoSaring">25 dari 25 baris</span> &middot; total 87 data</small>
+        <nav aria-label="Halaman tabel"><ul class="pagination pagination-sm mb-0">
+            <li class="page-item disabled"><a class="page-link" href="tabel.html">&lsaquo;</a></li>
+                            <li class="page-item active"><a class="page-link" href="tabel.html">1</a></li>
+                            <li class="page-item"><a class="page-link" href="tabel.html">2</a></li>
+                            <li class="page-item"><a class="page-link" href="tabel.html">3</a></li>
+                            <li class="page-item"><a class="page-link" href="tabel.html">4</a></li>
+                        <li class="page-item"><a class="page-link" href="tabel.html">&rsaquo;</a></li>
+        </ul></nav>
+    </div>
+</div>
+</div></div>
+<footer class="footer dmp-footer">
+    <div class="w-100 clearfix dmp-footer__baris">
+        <span class="dmp-footer__kiri">&copy;2026 Nama Organisasi. Hak cipta dilindungi.</span>
+        <span class="dmp-footer__versi" title="Versi aplikasi"><span class="dmp-footer__titik" aria-hidden="true"></span>v1.0.0</span>
+        <span class="dmp-footer__kanan">Tema Dasar Coretax</span>
+    </div>
+</footer>
+</div></div>
+<script src="../assets/vendor/jquery/jquery.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/ct/coretax-bahasa.js" defer></script>
+<script src="../assets/ct/coretax.js" defer></script>
+<script src="../assets/ct/dmp-theme.js" defer></script>
+<script src="../assets/ct/dmp-urut.js" defer></script>
+<script src="../assets/ct/ct-app.js" defer></script>
+</body>
+</html>

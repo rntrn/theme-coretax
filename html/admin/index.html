@@ -1,0 +1,84 @@
+<!doctype html>
+<html class="ct" lang="id" data-dmp-theme="biru" data-dmp-mode="light" data-dmp-palette="laut">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Beranda Admin | CTX</title>
+    <link rel="icon" href="../../assets/ct/logo.svg">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../assets/vendor/iconkit/css/iconkit.min.css">
+        <link rel="stylesheet" href="../../assets/ct/tokens.css">
+    <link rel="stylesheet" href="../../assets/ct/theme.css">
+    <link rel="stylesheet" href="../../assets/ct/coretax.css">
+    <link rel="stylesheet" href="../../assets/ct/ct-starter.css">
+    </head>
+<body class="dmp-body dmp-scope">
+<div class="ct-pita-demo">MODE DEMO</div><div class="dmp-adm">
+    <aside class="dmp-adm__nav">
+        <div class="dmp-adm__merek">
+            <span class="dmp-adm__logo dmp-adm__logo--gambar"><img src="../../assets/ct/logo.svg" alt="" width="32" height="32"></span>
+            <div><b>Administrator</b><small>Tema Dasar Coretax</small></div>
+        </div>
+        <nav class="dmp-adm__menu">
+                            <a href="../admin/index.html" class="dmp-adm__butir aktif">
+                    <i class="ik ik-grid"></i><span>Beranda Admin</span>
+                </a>
+                            <a href="../admin/pintu-masuk.html" class="dmp-adm__butir">
+                    <i class="ik ik-log-in"></i><span>Pintu Masuk</span>
+                </a>
+                            <a href="../admin/pengaturan.html" class="dmp-adm__butir">
+                    <i class="ik ik-sliders"></i><span>Pengaturan Tema</span>
+                </a>
+                    </nav>
+        <div class="dmp-adm__kaki">
+            <a href="../dashboard.html" class="dmp-adm__kembali"><i class="ik ik-arrow-left"></i><span>Kembali ke Dashboard</span></a>
+            <div class="dmp-adm__user">
+                <span class="dmp-nav__avatar">A</span>
+                <span class="dmp-adm__user-teks"><b>ADMIN CONTOH</b><small>Administrator</small></span>
+            </div>
+        </div>
+    </aside>
+    <main class="dmp-adm__isi">
+        <header class="dmp-adm__kepala">
+            <h1>Beranda Admin</h1>
+            <p>Ringkasan pengaturan yang berlaku untuk seluruh pengguna.</p>        </header>
+        <div class="dmp-kpi-grid dmp-mb-4">
+    <div class="dmp-kpi dmp-kpi--aksen"><span class="dmp-kpi__label">Login mandiri</span>
+        <span class="dmp-kpi__value">Dibuka</span></div>
+    <div class="dmp-kpi"><span class="dmp-kpi__label">Masuk lewat Coretax</span>
+        <span class="dmp-kpi__value">Dibuka</span></div>
+    <div class="dmp-kpi"><span class="dmp-kpi__label">Login 7 hari terakhir</span>
+        <span class="dmp-kpi__value">2</span></div>
+    <div class="dmp-kpi"><span class="dmp-kpi__label">Mode demo</span>
+        <span class="dmp-kpi__value">NYALA</span></div>
+</div>
+
+<div class="dmp-card dmp-mb-4">
+    <div class="dmp-card__head"><h3 class="dmp-card__title">Pintasan</h3>
+        <p class="dmp-card__sub">Menu admin dibaca dari config/menu-admin.php.</p></div>
+    <div class="dmp-card__body dmp-card__body--flush">
+        <table class="dmp-table">
+            <thead><tr><th>Menu</th><th>Kegunaan</th></tr></thead>
+            <tbody>
+            <tr><td><a href="../admin/pintu-masuk.html"><i class="ik ik-log-in"></i> Pintu Masuk</a></td>
+                <td>Buka/tutup login mandiri dan masuk lewat Coretax, dengan tiga pengaman.</td></tr>
+            <tr><td><a href="../admin/pengaturan.html"><i class="ik ik-sliders"></i> Pengaturan Tema</a></td>
+                <td>Pratinjau delapan tema warna dan palet grafik; bawaan diatur di config/app.php.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="dmp-adm__ingat" role="alert"><strong>Mode demo menyala.</strong> Akun contoh di <code>config/app.php</code> bisa dipakai siapa saja.
+    Set <code>'demo' =&gt; false</code> dan sambungkan login asli di <code>inc/auth.php</code> sebelum dipakai sungguhan.</div>
+        <footer class="dmp-adm__versi">CTX v1.0.0</footer>
+    </main>
+</div>
+<script src="../../assets/ct/dmp-urut.js" defer></script>
+<script src="../../assets/ct/ct-app.js" defer></script>
+</body>
+</html>

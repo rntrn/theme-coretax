@@ -1,0 +1,127 @@
+<!doctype html>
+<html class="ct" lang="id" data-dmp-theme="biru" data-dmp-mode="light" data-dmp-palette="laut">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pintu Masuk | CTX</title>
+    <link rel="icon" href="../../assets/ct/logo.svg">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../assets/vendor/iconkit/css/iconkit.min.css">
+        <link rel="stylesheet" href="../../assets/ct/tokens.css">
+    <link rel="stylesheet" href="../../assets/ct/theme.css">
+    <link rel="stylesheet" href="../../assets/ct/coretax.css">
+    <link rel="stylesheet" href="../../assets/ct/ct-starter.css">
+    </head>
+<body class="dmp-body dmp-scope">
+<div class="ct-pita-demo">MODE DEMO</div><div class="dmp-adm">
+    <aside class="dmp-adm__nav">
+        <div class="dmp-adm__merek">
+            <span class="dmp-adm__logo dmp-adm__logo--gambar"><img src="../../assets/ct/logo.svg" alt="" width="32" height="32"></span>
+            <div><b>Administrator</b><small>Tema Dasar Coretax</small></div>
+        </div>
+        <nav class="dmp-adm__menu">
+                            <a href="../admin/index.html" class="dmp-adm__butir">
+                    <i class="ik ik-grid"></i><span>Beranda Admin</span>
+                </a>
+                            <a href="../admin/pintu-masuk.html" class="dmp-adm__butir aktif">
+                    <i class="ik ik-log-in"></i><span>Pintu Masuk</span>
+                </a>
+                            <a href="../admin/pengaturan.html" class="dmp-adm__butir">
+                    <i class="ik ik-sliders"></i><span>Pengaturan Tema</span>
+                </a>
+                    </nav>
+        <div class="dmp-adm__kaki">
+            <a href="../dashboard.html" class="dmp-adm__kembali"><i class="ik ik-arrow-left"></i><span>Kembali ke Dashboard</span></a>
+            <div class="dmp-adm__user">
+                <span class="dmp-nav__avatar">A</span>
+                <span class="dmp-adm__user-teks"><b>ADMIN CONTOH</b><small>Administrator</small></span>
+            </div>
+        </div>
+    </aside>
+    <main class="dmp-adm__isi">
+        <header class="dmp-adm__kepala">
+            <h1>Pintu Masuk</h1>
+            <p>Login lewat halaman ini dan masuk dari aplikasi induk: buka, tutup, pantau.</p>        </header>
+        <div class="dmp-flex dmp-gap-3" style="flex-wrap:wrap;align-items:stretch">
+        <div class="dmp-card dmp-mb-4" style="flex:1 1 360px">
+        <div class="dmp-card__head">
+            <h3 class="dmp-card__title"><i class="ik ik-log-in"></i> Login lewat halaman ini                <span class="dmp-badge dmp-badge--sukses" style="margin-left:8px">DIBUKA</span></h3>
+            <p class="dmp-card__sub">Formulir login.php (nama pengguna + kata sandi).</p>
+        </div>
+        <div class="dmp-card__body">
+            <p class="dmp-help" style="margin:0 0 6px">Masuk terakhir lewat pintu ini:
+                <b>2026-11-19 04:48:57 (admin)</b>
+                &middot; 1 kali dalam 7 hari terakhir.</p>
+            <p class="dmp-help" style="margin:0 0 12px">
+                                    Belum pernah diubah: memakai bawaan (dibuka, config/app.php).
+                            </p>
+                        <form method="post" action="../admin/pintu-masuk.html"
+                  data-konfirmasi="TUTUP pintu &quot;Login lewat halaman ini&quot; untuk semua pengguna?">
+                <input type="hidden" name="_ct" value="statis">                <input type="hidden" name="jalur" value="mandiri">
+                <input type="hidden" name="nilai" value="off">
+                <button type="submit" class="dmp-btn dmp-btn--garis">
+                    Tutup pintu ini                </button>
+            </form>
+        </div>
+    </div>
+        <div class="dmp-card dmp-mb-4" style="flex:1 1 360px">
+        <div class="dmp-card__head">
+            <h3 class="dmp-card__title"><i class="ik ik-layers"></i> Masuk lewat Coretax                <span class="dmp-badge dmp-badge--sukses" style="margin-left:8px">DIBUKA</span></h3>
+            <p class="dmp-card__sub">Aplikasi induk mengirim token bertanda tangan ke sso.php.</p>
+        </div>
+        <div class="dmp-card__body">
+            <p class="dmp-help" style="margin:0 0 6px">Masuk terakhir lewat pintu ini:
+                <b>2026-11-19 10:58:17 (user)</b>
+                &middot; 1 kali dalam 7 hari terakhir.</p>
+            <p class="dmp-help" style="margin:0 0 12px">
+                                    Terakhir diubah 2026-11-19 04:57 oleh admin.
+                            </p>
+                            <div class="dmp-field" style="margin-bottom:12px">
+                    <label class="dmp-label" for="urlSso">Alamat tujuan POST untuk aplikasi induk</label>
+                    <input class="dmp-input" id="urlSso" readonly onclick="this.select()" value="https://alamat-aplikasi-anda/sso.php">
+                    <div class="dmp-help">Aplikasi induk mengirim <code>token</code> ke alamat ini.
+                        Verifikasinya di <code>inc/auth.php</code> &rarr; <code>ct_sso_verifikasi()</code>.</div>
+                </div>
+                        <form method="post" action="../admin/pintu-masuk.html"
+                  data-konfirmasi="TUTUP pintu &quot;Masuk lewat Coretax&quot; untuk semua pengguna?">
+                <input type="hidden" name="_ct" value="statis">                <input type="hidden" name="jalur" value="sso">
+                <input type="hidden" name="nilai" value="off">
+                <button type="submit" class="dmp-btn dmp-btn--garis">
+                    Tutup pintu ini                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="dmp-card dmp-mb-4">
+    <div class="dmp-card__head"><h3 class="dmp-card__title">Aturan pengaman</h3></div>
+    <div class="dmp-card__body">
+        <ul class="dmp-help" style="margin:0 0 0 18px">
+            <li>Kedua pintu <b>tidak boleh ditutup bersamaan</b>.</li>
+            <li>Login mandiri <b>baru boleh ditutup</b> bila sudah ada yang berhasil masuk lewat Coretax dalam 7 hari terakhir.</li>
+            <li>Saat login mandiri ditutup, <b>admin tetap bisa masuk</b> lewat <code>login.php?darurat=1</code>.</li>
+            <li>Sesi yang sedang berjalan ikut diakhiri pada permintaan berikutnya setelah pintunya ditutup
+                (untuk login mandiri, admin dikecualikan).</li>
+            <li>Terkunci di luar sama sekali? Hapus berkas <code>data/pintu.json</code> di server - semua kembali ke bawaan di <code>config/app.php</code>.</li>
+        </ul>
+    </div>
+</div>
+        <footer class="dmp-adm__versi">CTX v1.0.0</footer>
+    </main>
+</div>
+<script src="../../assets/ct/dmp-urut.js" defer></script>
+<script src="../../assets/ct/ct-app.js" defer></script>
+<script>
+// Konfirmasi sebelum mengubah pintu. Teksnya di atribut data-, bukan
+// disusun di onsubmit, supaya tanda kutip pada nama pintu tidak merusak skrip.
+Array.prototype.forEach.call(document.querySelectorAll('form[data-konfirmasi]'), function (f) {
+    f.addEventListener('submit', function (e) { if (!confirm(f.getAttribute('data-konfirmasi'))) { e.preventDefault(); } });
+});
+</script>
+</body>
+</html>

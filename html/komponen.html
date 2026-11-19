@@ -1,0 +1,719 @@
+<!doctype html>
+<html class="no-js ct" lang="id" data-dmp-theme="biru" data-dmp-mode="light" data-dmp-palette="laut">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Komponen | CTX</title>
+    <link rel="icon" href="../assets/ct/logo.svg">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/vendor/iconkit/css/iconkit.min.css">
+        <link rel="stylesheet" href="../assets/vendor/themekit/theme.min.css">
+        <link rel="stylesheet" href="../assets/ct/tokens.css">
+    <link rel="stylesheet" href="../assets/ct/theme.css">
+    <link rel="stylesheet" href="../assets/ct/coretax.css">
+    <link rel="stylesheet" href="../assets/ct/ct-starter.css">
+    </head>
+<body>
+<div class="ct-pita-demo" title="config/app.php: 'demo' => true">MODE DEMO</div>
+<div class="ct-muat" id="ctMuat" role="status" aria-live="polite">
+    <div class="ct-muat__kartu">
+        <div class="ct-muat__merek">
+            <img src="../assets/ct/logo.svg" alt="" width="34" height="34">
+            <span><b>CTX</b></span>
+        </div>
+        <span class="ct-muat__putar" aria-hidden="true"></span>
+        <strong>Memuat halaman</strong>
+        <small>Mohon tunggu&hellip;</small>
+    </div>
+</div>
+
+<div class="wrapper">
+<header class="header-top ct-kepala" header-theme="light">
+    <div class="container-fluid">
+        <div class="ct-kepala__baris">
+            <div class="ct-kepala__kiri">
+                <a class="ct-merek" href="dashboard.html" title="Ke halaman awal">
+                    <img class="ct-merek__logo" src="../assets/ct/logo.svg" alt="" width="30" height="30">
+                    <span class="ct-merek__garis" aria-hidden="true"></span>
+                </a>
+                <div class="judul ct-merek__judul" id="judul">
+                    <h3><b><strong>APLIKASI CORETAX STARTER</strong></b></h3>
+                </div>
+            </div>
+
+            <div class="ct-kepala__tengah">
+                <button type="button" class="ct-cari" id="ctCariBuka" aria-haspopup="dialog" title="Cari menu (Ctrl+K)">
+                    <i class="ik ik-search" aria-hidden="true"></i>
+                    <span class="ct-cari__teks">Cari Menu atau Laporan</span>
+                    <span class="ct-cari__kbd" aria-hidden="true"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+                </button>
+            </div>
+
+            <div class="top-menu ct-kepala__kanan d-flex align-items-center">
+                <button type="button" id="navbar-fullscreen" class="nav-link" title="Layar penuh" aria-label="Layar penuh"><i class="ik ik-maximize"></i></button>
+                <button type="button" id="navbar-print" class="nav-link" title="Cetak halaman" aria-label="Cetak halaman"><i class="ik ik-printer"></i></button>
+
+                <div class="dropdown ct-bahasa">
+                    <button type="button" class="ct-bahasa__tombol" id="ctBahasaToggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" title="Bahasa" aria-label="Bahasa">
+                        <span class="ct-bendera ct-bendera--id" aria-hidden="true"></span><b>ID</b>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right p-0" aria-labelledby="ctBahasaToggle">
+                        <div class="ct-bahasa__daftar" role="group">
+                            <button type="button" data-ct-bahasa="id" aria-pressed="true"><span class="ct-bendera ct-bendera--id" aria-hidden="true"></span>Bahasa Indonesia</button>
+                            <button type="button" data-ct-bahasa="en" aria-pressed="false"><span class="ct-bendera ct-bendera--en" aria-hidden="true"></span>English</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button type="button" class="nav-link" id="dmpTemaToggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" title="Mode terang / gelap" aria-label="Mode terang atau gelap">
+                        <i class="ik ik-sun"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right p-0" aria-labelledby="dmpTemaToggle">
+                        <div class="dmp-tema">
+                            <div class="dmp-tema__mode" role="group" aria-label="Mode terang atau gelap">
+                                <button type="button" data-mode="light" aria-pressed="false"><i class="ik ik-sun" aria-hidden="true"></i> Terang</button>
+                                <button type="button" data-mode="dark" aria-pressed="false"><i class="ik ik-moon" aria-hidden="true"></i> Gelap</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <a class="dropdown-toggle ct-pengguna" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="ik ik-user ct-pengguna__ikon" aria-hidden="true"></i>
+                        <span class="ct-pengguna__teks">
+                            <small>admin</small>
+                            <b>ADMIN CONTOH</b>
+                        </span>
+                        <span class="ct-pengguna__lencana">ADM</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="profil.html"><i class="ik ik-user dropdown-icon"></i> Profil</a>
+                                                <a class="dropdown-item" href="admin/index.html"><i class="ik ik-settings dropdown-icon"></i> Menu Admin</a>
+                                                <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="login.html"><i class="ik ik-power dropdown-icon"></i> Keluar</a>
+                    </div>
+                </div>
+
+                <a class="ct-keluar" href="login.html" title="Keluar" aria-label="Keluar">
+                    <i class="ik ik-log-out" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<script>
+// Konfigurasi untuk skrip tema - diberikan server, bukan ditebak di
+// peramban, karena aplikasi bisa dilayani di subfolder mana saja.
+window.DMP_TEMA = {   // dibaca dmp-theme.js: tombol terang/gelap disimpan ke sesi
+    url: "",
+    csrfNama: '_ct', csrfNilai: "statis"};
+window.DMP_CT = {     // dibaca coretax.js: blok "Menu Rekomendasi" di laci Buka Menu
+    menuPopuler: ""};
+</script>
+
+<div class="page-wrap">
+<aside class="app-sidebar dmp-nav" id="dmpSidebar" data-ciut="0">
+    <div class="dmp-nav__kepala">
+        <a class="dmp-nav__merek" href="dashboard.html">
+            <span class="dmp-nav__logo"><img src="../assets/ct/logo.svg" alt="" width="32" height="32"></span>
+            <span class="dmp-nav__merek-teks">
+                <b>CTX</b>
+                <small>Tema Dasar Coretax</small>
+            </span>
+        </a>
+        <button type="button" class="dmp-nav__ciut" id="dmpNavCiut" title="Ciutkan menu" aria-label="Ciutkan menu">
+            <i class="ik ik-chevrons-left"></i>
+        </button>
+    </div>
+
+    <div class="dmp-nav__cari">
+        <i class="ik ik-search"></i>
+        <input type="text" id="dmpNavCari" placeholder="Cari menu&hellip;" autocomplete="off" aria-label="Cari menu">
+    </div>
+
+    <nav class="dmp-nav__isi" id="dmpNavIsi">
+        <div class="dmp-nav__label">Utama</div>
+        <div class="dmp-nav__grup">
+            <button type="button" class="dmp-nav__butir dmp-nav__butir--grup">
+                <i class="ik ik-bar-chart-2"></i><span>Dashboard</span>
+            </button>
+            <div class="dmp-nav__sub"><div class="dmp-nav__sub-isi">
+                <a href="dashboard.html" class="dmp-nav__anak">Ringkasan</a>
+<a href="grafik.html" class="dmp-nav__anak">Grafik ECharts <span class="dmp-badge dmp-badge--sukses" style="margin-left:6px">BARU</span></a>
+            </div></div>
+        </div>
+        <div class="dmp-nav__grup">
+            <button type="button" class="dmp-nav__butir dmp-nav__butir--grup">
+                <i class="ik ik-layers"></i><span>Antarmuka</span>
+            </button>
+            <div class="dmp-nav__sub"><div class="dmp-nav__sub-isi">
+                <a href="komponen.html" class="dmp-nav__anak">Komponen</a>
+<a href="komponen.html#ikon" class="dmp-nav__anak">Ikon</a>
+<a href="formulir.html" class="dmp-nav__anak">Formulir</a>
+<a href="tabel.html" class="dmp-nav__anak">Tabel Data</a>
+            </div></div>
+        </div>
+        <div class="dmp-nav__grup">
+            <button type="button" class="dmp-nav__butir dmp-nav__butir--grup">
+                <i class="ik ik-file-text"></i><span>Halaman Contoh</span>
+            </button>
+            <div class="dmp-nav__sub"><div class="dmp-nav__sub-isi">
+                <a href="kosong.html" class="dmp-nav__anak">Halaman Kosong</a>
+<a href="profil.html" class="dmp-nav__anak">Profil Pengguna</a>
+<a href="404.html" class="dmp-nav__anak">Halaman 404</a>
+<a href="login.html" class="dmp-nav__anak" target="_blank" rel="noopener">Halaman Login</a>
+            </div></div>
+        </div>
+        <a href="kosong.html" class="dmp-nav__butir"><i class="ik ik-link"></i><span>Tautan Tunggal</span></a>
+        <div class="dmp-nav__label" data-ct-kumpul="Alat Bantu">Alat Bantu</div>
+        <a href="dokumentasi.html" class="dmp-nav__butir"><i class="ik ik-book-open"></i><span>Dokumentasi</span></a>
+        <a href="admin/index.html" class="dmp-nav__butir"><i class="ik ik-settings"></i><span>Menu Admin</span></a>
+        <p class="dmp-nav__kosong" id="dmpNavKosong" hidden>Tidak ada menu yang cocok.</p>
+    </nav>
+
+    <div class="dmp-nav__kaki">
+        <div class="dmp-nav__user">
+            <span class="dmp-nav__avatar">A</span>
+            <span class="dmp-nav__user-teks">
+                <b>ADMIN CONTOH</b>
+                <small>Administrator &middot; admin</small>
+            </span>
+        </div>
+        <a href="login.html" class="dmp-nav__keluar" title="Keluar">
+            <i class="ik ik-power"></i><span>Keluar</span>
+        </a>
+    </div>
+</aside>
+
+<script>
+// Kamus terjemahan menu dari config/menu.php (kunci 'en'), dibaca
+// coretax-bahasa.js. Bentuk: { 'Teks Indonesia': ['English', 'Jawa'] }.
+window.CT_KAMUS = {"Utama":["Main","Utama"],"Dashboard":["Dashboard","Dashboard"],"Ringkasan":["Overview","Ringkasan"],"Grafik ECharts":["ECharts","Grafik ECharts"],"Antarmuka":["Interface","Antarmuka"],"Komponen":["Components","Komponen"],"Ikon":["Icons","Ikon"],"Formulir":["Forms","Formulir"],"Tabel Data":["Data Table","Tabel Data"],"Halaman Contoh":["Sample Pages","Halaman Contoh"],"Halaman Kosong":["Blank Page","Halaman Kosong"],"Profil Pengguna":["User Profile","Profil Pengguna"],"Halaman 404":["404 Page","Halaman 404"],"Halaman Login":["Login Page","Halaman Login"],"Tautan Tunggal":["Single Link","Tautan Tunggal"],"Alat Bantu":["Tools","Alat Bantu"],"Dokumentasi":["Documentation","Dokumentasi"],"Menu Admin":["Admin Menu","Menu Admin"]};
+
+(function () {
+    'use strict';
+    var sb = document.getElementById('dmpSidebar'), isi = document.getElementById('dmpNavIsi');
+    var cari = document.getElementById('dmpNavCari'), ciut = document.getElementById('dmpNavCiut');
+    var kosong = document.getElementById('dmpNavKosong');
+    if (!sb || !isi) { return; }
+
+    // ---------- Buka-tutup submenu ----------
+    var grup = isi.querySelectorAll('.dmp-nav__grup');
+    Array.prototype.forEach.call(grup, function (g) {
+        var tbl = g.querySelector('.dmp-nav__butir--grup');
+        if (!tbl) { return; }
+        tbl.addEventListener('click', function () {
+            var terbuka = g.classList.toggle('buka');
+            tbl.setAttribute('aria-expanded', terbuka ? 'true' : 'false');
+        });
+    });
+
+    // ---------- Tandai menu aktif dari alamat ----------
+    // Dicocokkan dari yang TERPANJANG lebih dulu, supaya "admin/pintu"
+    // tidak kalah oleh "admin". Bagian #... dan ?... diabaikan.
+    (function () {
+        var kini = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+        var juara = null, panjang = -1;
+        Array.prototype.forEach.call(isi.querySelectorAll('a[href]'), function (a) {
+            var h;
+            try { h = new URL(a.getAttribute('href'), window.location.href).pathname; } catch (e) { return; }
+            h = h.toLowerCase().replace(/\/+$/, '');
+            if (h && h.length > panjang && (kini === h || kini.indexOf(h + '/') === 0)) { juara = a; panjang = h.length; }
+        });
+        if (juara) {
+            juara.classList.add('aktif');
+            var g = juara.closest('.dmp-nav__grup');
+            if (g) {
+                g.classList.add('buka');
+                var t = g.querySelector('.dmp-nav__butir--grup');
+                if (t) { t.classList.add('aktif-induk'); }
+            }
+        }
+    })();
+
+    // ---------- Ciutkan (hanya berarti bila coretax.js tidak berjalan) ----------
+    function terapkanCiut(nilai) {
+        sb.setAttribute('data-ciut', nilai ? '1' : '0');
+        document.body.classList.toggle('dmp-nav-ciut', !!nilai);
+        try { localStorage.setItem('dmp_nav_ciut', nilai ? '1' : '0'); } catch (e) {}
+    }
+    if (ciut) { ciut.addEventListener('click', function () { terapkanCiut(sb.getAttribute('data-ciut') !== '1'); }); }
+    try { if (localStorage.getItem('dmp_nav_ciut') === '1') { terapkanCiut(true); } } catch (e) {}
+
+    // ---------- Pencarian di sidebar ----------
+    if (cari) {
+        cari.addEventListener('input', function () {
+            var q = this.value.trim().toLowerCase();
+            var semua = isi.querySelectorAll('.dmp-nav__butir, .dmp-nav__anak, .dmp-nav__grup, .dmp-nav__label');
+            if (!q) {
+                Array.prototype.forEach.call(semua, function (el) { el.hidden = false; });
+                Array.prototype.forEach.call(grup, function (g) { g.classList.remove('paksa-buka'); });
+                if (kosong) { kosong.hidden = true; }
+                return;
+            }
+            var ketemu = 0;
+            Array.prototype.forEach.call(isi.querySelectorAll(':scope > .dmp-nav__butir'), function (a) {
+                var c = a.textContent.toLowerCase().indexOf(q) !== -1;
+                a.hidden = !c; if (c) { ketemu++; }
+            });
+            Array.prototype.forEach.call(grup, function (g) {
+                var judul = g.querySelector('.dmp-nav__butir--grup');
+                var cj = judul && judul.textContent.toLowerCase().indexOf(q) !== -1, n = 0;
+                Array.prototype.forEach.call(g.querySelectorAll('.dmp-nav__anak'), function (a) {
+                    var c = cj || a.textContent.toLowerCase().indexOf(q) !== -1;
+                    a.hidden = !c; if (c) { n++; }
+                });
+                g.hidden = !(cj || n); g.classList.toggle('paksa-buka', !!(cj || n)); ketemu += n;
+            });
+            Array.prototype.forEach.call(isi.querySelectorAll('.dmp-nav__label'), function (l) { l.hidden = true; });
+            if (kosong) { kosong.hidden = ketemu > 0; }
+        });
+        cari.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') { this.value = ''; this.dispatchEvent(new Event('input')); }
+        });
+    }
+})();
+</script>
+
+<div class="main-content"><div class="container-fluid">
+    <div class="ct-judul">
+        <div>
+            <h1>Komponen</h1>
+            <p>Katalog elemen antarmuka. Klik nama ikon untuk menyalin kelasnya.</p>        </div>
+                <nav aria-label="Remah roti">
+            <ol class="ct-remah">
+                                                            <li aria-current="page">Antarmuka</li>
+                                                                                <li aria-current="page">Komponen</li>
+                                                </ol>
+        </nav>
+            </div>
+
+    
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card"><div class="card-header"><h3>Tombol</h3></div><div class="card-body">
+            <p class="small text-muted mb-2">Kelas dmp-btn</p>
+            <div class="d-flex flex-wrap" style="gap:8px">
+                <button class="dmp-btn dmp-btn--utama"><i class="ik ik-save"></i> Utama</button>
+                <button class="dmp-btn dmp-btn--garis">Garis</button>
+                <button class="dmp-btn dmp-btn--lembut">Lembut</button>
+                <button class="dmp-btn dmp-btn--bahaya"><i class="ik ik-trash-2"></i> Bahaya</button>
+                <button class="dmp-btn dmp-btn--utama dmp-btn--kecil">Kecil</button>
+                <button class="dmp-btn dmp-btn--garis" disabled>Nonaktif</button>
+            </div>
+            <p class="small text-muted mt-3 mb-2">Bootstrap</p>
+            <div class="d-flex flex-wrap" style="gap:8px">
+                <button class="btn btn-primary">Primary</button>
+                <button class="btn btn-outline-primary">Outline</button>
+                <button class="btn btn-success">Success</button>
+                <button class="btn btn-warning">Warning</button>
+                <button class="btn btn-danger">Danger</button>
+                <button class="btn btn-light">Light</button>
+            </div>
+        </div></div>
+
+        <div class="card"><div class="card-header"><h3>Lencana &amp; Status</h3></div><div class="card-body">
+            <div class="d-flex flex-wrap align-items-center" style="gap:8px">
+                <span class="dmp-badge dmp-badge--sukses">Sukses</span>
+                <span class="dmp-badge dmp-badge--awas">Awas</span>
+                <span class="dmp-badge dmp-badge--bahaya">Bahaya</span>
+                <span class="dmp-badge dmp-badge--netral">Netral</span>
+                <span class="dmp-lencana dmp-lencana--biru">Biru</span>
+                <span class="dmp-lencana dmp-lencana--hijau">Hijau</span>
+                <span class="dmp-lencana dmp-lencana--abu">Abu</span>
+                <span class="badge badge-primary">badge</span>
+                <span class="badge badge-pill badge-success">pill</span>
+            </div>
+        </div></div>
+
+        <div class="card"><div class="card-header"><h3>Peringatan</h3></div><div class="card-body">
+            <div class="ct-kilat ct-kilat--sukses"><i class="ik ik-check-circle"></i><span>Data berhasil disimpan (ct-kilat).</span></div>
+            <div class="ct-kilat ct-kilat--gagal"><i class="ik ik-alert-circle"></i><span>Gagal menyimpan. Tidak ada yang diubah.</span></div>
+            <div class="alert alert-info mb-2">Alert Bootstrap: info.</div>
+            <div class="alert alert-warning mb-0">Alert Bootstrap: warning.</div>
+        </div></div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card"><div class="card-header"><h3>Tab</h3></div><div class="card-body">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#tab1" role="tab">Unit Kerja</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab2" role="tab">Jenis Layanan</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab3" role="tab">Periode</a></li>
+            </ul>
+            <div class="tab-content pt-3">
+                <div class="tab-pane fade show active" id="tab1" role="tabpanel">Isi tab pertama. Tab aktif berwarna navy seperti Coretax.</div>
+                <div class="tab-pane fade" id="tab2" role="tabpanel">Isi tab kedua.</div>
+                <div class="tab-pane fade" id="tab3" role="tabpanel">Isi tab ketiga.</div>
+            </div>
+        </div></div>
+
+        <div class="card"><div class="card-header"><h3>Modal, Dropdown, Tooltip</h3></div><div class="card-body d-flex flex-wrap" style="gap:8px">
+            <button class="dmp-btn dmp-btn--utama" data-toggle="modal" data-target="#contohModal">Buka modal</button>
+            <div class="dropdown">
+                <button class="dmp-btn dmp-btn--garis dropdown-toggle" data-toggle="dropdown">Aksi</button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#"><i class="ik ik-download dropdown-icon"></i> Unduh Excel</a>
+                    <a class="dropdown-item" href="#"><i class="ik ik-printer dropdown-icon"></i> Cetak</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-danger" href="#"><i class="ik ik-trash-2 dropdown-icon"></i> Hapus</a>
+                </div>
+            </div>
+            <button class="dmp-btn dmp-btn--lembut" data-toggle="tooltip" title="Teks bantuan singkat">Arahkan kursor</button>
+        </div></div>
+
+        <div class="card"><div class="card-header"><h3>Progres &amp; Memuat</h3></div><div class="card-body">
+            <div class="progress mb-3" style="height:8px"><div class="progress-bar" style="width:65%"></div></div>
+            <div class="dmp-skeleton dmp-skeleton--judul mb-2"></div>
+            <div class="dmp-skeleton dmp-skeleton--baris mb-2"></div>
+            <div class="dmp-skeleton dmp-skeleton--baris" style="width:70%"></div>
+        </div></div>
+
+        <div class="card"><div class="card-header"><h3>Keadaan Kosong</h3></div><div class="card-body">
+            <div class="dmp-kosong">
+                <i class="ik ik-inbox" style="font-size:32px"></i>
+                <div class="dmp-kosong__judul">Belum ada data</div>
+                <div class="dmp-kosong__pesan">Ubah penyaring atau pilih periode lain.</div>
+            </div>
+        </div></div>
+    </div>
+</div>
+
+<div class="dmp-card dmp-mb-4">
+    <div class="dmp-card__head">
+        <h3 class="dmp-card__title"><i class="ik ik-box"></i> Kartu dmp-card</h3>
+        <p class="dmp-card__sub">Kartu gaya admin: judul, subjudul, isi. Dipakai di tata letak admin.</p>
+    </div>
+    <div class="dmp-card__body">Isi kartu. Gunakan <code>.dmp-card__body--flush</code> untuk tabel tanpa jarak tepi.</div>
+</div>
+
+<div class="card" id="ikon">
+    <div class="card-header"><h3>Ikon iconkit (272)</h3></div>
+    <div class="card-body">
+        <input type="search" class="dmp-input mb-3" id="cariIkon" placeholder="Saring ikon..." style="max-width:280px">
+        <div class="ct-ikon-galeri" id="galeriIkon">
+                            <button type="button" data-ct-salin="ik ik-activity" title="Salin kelas"><i class="ik ik-activity"></i><span>activity</span></button>
+                            <button type="button" data-ct-salin="ik ik-airplay" title="Salin kelas"><i class="ik ik-airplay"></i><span>airplay</span></button>
+                            <button type="button" data-ct-salin="ik ik-alert-circle" title="Salin kelas"><i class="ik ik-alert-circle"></i><span>alert-circle</span></button>
+                            <button type="button" data-ct-salin="ik ik-alert-octagon" title="Salin kelas"><i class="ik ik-alert-octagon"></i><span>alert-octagon</span></button>
+                            <button type="button" data-ct-salin="ik ik-alert-triangle" title="Salin kelas"><i class="ik ik-alert-triangle"></i><span>alert-triangle</span></button>
+                            <button type="button" data-ct-salin="ik ik-align-center" title="Salin kelas"><i class="ik ik-align-center"></i><span>align-center</span></button>
+                            <button type="button" data-ct-salin="ik ik-align-justify" title="Salin kelas"><i class="ik ik-align-justify"></i><span>align-justify</span></button>
+                            <button type="button" data-ct-salin="ik ik-align-left" title="Salin kelas"><i class="ik ik-align-left"></i><span>align-left</span></button>
+                            <button type="button" data-ct-salin="ik ik-align-right" title="Salin kelas"><i class="ik ik-align-right"></i><span>align-right</span></button>
+                            <button type="button" data-ct-salin="ik ik-anchor" title="Salin kelas"><i class="ik ik-anchor"></i><span>anchor</span></button>
+                            <button type="button" data-ct-salin="ik ik-aperture" title="Salin kelas"><i class="ik ik-aperture"></i><span>aperture</span></button>
+                            <button type="button" data-ct-salin="ik ik-archive" title="Salin kelas"><i class="ik ik-archive"></i><span>archive</span></button>
+                            <button type="button" data-ct-salin="ik ik-arrow-down" title="Salin kelas"><i class="ik ik-arrow-down"></i><span>arrow-down</span></button>
+                            <button type="button" data-ct-salin="ik ik-arrow-down-circle" title="Salin kelas"><i class="ik ik-arrow-down-circle"></i><span>arrow-down-circle</span></button>
+                            <button type="button" data-ct-salin="ik ik-arrow-down-left" title="Salin kelas"><i class="ik ik-arrow-down-left"></i><span>arrow-down-left</span></button>
+                            <button type="button" data-ct-salin="ik ik-arrow-down-right" title="Salin kelas"><i class="ik ik-arrow-down-right"></i><span>arrow-down-right</span></button>
+                            <button type="button" data-ct-salin="ik ik-arrow-left" title="Salin kelas"><i class="ik ik-arrow-left"></i><span>arrow-left</span></button>
+                            <button type="button" data-ct-salin="ik ik-arrow-left-circle" title="Salin kelas"><i class="ik ik-arrow-left-circle"></i><span>arrow-left-circle</span></button>
+                            <button type="button" data-ct-salin="ik ik-arrow-right" title="Salin kelas"><i class="ik ik-arrow-right"></i><span>arrow-right</span></button>
+                            <button type="button" data-ct-salin="ik ik-arrow-right-circle" title="Salin kelas"><i class="ik ik-arrow-right-circle"></i><span>arrow-right-circle</span></button>
+                            <button type="button" data-ct-salin="ik ik-arrow-up" title="Salin kelas"><i class="ik ik-arrow-up"></i><span>arrow-up</span></button>
+                            <button type="button" data-ct-salin="ik ik-arrow-up-circle" title="Salin kelas"><i class="ik ik-arrow-up-circle"></i><span>arrow-up-circle</span></button>
+                            <button type="button" data-ct-salin="ik ik-arrow-up-left" title="Salin kelas"><i class="ik ik-arrow-up-left"></i><span>arrow-up-left</span></button>
+                            <button type="button" data-ct-salin="ik ik-arrow-up-right" title="Salin kelas"><i class="ik ik-arrow-up-right"></i><span>arrow-up-right</span></button>
+                            <button type="button" data-ct-salin="ik ik-at-sign" title="Salin kelas"><i class="ik ik-at-sign"></i><span>at-sign</span></button>
+                            <button type="button" data-ct-salin="ik ik-award" title="Salin kelas"><i class="ik ik-award"></i><span>award</span></button>
+                            <button type="button" data-ct-salin="ik ik-bar-chart" title="Salin kelas"><i class="ik ik-bar-chart"></i><span>bar-chart</span></button>
+                            <button type="button" data-ct-salin="ik ik-bar-chart-2" title="Salin kelas"><i class="ik ik-bar-chart-2"></i><span>bar-chart-2</span></button>
+                            <button type="button" data-ct-salin="ik ik-bar-chart-line" title="Salin kelas"><i class="ik ik-bar-chart-line"></i><span>bar-chart-line</span></button>
+                            <button type="button" data-ct-salin="ik ik-bar-chart-line-" title="Salin kelas"><i class="ik ik-bar-chart-line-"></i><span>bar-chart-line-</span></button>
+                            <button type="button" data-ct-salin="ik ik-battery" title="Salin kelas"><i class="ik ik-battery"></i><span>battery</span></button>
+                            <button type="button" data-ct-salin="ik ik-battery-charging" title="Salin kelas"><i class="ik ik-battery-charging"></i><span>battery-charging</span></button>
+                            <button type="button" data-ct-salin="ik ik-bell" title="Salin kelas"><i class="ik ik-bell"></i><span>bell</span></button>
+                            <button type="button" data-ct-salin="ik ik-bell-off" title="Salin kelas"><i class="ik ik-bell-off"></i><span>bell-off</span></button>
+                            <button type="button" data-ct-salin="ik ik-bluetooth" title="Salin kelas"><i class="ik ik-bluetooth"></i><span>bluetooth</span></button>
+                            <button type="button" data-ct-salin="ik ik-bold" title="Salin kelas"><i class="ik ik-bold"></i><span>bold</span></button>
+                            <button type="button" data-ct-salin="ik ik-book" title="Salin kelas"><i class="ik ik-book"></i><span>book</span></button>
+                            <button type="button" data-ct-salin="ik ik-book-open" title="Salin kelas"><i class="ik ik-book-open"></i><span>book-open</span></button>
+                            <button type="button" data-ct-salin="ik ik-bookmark" title="Salin kelas"><i class="ik ik-bookmark"></i><span>bookmark</span></button>
+                            <button type="button" data-ct-salin="ik ik-box" title="Salin kelas"><i class="ik ik-box"></i><span>box</span></button>
+                            <button type="button" data-ct-salin="ik ik-briefcase" title="Salin kelas"><i class="ik ik-briefcase"></i><span>briefcase</span></button>
+                            <button type="button" data-ct-salin="ik ik-calendar" title="Salin kelas"><i class="ik ik-calendar"></i><span>calendar</span></button>
+                            <button type="button" data-ct-salin="ik ik-camera" title="Salin kelas"><i class="ik ik-camera"></i><span>camera</span></button>
+                            <button type="button" data-ct-salin="ik ik-camera-off" title="Salin kelas"><i class="ik ik-camera-off"></i><span>camera-off</span></button>
+                            <button type="button" data-ct-salin="ik ik-cast" title="Salin kelas"><i class="ik ik-cast"></i><span>cast</span></button>
+                            <button type="button" data-ct-salin="ik ik-check" title="Salin kelas"><i class="ik ik-check"></i><span>check</span></button>
+                            <button type="button" data-ct-salin="ik ik-check-circle" title="Salin kelas"><i class="ik ik-check-circle"></i><span>check-circle</span></button>
+                            <button type="button" data-ct-salin="ik ik-check-square" title="Salin kelas"><i class="ik ik-check-square"></i><span>check-square</span></button>
+                            <button type="button" data-ct-salin="ik ik-chevron-down" title="Salin kelas"><i class="ik ik-chevron-down"></i><span>chevron-down</span></button>
+                            <button type="button" data-ct-salin="ik ik-chevron-left" title="Salin kelas"><i class="ik ik-chevron-left"></i><span>chevron-left</span></button>
+                            <button type="button" data-ct-salin="ik ik-chevron-right" title="Salin kelas"><i class="ik ik-chevron-right"></i><span>chevron-right</span></button>
+                            <button type="button" data-ct-salin="ik ik-chevron-up" title="Salin kelas"><i class="ik ik-chevron-up"></i><span>chevron-up</span></button>
+                            <button type="button" data-ct-salin="ik ik-chevrons-down" title="Salin kelas"><i class="ik ik-chevrons-down"></i><span>chevrons-down</span></button>
+                            <button type="button" data-ct-salin="ik ik-chevrons-left" title="Salin kelas"><i class="ik ik-chevrons-left"></i><span>chevrons-left</span></button>
+                            <button type="button" data-ct-salin="ik ik-chevrons-right" title="Salin kelas"><i class="ik ik-chevrons-right"></i><span>chevrons-right</span></button>
+                            <button type="button" data-ct-salin="ik ik-chevrons-up" title="Salin kelas"><i class="ik ik-chevrons-up"></i><span>chevrons-up</span></button>
+                            <button type="button" data-ct-salin="ik ik-chrome" title="Salin kelas"><i class="ik ik-chrome"></i><span>chrome</span></button>
+                            <button type="button" data-ct-salin="ik ik-circle" title="Salin kelas"><i class="ik ik-circle"></i><span>circle</span></button>
+                            <button type="button" data-ct-salin="ik ik-clipboard" title="Salin kelas"><i class="ik ik-clipboard"></i><span>clipboard</span></button>
+                            <button type="button" data-ct-salin="ik ik-clock" title="Salin kelas"><i class="ik ik-clock"></i><span>clock</span></button>
+                            <button type="button" data-ct-salin="ik ik-cloud" title="Salin kelas"><i class="ik ik-cloud"></i><span>cloud</span></button>
+                            <button type="button" data-ct-salin="ik ik-cloud-drizzle" title="Salin kelas"><i class="ik ik-cloud-drizzle"></i><span>cloud-drizzle</span></button>
+                            <button type="button" data-ct-salin="ik ik-cloud-lightning" title="Salin kelas"><i class="ik ik-cloud-lightning"></i><span>cloud-lightning</span></button>
+                            <button type="button" data-ct-salin="ik ik-cloud-off" title="Salin kelas"><i class="ik ik-cloud-off"></i><span>cloud-off</span></button>
+                            <button type="button" data-ct-salin="ik ik-cloud-rain" title="Salin kelas"><i class="ik ik-cloud-rain"></i><span>cloud-rain</span></button>
+                            <button type="button" data-ct-salin="ik ik-cloud-snow" title="Salin kelas"><i class="ik ik-cloud-snow"></i><span>cloud-snow</span></button>
+                            <button type="button" data-ct-salin="ik ik-code" title="Salin kelas"><i class="ik ik-code"></i><span>code</span></button>
+                            <button type="button" data-ct-salin="ik ik-codepen" title="Salin kelas"><i class="ik ik-codepen"></i><span>codepen</span></button>
+                            <button type="button" data-ct-salin="ik ik-command" title="Salin kelas"><i class="ik ik-command"></i><span>command</span></button>
+                            <button type="button" data-ct-salin="ik ik-compass" title="Salin kelas"><i class="ik ik-compass"></i><span>compass</span></button>
+                            <button type="button" data-ct-salin="ik ik-copy" title="Salin kelas"><i class="ik ik-copy"></i><span>copy</span></button>
+                            <button type="button" data-ct-salin="ik ik-corner-down-left" title="Salin kelas"><i class="ik ik-corner-down-left"></i><span>corner-down-left</span></button>
+                            <button type="button" data-ct-salin="ik ik-corner-down-right" title="Salin kelas"><i class="ik ik-corner-down-right"></i><span>corner-down-right</span></button>
+                            <button type="button" data-ct-salin="ik ik-corner-left-down" title="Salin kelas"><i class="ik ik-corner-left-down"></i><span>corner-left-down</span></button>
+                            <button type="button" data-ct-salin="ik ik-corner-left-up" title="Salin kelas"><i class="ik ik-corner-left-up"></i><span>corner-left-up</span></button>
+                            <button type="button" data-ct-salin="ik ik-corner-right-down" title="Salin kelas"><i class="ik ik-corner-right-down"></i><span>corner-right-down</span></button>
+                            <button type="button" data-ct-salin="ik ik-corner-right-up" title="Salin kelas"><i class="ik ik-corner-right-up"></i><span>corner-right-up</span></button>
+                            <button type="button" data-ct-salin="ik ik-corner-up-left" title="Salin kelas"><i class="ik ik-corner-up-left"></i><span>corner-up-left</span></button>
+                            <button type="button" data-ct-salin="ik ik-corner-up-right" title="Salin kelas"><i class="ik ik-corner-up-right"></i><span>corner-up-right</span></button>
+                            <button type="button" data-ct-salin="ik ik-cpu" title="Salin kelas"><i class="ik ik-cpu"></i><span>cpu</span></button>
+                            <button type="button" data-ct-salin="ik ik-credit-card" title="Salin kelas"><i class="ik ik-credit-card"></i><span>credit-card</span></button>
+                            <button type="button" data-ct-salin="ik ik-crop" title="Salin kelas"><i class="ik ik-crop"></i><span>crop</span></button>
+                            <button type="button" data-ct-salin="ik ik-crosshair" title="Salin kelas"><i class="ik ik-crosshair"></i><span>crosshair</span></button>
+                            <button type="button" data-ct-salin="ik ik-database" title="Salin kelas"><i class="ik ik-database"></i><span>database</span></button>
+                            <button type="button" data-ct-salin="ik ik-delete" title="Salin kelas"><i class="ik ik-delete"></i><span>delete</span></button>
+                            <button type="button" data-ct-salin="ik ik-disc" title="Salin kelas"><i class="ik ik-disc"></i><span>disc</span></button>
+                            <button type="button" data-ct-salin="ik ik-dollar-sign" title="Salin kelas"><i class="ik ik-dollar-sign"></i><span>dollar-sign</span></button>
+                            <button type="button" data-ct-salin="ik ik-download" title="Salin kelas"><i class="ik ik-download"></i><span>download</span></button>
+                            <button type="button" data-ct-salin="ik ik-download-cloud" title="Salin kelas"><i class="ik ik-download-cloud"></i><span>download-cloud</span></button>
+                            <button type="button" data-ct-salin="ik ik-droplet" title="Salin kelas"><i class="ik ik-droplet"></i><span>droplet</span></button>
+                            <button type="button" data-ct-salin="ik ik-edit" title="Salin kelas"><i class="ik ik-edit"></i><span>edit</span></button>
+                            <button type="button" data-ct-salin="ik ik-edit-1" title="Salin kelas"><i class="ik ik-edit-1"></i><span>edit-1</span></button>
+                            <button type="button" data-ct-salin="ik ik-edit-2" title="Salin kelas"><i class="ik ik-edit-2"></i><span>edit-2</span></button>
+                            <button type="button" data-ct-salin="ik ik-external-link" title="Salin kelas"><i class="ik ik-external-link"></i><span>external-link</span></button>
+                            <button type="button" data-ct-salin="ik ik-eye" title="Salin kelas"><i class="ik ik-eye"></i><span>eye</span></button>
+                            <button type="button" data-ct-salin="ik ik-eye-off" title="Salin kelas"><i class="ik ik-eye-off"></i><span>eye-off</span></button>
+                            <button type="button" data-ct-salin="ik ik-facebook" title="Salin kelas"><i class="ik ik-facebook"></i><span>facebook</span></button>
+                            <button type="button" data-ct-salin="ik ik-fast-forward" title="Salin kelas"><i class="ik ik-fast-forward"></i><span>fast-forward</span></button>
+                            <button type="button" data-ct-salin="ik ik-feather" title="Salin kelas"><i class="ik ik-feather"></i><span>feather</span></button>
+                            <button type="button" data-ct-salin="ik ik-file" title="Salin kelas"><i class="ik ik-file"></i><span>file</span></button>
+                            <button type="button" data-ct-salin="ik ik-file-minus" title="Salin kelas"><i class="ik ik-file-minus"></i><span>file-minus</span></button>
+                            <button type="button" data-ct-salin="ik ik-file-plus" title="Salin kelas"><i class="ik ik-file-plus"></i><span>file-plus</span></button>
+                            <button type="button" data-ct-salin="ik ik-file-text" title="Salin kelas"><i class="ik ik-file-text"></i><span>file-text</span></button>
+                            <button type="button" data-ct-salin="ik ik-film" title="Salin kelas"><i class="ik ik-film"></i><span>film</span></button>
+                            <button type="button" data-ct-salin="ik ik-filter" title="Salin kelas"><i class="ik ik-filter"></i><span>filter</span></button>
+                            <button type="button" data-ct-salin="ik ik-flag" title="Salin kelas"><i class="ik ik-flag"></i><span>flag</span></button>
+                            <button type="button" data-ct-salin="ik ik-folder" title="Salin kelas"><i class="ik ik-folder"></i><span>folder</span></button>
+                            <button type="button" data-ct-salin="ik ik-folder-minus" title="Salin kelas"><i class="ik ik-folder-minus"></i><span>folder-minus</span></button>
+                            <button type="button" data-ct-salin="ik ik-folder-plus" title="Salin kelas"><i class="ik ik-folder-plus"></i><span>folder-plus</span></button>
+                            <button type="button" data-ct-salin="ik ik-gift" title="Salin kelas"><i class="ik ik-gift"></i><span>gift</span></button>
+                            <button type="button" data-ct-salin="ik ik-git-branch" title="Salin kelas"><i class="ik ik-git-branch"></i><span>git-branch</span></button>
+                            <button type="button" data-ct-salin="ik ik-git-commit" title="Salin kelas"><i class="ik ik-git-commit"></i><span>git-commit</span></button>
+                            <button type="button" data-ct-salin="ik ik-git-merge" title="Salin kelas"><i class="ik ik-git-merge"></i><span>git-merge</span></button>
+                            <button type="button" data-ct-salin="ik ik-git-pull-request" title="Salin kelas"><i class="ik ik-git-pull-request"></i><span>git-pull-request</span></button>
+                            <button type="button" data-ct-salin="ik ik-github" title="Salin kelas"><i class="ik ik-github"></i><span>github</span></button>
+                            <button type="button" data-ct-salin="ik ik-gitlab" title="Salin kelas"><i class="ik ik-gitlab"></i><span>gitlab</span></button>
+                            <button type="button" data-ct-salin="ik ik-globe" title="Salin kelas"><i class="ik ik-globe"></i><span>globe</span></button>
+                            <button type="button" data-ct-salin="ik ik-grid" title="Salin kelas"><i class="ik ik-grid"></i><span>grid</span></button>
+                            <button type="button" data-ct-salin="ik ik-hard-drive" title="Salin kelas"><i class="ik ik-hard-drive"></i><span>hard-drive</span></button>
+                            <button type="button" data-ct-salin="ik ik-hash" title="Salin kelas"><i class="ik ik-hash"></i><span>hash</span></button>
+                            <button type="button" data-ct-salin="ik ik-headphones" title="Salin kelas"><i class="ik ik-headphones"></i><span>headphones</span></button>
+                            <button type="button" data-ct-salin="ik ik-heart" title="Salin kelas"><i class="ik ik-heart"></i><span>heart</span></button>
+                            <button type="button" data-ct-salin="ik ik-heart-on" title="Salin kelas"><i class="ik ik-heart-on"></i><span>heart-on</span></button>
+                            <button type="button" data-ct-salin="ik ik-help-circle" title="Salin kelas"><i class="ik ik-help-circle"></i><span>help-circle</span></button>
+                            <button type="button" data-ct-salin="ik ik-home" title="Salin kelas"><i class="ik ik-home"></i><span>home</span></button>
+                            <button type="button" data-ct-salin="ik ik-image" title="Salin kelas"><i class="ik ik-image"></i><span>image</span></button>
+                            <button type="button" data-ct-salin="ik ik-inbox" title="Salin kelas"><i class="ik ik-inbox"></i><span>inbox</span></button>
+                            <button type="button" data-ct-salin="ik ik-info" title="Salin kelas"><i class="ik ik-info"></i><span>info</span></button>
+                            <button type="button" data-ct-salin="ik ik-instagram" title="Salin kelas"><i class="ik ik-instagram"></i><span>instagram</span></button>
+                            <button type="button" data-ct-salin="ik ik-italic" title="Salin kelas"><i class="ik ik-italic"></i><span>italic</span></button>
+                            <button type="button" data-ct-salin="ik ik-layers" title="Salin kelas"><i class="ik ik-layers"></i><span>layers</span></button>
+                            <button type="button" data-ct-salin="ik ik-layout" title="Salin kelas"><i class="ik ik-layout"></i><span>layout</span></button>
+                            <button type="button" data-ct-salin="ik ik-life-buoy" title="Salin kelas"><i class="ik ik-life-buoy"></i><span>life-buoy</span></button>
+                            <button type="button" data-ct-salin="ik ik-link" title="Salin kelas"><i class="ik ik-link"></i><span>link</span></button>
+                            <button type="button" data-ct-salin="ik ik-link-2" title="Salin kelas"><i class="ik ik-link-2"></i><span>link-2</span></button>
+                            <button type="button" data-ct-salin="ik ik-linkedin" title="Salin kelas"><i class="ik ik-linkedin"></i><span>linkedin</span></button>
+                            <button type="button" data-ct-salin="ik ik-list" title="Salin kelas"><i class="ik ik-list"></i><span>list</span></button>
+                            <button type="button" data-ct-salin="ik ik-loader" title="Salin kelas"><i class="ik ik-loader"></i><span>loader</span></button>
+                            <button type="button" data-ct-salin="ik ik-lock" title="Salin kelas"><i class="ik ik-lock"></i><span>lock</span></button>
+                            <button type="button" data-ct-salin="ik ik-log-in" title="Salin kelas"><i class="ik ik-log-in"></i><span>log-in</span></button>
+                            <button type="button" data-ct-salin="ik ik-log-out" title="Salin kelas"><i class="ik ik-log-out"></i><span>log-out</span></button>
+                            <button type="button" data-ct-salin="ik ik-mail" title="Salin kelas"><i class="ik ik-mail"></i><span>mail</span></button>
+                            <button type="button" data-ct-salin="ik ik-map" title="Salin kelas"><i class="ik ik-map"></i><span>map</span></button>
+                            <button type="button" data-ct-salin="ik ik-map-pin" title="Salin kelas"><i class="ik ik-map-pin"></i><span>map-pin</span></button>
+                            <button type="button" data-ct-salin="ik ik-maximize" title="Salin kelas"><i class="ik ik-maximize"></i><span>maximize</span></button>
+                            <button type="button" data-ct-salin="ik ik-maximize-2" title="Salin kelas"><i class="ik ik-maximize-2"></i><span>maximize-2</span></button>
+                            <button type="button" data-ct-salin="ik ik-menu" title="Salin kelas"><i class="ik ik-menu"></i><span>menu</span></button>
+                            <button type="button" data-ct-salin="ik ik-message-circle" title="Salin kelas"><i class="ik ik-message-circle"></i><span>message-circle</span></button>
+                            <button type="button" data-ct-salin="ik ik-message-square" title="Salin kelas"><i class="ik ik-message-square"></i><span>message-square</span></button>
+                            <button type="button" data-ct-salin="ik ik-mic" title="Salin kelas"><i class="ik ik-mic"></i><span>mic</span></button>
+                            <button type="button" data-ct-salin="ik ik-mic-off" title="Salin kelas"><i class="ik ik-mic-off"></i><span>mic-off</span></button>
+                            <button type="button" data-ct-salin="ik ik-minimize" title="Salin kelas"><i class="ik ik-minimize"></i><span>minimize</span></button>
+                            <button type="button" data-ct-salin="ik ik-minimize-2" title="Salin kelas"><i class="ik ik-minimize-2"></i><span>minimize-2</span></button>
+                            <button type="button" data-ct-salin="ik ik-minus" title="Salin kelas"><i class="ik ik-minus"></i><span>minus</span></button>
+                            <button type="button" data-ct-salin="ik ik-minus-circle" title="Salin kelas"><i class="ik ik-minus-circle"></i><span>minus-circle</span></button>
+                            <button type="button" data-ct-salin="ik ik-minus-square" title="Salin kelas"><i class="ik ik-minus-square"></i><span>minus-square</span></button>
+                            <button type="button" data-ct-salin="ik ik-monitor" title="Salin kelas"><i class="ik ik-monitor"></i><span>monitor</span></button>
+                            <button type="button" data-ct-salin="ik ik-moon" title="Salin kelas"><i class="ik ik-moon"></i><span>moon</span></button>
+                            <button type="button" data-ct-salin="ik ik-more-horizontal" title="Salin kelas"><i class="ik ik-more-horizontal"></i><span>more-horizontal</span></button>
+                            <button type="button" data-ct-salin="ik ik-more-horizontal-" title="Salin kelas"><i class="ik ik-more-horizontal-"></i><span>more-horizontal-</span></button>
+                            <button type="button" data-ct-salin="ik ik-more-vertical" title="Salin kelas"><i class="ik ik-more-vertical"></i><span>more-vertical</span></button>
+                            <button type="button" data-ct-salin="ik ik-more-vertical-" title="Salin kelas"><i class="ik ik-more-vertical-"></i><span>more-vertical-</span></button>
+                            <button type="button" data-ct-salin="ik ik-move" title="Salin kelas"><i class="ik ik-move"></i><span>move</span></button>
+                            <button type="button" data-ct-salin="ik ik-music" title="Salin kelas"><i class="ik ik-music"></i><span>music</span></button>
+                            <button type="button" data-ct-salin="ik ik-navigation" title="Salin kelas"><i class="ik ik-navigation"></i><span>navigation</span></button>
+                            <button type="button" data-ct-salin="ik ik-navigation-2" title="Salin kelas"><i class="ik ik-navigation-2"></i><span>navigation-2</span></button>
+                            <button type="button" data-ct-salin="ik ik-octagon" title="Salin kelas"><i class="ik ik-octagon"></i><span>octagon</span></button>
+                            <button type="button" data-ct-salin="ik ik-package" title="Salin kelas"><i class="ik ik-package"></i><span>package</span></button>
+                            <button type="button" data-ct-salin="ik ik-paperclip" title="Salin kelas"><i class="ik ik-paperclip"></i><span>paperclip</span></button>
+                            <button type="button" data-ct-salin="ik ik-pause" title="Salin kelas"><i class="ik ik-pause"></i><span>pause</span></button>
+                            <button type="button" data-ct-salin="ik ik-pause-circle" title="Salin kelas"><i class="ik ik-pause-circle"></i><span>pause-circle</span></button>
+                            <button type="button" data-ct-salin="ik ik-percent" title="Salin kelas"><i class="ik ik-percent"></i><span>percent</span></button>
+                            <button type="button" data-ct-salin="ik ik-phone" title="Salin kelas"><i class="ik ik-phone"></i><span>phone</span></button>
+                            <button type="button" data-ct-salin="ik ik-phone-call" title="Salin kelas"><i class="ik ik-phone-call"></i><span>phone-call</span></button>
+                            <button type="button" data-ct-salin="ik ik-phone-forwarded" title="Salin kelas"><i class="ik ik-phone-forwarded"></i><span>phone-forwarded</span></button>
+                            <button type="button" data-ct-salin="ik ik-phone-incoming" title="Salin kelas"><i class="ik ik-phone-incoming"></i><span>phone-incoming</span></button>
+                            <button type="button" data-ct-salin="ik ik-phone-missed" title="Salin kelas"><i class="ik ik-phone-missed"></i><span>phone-missed</span></button>
+                            <button type="button" data-ct-salin="ik ik-phone-off" title="Salin kelas"><i class="ik ik-phone-off"></i><span>phone-off</span></button>
+                            <button type="button" data-ct-salin="ik ik-phone-outgoing" title="Salin kelas"><i class="ik ik-phone-outgoing"></i><span>phone-outgoing</span></button>
+                            <button type="button" data-ct-salin="ik ik-pie-chart" title="Salin kelas"><i class="ik ik-pie-chart"></i><span>pie-chart</span></button>
+                            <button type="button" data-ct-salin="ik ik-play" title="Salin kelas"><i class="ik ik-play"></i><span>play</span></button>
+                            <button type="button" data-ct-salin="ik ik-play-circle" title="Salin kelas"><i class="ik ik-play-circle"></i><span>play-circle</span></button>
+                            <button type="button" data-ct-salin="ik ik-plus" title="Salin kelas"><i class="ik ik-plus"></i><span>plus</span></button>
+                            <button type="button" data-ct-salin="ik ik-plus-circle" title="Salin kelas"><i class="ik ik-plus-circle"></i><span>plus-circle</span></button>
+                            <button type="button" data-ct-salin="ik ik-plus-square" title="Salin kelas"><i class="ik ik-plus-square"></i><span>plus-square</span></button>
+                            <button type="button" data-ct-salin="ik ik-pocket" title="Salin kelas"><i class="ik ik-pocket"></i><span>pocket</span></button>
+                            <button type="button" data-ct-salin="ik ik-power" title="Salin kelas"><i class="ik ik-power"></i><span>power</span></button>
+                            <button type="button" data-ct-salin="ik ik-printer" title="Salin kelas"><i class="ik ik-printer"></i><span>printer</span></button>
+                            <button type="button" data-ct-salin="ik ik-radio" title="Salin kelas"><i class="ik ik-radio"></i><span>radio</span></button>
+                            <button type="button" data-ct-salin="ik ik-refresh-ccw" title="Salin kelas"><i class="ik ik-refresh-ccw"></i><span>refresh-ccw</span></button>
+                            <button type="button" data-ct-salin="ik ik-refresh-cw" title="Salin kelas"><i class="ik ik-refresh-cw"></i><span>refresh-cw</span></button>
+                            <button type="button" data-ct-salin="ik ik-repeat" title="Salin kelas"><i class="ik ik-repeat"></i><span>repeat</span></button>
+                            <button type="button" data-ct-salin="ik ik-rewind" title="Salin kelas"><i class="ik ik-rewind"></i><span>rewind</span></button>
+                            <button type="button" data-ct-salin="ik ik-rotate-ccw" title="Salin kelas"><i class="ik ik-rotate-ccw"></i><span>rotate-ccw</span></button>
+                            <button type="button" data-ct-salin="ik ik-rotate-cw" title="Salin kelas"><i class="ik ik-rotate-cw"></i><span>rotate-cw</span></button>
+                            <button type="button" data-ct-salin="ik ik-rss" title="Salin kelas"><i class="ik ik-rss"></i><span>rss</span></button>
+                            <button type="button" data-ct-salin="ik ik-save" title="Salin kelas"><i class="ik ik-save"></i><span>save</span></button>
+                            <button type="button" data-ct-salin="ik ik-scissors" title="Salin kelas"><i class="ik ik-scissors"></i><span>scissors</span></button>
+                            <button type="button" data-ct-salin="ik ik-search" title="Salin kelas"><i class="ik ik-search"></i><span>search</span></button>
+                            <button type="button" data-ct-salin="ik ik-send" title="Salin kelas"><i class="ik ik-send"></i><span>send</span></button>
+                            <button type="button" data-ct-salin="ik ik-server" title="Salin kelas"><i class="ik ik-server"></i><span>server</span></button>
+                            <button type="button" data-ct-salin="ik ik-settings" title="Salin kelas"><i class="ik ik-settings"></i><span>settings</span></button>
+                            <button type="button" data-ct-salin="ik ik-share" title="Salin kelas"><i class="ik ik-share"></i><span>share</span></button>
+                            <button type="button" data-ct-salin="ik ik-share-2" title="Salin kelas"><i class="ik ik-share-2"></i><span>share-2</span></button>
+                            <button type="button" data-ct-salin="ik ik-shield" title="Salin kelas"><i class="ik ik-shield"></i><span>shield</span></button>
+                            <button type="button" data-ct-salin="ik ik-shield-off" title="Salin kelas"><i class="ik ik-shield-off"></i><span>shield-off</span></button>
+                            <button type="button" data-ct-salin="ik ik-shopping-bag" title="Salin kelas"><i class="ik ik-shopping-bag"></i><span>shopping-bag</span></button>
+                            <button type="button" data-ct-salin="ik ik-shopping-cart" title="Salin kelas"><i class="ik ik-shopping-cart"></i><span>shopping-cart</span></button>
+                            <button type="button" data-ct-salin="ik ik-shuffle" title="Salin kelas"><i class="ik ik-shuffle"></i><span>shuffle</span></button>
+                            <button type="button" data-ct-salin="ik ik-sidebar" title="Salin kelas"><i class="ik ik-sidebar"></i><span>sidebar</span></button>
+                            <button type="button" data-ct-salin="ik ik-skip-back" title="Salin kelas"><i class="ik ik-skip-back"></i><span>skip-back</span></button>
+                            <button type="button" data-ct-salin="ik ik-skip-forward" title="Salin kelas"><i class="ik ik-skip-forward"></i><span>skip-forward</span></button>
+                            <button type="button" data-ct-salin="ik ik-slack" title="Salin kelas"><i class="ik ik-slack"></i><span>slack</span></button>
+                            <button type="button" data-ct-salin="ik ik-slash" title="Salin kelas"><i class="ik ik-slash"></i><span>slash</span></button>
+                            <button type="button" data-ct-salin="ik ik-sliders" title="Salin kelas"><i class="ik ik-sliders"></i><span>sliders</span></button>
+                            <button type="button" data-ct-salin="ik ik-smartphone" title="Salin kelas"><i class="ik ik-smartphone"></i><span>smartphone</span></button>
+                            <button type="button" data-ct-salin="ik ik-speaker" title="Salin kelas"><i class="ik ik-speaker"></i><span>speaker</span></button>
+                            <button type="button" data-ct-salin="ik ik-square" title="Salin kelas"><i class="ik ik-square"></i><span>square</span></button>
+                            <button type="button" data-ct-salin="ik ik-star" title="Salin kelas"><i class="ik ik-star"></i><span>star</span></button>
+                            <button type="button" data-ct-salin="ik ik-star-on" title="Salin kelas"><i class="ik ik-star-on"></i><span>star-on</span></button>
+                            <button type="button" data-ct-salin="ik ik-stop-circle" title="Salin kelas"><i class="ik ik-stop-circle"></i><span>stop-circle</span></button>
+                            <button type="button" data-ct-salin="ik ik-sun" title="Salin kelas"><i class="ik ik-sun"></i><span>sun</span></button>
+                            <button type="button" data-ct-salin="ik ik-sunrise" title="Salin kelas"><i class="ik ik-sunrise"></i><span>sunrise</span></button>
+                            <button type="button" data-ct-salin="ik ik-sunset" title="Salin kelas"><i class="ik ik-sunset"></i><span>sunset</span></button>
+                            <button type="button" data-ct-salin="ik ik-tablet" title="Salin kelas"><i class="ik ik-tablet"></i><span>tablet</span></button>
+                            <button type="button" data-ct-salin="ik ik-tag" title="Salin kelas"><i class="ik ik-tag"></i><span>tag</span></button>
+                            <button type="button" data-ct-salin="ik ik-target" title="Salin kelas"><i class="ik ik-target"></i><span>target</span></button>
+                            <button type="button" data-ct-salin="ik ik-terminal" title="Salin kelas"><i class="ik ik-terminal"></i><span>terminal</span></button>
+                            <button type="button" data-ct-salin="ik ik-thermometer" title="Salin kelas"><i class="ik ik-thermometer"></i><span>thermometer</span></button>
+                            <button type="button" data-ct-salin="ik ik-thumbs-down" title="Salin kelas"><i class="ik ik-thumbs-down"></i><span>thumbs-down</span></button>
+                            <button type="button" data-ct-salin="ik ik-thumbs-up" title="Salin kelas"><i class="ik ik-thumbs-up"></i><span>thumbs-up</span></button>
+                            <button type="button" data-ct-salin="ik ik-toggle-left" title="Salin kelas"><i class="ik ik-toggle-left"></i><span>toggle-left</span></button>
+                            <button type="button" data-ct-salin="ik ik-toggle-right" title="Salin kelas"><i class="ik ik-toggle-right"></i><span>toggle-right</span></button>
+                            <button type="button" data-ct-salin="ik ik-trash" title="Salin kelas"><i class="ik ik-trash"></i><span>trash</span></button>
+                            <button type="button" data-ct-salin="ik ik-trash-2" title="Salin kelas"><i class="ik ik-trash-2"></i><span>trash-2</span></button>
+                            <button type="button" data-ct-salin="ik ik-trending-down" title="Salin kelas"><i class="ik ik-trending-down"></i><span>trending-down</span></button>
+                            <button type="button" data-ct-salin="ik ik-trending-up" title="Salin kelas"><i class="ik ik-trending-up"></i><span>trending-up</span></button>
+                            <button type="button" data-ct-salin="ik ik-triangle" title="Salin kelas"><i class="ik ik-triangle"></i><span>triangle</span></button>
+                            <button type="button" data-ct-salin="ik ik-truck" title="Salin kelas"><i class="ik ik-truck"></i><span>truck</span></button>
+                            <button type="button" data-ct-salin="ik ik-tv" title="Salin kelas"><i class="ik ik-tv"></i><span>tv</span></button>
+                            <button type="button" data-ct-salin="ik ik-twitter" title="Salin kelas"><i class="ik ik-twitter"></i><span>twitter</span></button>
+                            <button type="button" data-ct-salin="ik ik-type" title="Salin kelas"><i class="ik ik-type"></i><span>type</span></button>
+                            <button type="button" data-ct-salin="ik ik-umbrella" title="Salin kelas"><i class="ik ik-umbrella"></i><span>umbrella</span></button>
+                            <button type="button" data-ct-salin="ik ik-underline" title="Salin kelas"><i class="ik ik-underline"></i><span>underline</span></button>
+                            <button type="button" data-ct-salin="ik ik-unlock" title="Salin kelas"><i class="ik ik-unlock"></i><span>unlock</span></button>
+                            <button type="button" data-ct-salin="ik ik-upload" title="Salin kelas"><i class="ik ik-upload"></i><span>upload</span></button>
+                            <button type="button" data-ct-salin="ik ik-upload-cloud" title="Salin kelas"><i class="ik ik-upload-cloud"></i><span>upload-cloud</span></button>
+                            <button type="button" data-ct-salin="ik ik-user" title="Salin kelas"><i class="ik ik-user"></i><span>user</span></button>
+                            <button type="button" data-ct-salin="ik ik-user-check" title="Salin kelas"><i class="ik ik-user-check"></i><span>user-check</span></button>
+                            <button type="button" data-ct-salin="ik ik-user-minus" title="Salin kelas"><i class="ik ik-user-minus"></i><span>user-minus</span></button>
+                            <button type="button" data-ct-salin="ik ik-user-plus" title="Salin kelas"><i class="ik ik-user-plus"></i><span>user-plus</span></button>
+                            <button type="button" data-ct-salin="ik ik-user-x" title="Salin kelas"><i class="ik ik-user-x"></i><span>user-x</span></button>
+                            <button type="button" data-ct-salin="ik ik-users" title="Salin kelas"><i class="ik ik-users"></i><span>users</span></button>
+                            <button type="button" data-ct-salin="ik ik-video" title="Salin kelas"><i class="ik ik-video"></i><span>video</span></button>
+                            <button type="button" data-ct-salin="ik ik-video-off" title="Salin kelas"><i class="ik ik-video-off"></i><span>video-off</span></button>
+                            <button type="button" data-ct-salin="ik ik-voicemail" title="Salin kelas"><i class="ik ik-voicemail"></i><span>voicemail</span></button>
+                            <button type="button" data-ct-salin="ik ik-volume" title="Salin kelas"><i class="ik ik-volume"></i><span>volume</span></button>
+                            <button type="button" data-ct-salin="ik ik-volume-1" title="Salin kelas"><i class="ik ik-volume-1"></i><span>volume-1</span></button>
+                            <button type="button" data-ct-salin="ik ik-volume-2" title="Salin kelas"><i class="ik ik-volume-2"></i><span>volume-2</span></button>
+                            <button type="button" data-ct-salin="ik ik-volume-x" title="Salin kelas"><i class="ik ik-volume-x"></i><span>volume-x</span></button>
+                            <button type="button" data-ct-salin="ik ik-watch" title="Salin kelas"><i class="ik ik-watch"></i><span>watch</span></button>
+                            <button type="button" data-ct-salin="ik ik-wifi" title="Salin kelas"><i class="ik ik-wifi"></i><span>wifi</span></button>
+                            <button type="button" data-ct-salin="ik ik-wifi-off" title="Salin kelas"><i class="ik ik-wifi-off"></i><span>wifi-off</span></button>
+                            <button type="button" data-ct-salin="ik ik-wind" title="Salin kelas"><i class="ik ik-wind"></i><span>wind</span></button>
+                            <button type="button" data-ct-salin="ik ik-x" title="Salin kelas"><i class="ik ik-x"></i><span>x</span></button>
+                            <button type="button" data-ct-salin="ik ik-x-circle" title="Salin kelas"><i class="ik ik-x-circle"></i><span>x-circle</span></button>
+                            <button type="button" data-ct-salin="ik ik-x-square" title="Salin kelas"><i class="ik ik-x-square"></i><span>x-square</span></button>
+                            <button type="button" data-ct-salin="ik ik-youtube" title="Salin kelas"><i class="ik ik-youtube"></i><span>youtube</span></button>
+                            <button type="button" data-ct-salin="ik ik-zap" title="Salin kelas"><i class="ik ik-zap"></i><span>zap</span></button>
+                            <button type="button" data-ct-salin="ik ik-zap-off" title="Salin kelas"><i class="ik ik-zap-off"></i><span>zap-off</span></button>
+                            <button type="button" data-ct-salin="ik ik-zoom-in" title="Salin kelas"><i class="ik ik-zoom-in"></i><span>zoom-in</span></button>
+                            <button type="button" data-ct-salin="ik ik-zoom-out" title="Salin kelas"><i class="ik ik-zoom-out"></i><span>zoom-out</span></button>
+                    </div>
+    </div>
+</div>
+
+<div class="modal fade" id="contohModal" tabindex="-1" role="dialog" aria-labelledby="contohModalJudul" aria-hidden="true">
+    <div class="modal-dialog" role="document"><div class="modal-content">
+        <div class="modal-header"><h5 class="modal-title" id="contohModalJudul">Judul Modal</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Tutup"><span aria-hidden="true">&times;</span></button></div>
+        <div class="modal-body">Isi modal Bootstrap 4, sudah bergaya Coretax.</div>
+        <div class="modal-footer">
+            <button type="button" class="dmp-btn dmp-btn--garis" data-dismiss="modal">Batal</button>
+            <button type="button" class="dmp-btn dmp-btn--utama" data-dismiss="modal">Simpan</button>
+        </div>
+    </div></div>
+</div>
+
+</div></div>
+<footer class="footer dmp-footer">
+    <div class="w-100 clearfix dmp-footer__baris">
+        <span class="dmp-footer__kiri">&copy;2026 Nama Organisasi. Hak cipta dilindungi.</span>
+        <span class="dmp-footer__versi" title="Versi aplikasi"><span class="dmp-footer__titik" aria-hidden="true"></span>v1.0.0</span>
+        <span class="dmp-footer__kanan">Tema Dasar Coretax</span>
+    </div>
+</footer>
+</div></div>
+<script src="../assets/vendor/jquery/jquery.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/ct/coretax-bahasa.js" defer></script>
+<script src="../assets/ct/coretax.js" defer></script>
+<script src="../assets/ct/dmp-theme.js" defer></script>
+<script src="../assets/ct/dmp-urut.js" defer></script>
+<script src="../assets/ct/ct-app.js" defer></script>
+<script>
+$(function () { $('[data-toggle="tooltip"]').tooltip(); });
+document.getElementById('cariIkon').addEventListener('input', function () {
+    var q = this.value.trim().toLowerCase();
+    Array.prototype.forEach.call(document.querySelectorAll('#galeriIkon button'), function (b) {
+        b.hidden = q !== '' && b.textContent.indexOf(q) === -1;
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1894 @@
+/* =============================================================
+ * coretax.css — Tampilan gaya Coretax untuk seluruh DMP
+ * Fase 113 · Dibuat 2026-09-24
+ *
+ * APA
+ * ---
+ * Satu lapisan CSS yang membuat DMP tampil seperti Coretax:
+ *   - header navy dua baris: merek + kotak cari + kartu pengguna,
+ *     lalu baris menu mendatar dengan ikon kuning
+ *   - submenu membuka sebagai kartu "Jelajahi ..." di bawah menunya
+ *   - sidebar seluruh menu, tersimpan sebagai tab "Buka Menu" di kiri
+ *   - kartu putih bersudut besar, tabel berkepala navy
+ *   - layar "memuat" berupa kartu di tengah
+ *
+ * KENAPA BEGINI
+ * -------------
+ * Markup lama TIDAK ditulis ulang. Sidebar kiri (inc/sidebar.php)
+ * berisi puluhan gerbang dev/prod dan catatan yang saling terkait;
+ * menyalin tautannya ke berkas menu baru berarti ada dua daftar
+ * yang harus dijaga sama - dan salinan kedua selalu menyimpang.
+ * Jadi sidebar yang SAMA ditata ulang menjadi baris mendatar.
+ *
+ * Semua selektor diawali .ct (kelas pada <html>, dipasang di
+ * inc/head.php). Menghapus kelas itu = kembali ke tema lama.
+ *
+ * KENAPA BUKAN CARA LAIN
+ * ----------------------
+ * - Menyunting theme.css langsung: 3.400 baris berisi banyak
+ *   perbaikan yang saling bergantung. Lapisan terpisah lebih mudah
+ *   diperiksa dan dilepas.
+ * - Memakai preset tema ke-9 ("coretax") lewat ThemeService:
+ *   preset hanya mengganti WARNA AKSEN, sedangkan Coretax mengubah
+ *   TATA LETAK (menu pindah ke atas). Itu di luar jangkauan preset.
+ *
+ * WARNA
+ * -----
+ * Seluruh kode warna ada di tokens.css bagian 6 (--ct-*). Berkas
+ * ini hanya memanggil variabelnya. rgba() untuk bayangan/transparansi
+ * di atas navy tetap ditulis langsung, sama seperti theme.css.
+ *
+ * SPESIFISITAS
+ * ------------
+ * theme.css punya aturan seperti
+ *   body.dmp-nav-ciut .wrapper .page-wrap .main-content  (0,4,1)
+ * Aturan di sini memakai awalan .ct + body supaya menang tanpa
+ * !important. !important hanya dipakai bila lawannya juga
+ * !important atau berupa style inline (dicatat di tempatnya).
+ * ============================================================= */
+
+
+/* -------------------------------------------------------------
+ * 1. DASAR
+ * ----------------------------------------------------------- */
+
+.ct body,
+.ct .wrapper {
+    font-family: var(--ct-font);
+    background: var(--ct-latar);
+    color: var(--ct-teks);
+}
+
+/* Latar halaman: bidang lembut seperti beranda Coretax. */
+.ct body {
+    background:
+        radial-gradient(1200px 600px at 100% 0%, rgba(26, 46, 106, .06), transparent 60%),
+        radial-gradient(900px 500px at 0% 100%, rgba(253, 202, 42, .07), transparent 60%),
+        var(--ct-latar);
+    background-attachment: fixed;
+}
+.ct [data-dmp-mode] .wrapper,
+.ct .wrapper { background: transparent; }
+
+
+/* -------------------------------------------------------------
+ * 2. HEADER BARIS 1 — merek, cari, pengguna
+ * ----------------------------------------------------------- */
+
+.ct body .wrapper .header-top.ct-kepala {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--ct-kepala-h);
+    min-height: 0;
+    margin-left: 0;
+    padding: 0;
+    background: var(--ct-navy);
+    border: 0;
+    box-shadow: none;
+    z-index: 1040;
+}
+
+/* Garis aksen warisan theme.css tidak dipakai di header navy. */
+.ct body .wrapper .header-top.ct-kepala::before { content: none; }
+
+.ct .ct-kepala > .container-fluid {
+    height: 100%;
+    padding: 0 16px;
+}
+
+.ct .ct-kepala__baris {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 100%;
+}
+
+.ct .ct-kepala__kiri {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 0 1 auto;
+    min-width: 0;
+}
+
+.ct .ct-kepala__tengah {
+    flex: 1 1 340px;
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+}
+
+.ct .ct-kepala__kanan {
+    flex: none;
+    gap: 8px;
+}
+
+/* Tombol menu seluler bawaan tema lama - menu Coretax selalu
+   tampil sebagai baris, tombol ini tidak lagi punya fungsi. */
+.ct .ct-kepala .mobile-nav-toggle { display: none !important; } /* !important: menimpa .d-lg-none Bootstrap yang juga !important */
+
+.ct .ct-merek {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    flex: none;
+}
+
+.ct .ct-merek__logo {
+    width: 30px;
+    height: 30px;
+    padding: 3px;
+    border-radius: 8px;
+    background: var(--ct-putih);
+    object-fit: contain;
+}
+
+.ct .ct-merek__garis {
+    width: 1px;
+    height: 24px;
+    background: rgba(255, 255, 255, .35);
+}
+
+.ct body .wrapper .header-top .judul {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.ct body .wrapper .header-top .judul h3 {
+    margin: 0;
+    color: var(--ct-putih);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ct body .wrapper .header-top .judul h3 b,
+.ct body .wrapper .header-top .judul h3 strong { font-weight: 800; }
+
+/* Kotak cari - sebenarnya tombol pembuka palet pencarian. */
+.ct .ct-cari {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 340px;
+    height: 32px;
+    padding: 0 6px 0 10px;
+    border: 1px solid rgba(255, 255, 255, .55);
+    border-radius: 8px;
+    background: var(--ct-putih);
+    color: var(--ct-teks-redup);
+    font-family: inherit;
+    font-size: 12.5px;
+    text-align: left;
+    cursor: text;
+    transition: box-shadow 160ms;
+}
+.ct .ct-cari:hover { box-shadow: 0 0 0 3px rgba(253, 202, 42, .45); }
+.ct .ct-cari i { font-size: 14px; flex: none; }
+.ct .ct-cari__teks {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ct .ct-cari__kbd { display: inline-flex; gap: 3px; flex: none; }
+.ct .ct-cari kbd,
+.ct .ct-palet kbd {
+    padding: 1px 5px;
+    border: 1px solid var(--ct-garis);
+    border-radius: 4px;
+    background: var(--ct-panel-2);
+    color: var(--ct-teks-redup);
+    font-family: inherit;
+    font-size: 9.5px;
+    font-weight: 700;
+    box-shadow: none;
+}
+
+/* Ikon alat di kanan (layar penuh, cetak). theme.min.css menjadikan
+   .nav-link lingkaran 30x30 - bentuk itu dipertahankan. */
+.ct body .wrapper .header-top .top-menu .nav-link,
+.ct body .wrapper .header-top .top-menu .btn-icon {
+    color: rgba(255, 255, 255, .85);
+    background: transparent;
+}
+.ct body .wrapper .header-top .top-menu .nav-link:hover {
+    color: var(--ct-putih);
+    background: rgba(255, 255, 255, .14);
+}
+
+/* Tombol pemilih tema */
+.ct body .wrapper .header-top #dmpTemaToggle {
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 255, 255, .12);
+    color: var(--ct-kuning);
+}
+.ct body .wrapper .header-top #dmpTemaToggle:hover {
+    background: var(--ct-kuning);
+    color: var(--ct-navy);
+}
+.ct body .wrapper .header-top #dmpTemaToggle::after { content: none; }
+
+/* Pemilih tema tinggal mode terang/gelap (Fase 113.3 - contoh warna
+   dan palet grafik dibuang dari markup inc/navbar.php). Kotaknya
+   dikecilkan menyesuaikan isi yang tinggal dua tombol. */
+.ct body .wrapper .header-top .dropdown-menu[aria-labelledby="dmpTemaToggle"] { min-width: 0; }
+.ct .dmp-tema { padding: 10px; }
+.ct .dmp-tema__mode button { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; }
+.ct .dmp-tema__mode button[aria-pressed="true"] {
+    background: var(--ct-navy);
+    color: var(--ct-putih);
+}
+
+/* Pemilih bahasa (Fase 113.6) - "bendera ID v" seperti Coretax */
+.ct .ct-bahasa__tombol {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 30px;
+    padding: 0 8px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--ct-putih);
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+}
+.ct .ct-bahasa__tombol:hover { background: rgba(255, 255, 255, .14); }
+.ct .ct-bahasa__tombol b { font-weight: 800; letter-spacing: .03em; }
+.ct .ct-bahasa__tombol::after {
+    content: "\203A";
+    display: inline-block;
+    margin-left: 1px;
+    opacity: .75;
+    transform: rotate(90deg);
+}
+
+.ct .ct-bahasa__daftar { display: flex; flex-direction: column; padding: 6px; min-width: 190px; }
+.ct .ct-bahasa__daftar button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--ct-teks);
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+}
+.ct .ct-bahasa__daftar button:hover { background: var(--ct-panel-2); }
+.ct .ct-bahasa__daftar button[aria-pressed="true"] { background: var(--ct-kuning-lembut); color: var(--ct-navy); }
+.ct .ct-bahasa__daftar button[aria-pressed="true"]::after {
+    content: "\2713";
+    margin-left: auto;
+    font-weight: 800;
+}
+
+/* Bendera bulat dari gradien CSS */
+.ct .ct-bendera {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    flex: none;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .15);
+}
+.ct .ct-bendera--id { background: linear-gradient(var(--ct-bendera-merah) 50%, var(--ct-putih) 50%); }
+.ct .ct-bendera--en {
+    background:
+        linear-gradient(var(--ct-bendera-silang), var(--ct-bendera-silang)) center / 100% 3px no-repeat,
+        linear-gradient(var(--ct-bendera-silang), var(--ct-bendera-silang)) center / 3px 100% no-repeat,
+        linear-gradient(var(--ct-putih), var(--ct-putih)) center / 100% 6px no-repeat,
+        linear-gradient(var(--ct-putih), var(--ct-putih)) center / 6px 100% no-repeat,
+        var(--ct-bendera-biru);
+}
+/* Basa Jawa tidak punya bendera negara - dipakai motif sogan-emas
+   (warna batik) supaya tetap berbentuk bulatan yang sejajar. */
+.ct .ct-bendera--jv {
+    background:
+        radial-gradient(circle at center, var(--ct-kuning) 0 3px, transparent 3.5px),
+        repeating-linear-gradient(45deg, var(--ct-bendera-jawa) 0 3px, var(--ct-kuning-tinta) 3px 5px);
+}
+
+@media (max-width: 767px) {
+    .ct .ct-bahasa__tombol b,
+    .ct .ct-bahasa__tombol::after { display: none; }
+}
+
+/* Lencana "Data per" di atas navy */
+.ct body .wrapper .header-top .dmp-dataper {
+    margin-right: 0;
+    border-color: rgba(255, 255, 255, .25);
+    background: rgba(255, 255, 255, .10);
+    color: var(--ct-kuning);
+}
+.ct body .wrapper .header-top .dmp-dataper__teks,
+.ct body .wrapper .header-top .dmp-dataper__teks strong { color: var(--ct-putih); }
+.ct body .wrapper .header-top .dmp-dataper__sumber {
+    background: var(--ct-kuning-lembut);
+    color: var(--ct-kuning-tinta);
+}
+
+/* Kartu pengguna - putih, NIP kecil, nama tebal, lencana kuning. */
+.ct body .wrapper .header-top .ct-pengguna {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 36px;
+    padding: 3px 10px 3px 8px;
+    border-radius: 8px;
+    background: var(--ct-putih);
+    color: var(--ct-navy-tinta);
+    text-decoration: none;
+}
+.ct body .wrapper .header-top .ct-pengguna::after { color: var(--ct-teks-redup); margin-left: 2px; }
+.ct .ct-pengguna__ikon { font-size: 15px; color: var(--ct-navy); flex: none; }
+.ct .ct-pengguna__teks { display: flex; flex-direction: column; line-height: 1.15; min-width: 0; }
+.ct .ct-pengguna__teks small {
+    font-family: "Cascadia Mono", Consolas, monospace;
+    font-size: 9.5px;
+    color: var(--ct-teks-redup);
+}
+.ct .ct-pengguna__teks b {
+    max-width: 150px;
+    font-size: 11.5px;
+    font-weight: 800;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ct .ct-pengguna__lencana {
+    flex: none;
+    max-width: 120px;
+    padding: 2px 8px;
+    border: 1px solid var(--ct-kuning);
+    border-radius: 999px;
+    background: var(--ct-kuning-lembut);
+    color: var(--ct-kuning-tinta);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Tombol keluar bulat merah */
+.ct .ct-keluar {
+    display: inline-grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--ct-merah);
+    color: var(--ct-putih);
+    font-size: 14px;
+    text-decoration: none;
+    transition: transform 120ms, box-shadow 160ms;
+}
+.ct .ct-keluar:hover {
+    color: var(--ct-putih);
+    transform: translateY(-1px);
+    box-shadow: 0 0 0 3px rgba(228, 72, 77, .35);
+}
+
+/* Layar sempit: buang yang paling tidak penting lebih dulu. */
+@media (max-width: 1499px) {
+    .ct .ct-pengguna__lencana { display: none; }
+}
+@media (max-width: 1279px) {
+    .ct .ct-merek__judul,
+    .ct .ct-merek__garis { display: none; }
+    .ct .ct-cari__kbd { display: none; }
+}
+@media (max-width: 767px) {
+    .ct .ct-pengguna__teks { display: none; }
+    .ct .ct-cari__teks { display: none; }
+    .ct .ct-cari { width: 36px; padding: 0; justify-content: center; }
+    .ct .ct-kepala__tengah { justify-content: flex-end; flex: 1 1 auto; }
+    .ct body .wrapper .header-top #navbar-print { display: none; }
+}
+
+
+/* -------------------------------------------------------------
+ * 3. HEADER BARIS 2 — menu mendatar (inc/sidebar.php)
+ *
+ * <aside class="dmp-nav"> yang sama dengan sidebar lama, diubah
+ * dari kolom tegak menjadi baris. Bagian kepala, pencarian, dan
+ * kaki sidebar disembunyikan karena sudah pindah ke header.
+ * ----------------------------------------------------------- */
+
+.ct body .wrapper .page-wrap .dmp-nav,
+.ct body .wrapper .page-wrap .dmp-nav[data-ciut="1"] {
+    position: fixed;
+    top: var(--ct-kepala-h);
+    left: 0; right: 0; bottom: auto;
+    width: auto;
+    height: var(--ct-menu-h);
+    flex-direction: row;
+    background: var(--ct-navy);
+    border-top: 1px solid rgba(255, 255, 255, .10);
+    box-shadow: 0 6px 18px rgba(15, 25, 60, .16);
+    overflow: visible;
+    z-index: 1035;
+    transition: none;
+    /* theme.min.css menyembunyikan sidebar keluar layar di bawah
+       992 px lewat transform. Baris menu harus selalu tampil. */
+    transform: none;
+    visibility: visible;
+}
+
+.ct .dmp-nav .dmp-nav__kepala,
+.ct .dmp-nav .dmp-nav__cari,
+.ct .dmp-nav .dmp-nav__kaki,
+.ct .dmp-nav .dmp-nav__label,
+.ct .dmp-nav .dmp-nav__kosong { display: none; }
+
+.ct .dmp-nav .dmp-nav__isi {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2px;
+    flex: 1;
+    height: 100%;
+    padding: 0 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+}
+.ct .dmp-nav .dmp-nav__isi::-webkit-scrollbar { display: none; }
+
+/* Butir paling atas: tautan tunggal dan judul grup */
+.ct .dmp-nav .dmp-nav__butir,
+.ct .dmp-nav[data-ciut="1"] .dmp-nav__butir {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex: none;
+    width: auto;
+    height: 30px;
+    margin: 0;
+    padding: 0 8px;
+    border: 1.5px solid transparent;
+    border-radius: 7px;
+    color: var(--ct-putih);
+    font-size: 11.5px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+.ct .dmp-nav .dmp-nav__butir span,
+.ct .dmp-nav[data-ciut="1"] .dmp-nav__butir span {
+    display: inline;
+    overflow: visible;
+}
+.ct .dmp-nav .dmp-nav__butir i {
+    width: auto;
+    font-size: 14px;
+    color: var(--ct-kuning);
+    opacity: 1;
+}
+.ct .dmp-nav .dmp-nav__butir:hover {
+    background: rgba(255, 255, 255, .10);
+    color: var(--ct-putih);
+}
+
+/* Panah bawah pada judul grup */
+.ct .dmp-nav .dmp-nav__butir--grup::after,
+.ct .dmp-nav .dmp-nav__grup.buka > .dmp-nav__butir--grup::after,
+.ct .dmp-nav .dmp-nav__grup.paksa-buka > .dmp-nav__butir--grup::after {
+    content: "\203A";
+    margin-left: 1px;
+    font-size: 14px;
+    line-height: 1;
+    opacity: .75;
+    transform: rotate(90deg);
+}
+.ct .dmp-nav .dmp-nav__grup.ct-buka > .dmp-nav__butir--grup::after {
+    transform: rotate(-90deg);
+}
+
+/* Penanda batang kiri milik sidebar lama tidak berlaku di baris */
+.ct .dmp-nav .dmp-nav__butir.aktif::before,
+.ct .dmp-nav .dmp-nav__butir--grup.aktif-induk::before { content: none; }
+
+/* Grup yang sedang dibuka */
+.ct .dmp-nav .dmp-nav__grup.ct-buka > .dmp-nav__butir--grup {
+    background: var(--ct-navy-buka);
+}
+
+/* Grup/tautan milik halaman yang sedang dibuka: pil kuning Coretax */
+.ct .dmp-nav .dmp-nav__butir.aktif,
+.ct .dmp-nav .dmp-nav__butir--grup.aktif-induk {
+    background: var(--ct-kuning-aktif);
+    border-color: var(--ct-navy-gelap);
+    box-shadow: 0 0 0 1.5px var(--ct-kuning-aktif);
+    color: var(--ct-navy);
+}
+.ct .dmp-nav .dmp-nav__butir.aktif i,
+.ct .dmp-nav .dmp-nav__butir--grup.aktif-induk i { color: var(--ct-navy); }
+
+/* Grup aktif yang panelnya sedang terbuka tetap kuning - aturan
+   .ct-buka di atas lebih spesifik dan membuatnya navy, sehingga teks
+   navy-nya hilang (ditemukan saat uji pratinjau Fase 113.2). */
+.ct .dmp-nav .dmp-nav__grup.ct-buka > .dmp-nav__butir--grup.aktif-induk {
+    background: var(--ct-kuning-aktif);
+}
+
+.ct .dmp-nav .dmp-nav__grup { flex: none; }
+
+/* Panel submenu ala "Jelajahi Laporan" Coretax: kartu di bawah judul
+   grupnya, bukan selebar layar. position: fixed supaya tidak
+   terpotong overflow-x baris menu; left/width diisi coretax.js. */
+.ct body .wrapper .page-wrap .dmp-nav .dmp-nav__sub {
+    display: none;
+    position: fixed;
+    top: calc(var(--ct-atas) + 6px);
+    left: 12px;
+    width: 580px;
+    max-width: calc(100vw - 24px);
+    max-height: calc(100vh - var(--ct-atas) - 24px);
+    overflow-y: auto;
+    padding: 20px 20px 22px;
+    background: var(--ct-panel);
+    border: 1px solid var(--ct-garis);
+    border-radius: 16px;
+    box-shadow: var(--ct-bayang-lg);
+    z-index: 1036;
+}
+.ct body .wrapper .page-wrap .dmp-nav .dmp-nav__grup.ct-buka > .dmp-nav__sub {
+    display: block;
+    animation: ct-turun 160ms ease-out;
+}
+
+@keyframes ct-turun {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* Kepala: MENU / Jelajahi ... / N menu tersedia + tombol cari */
+.ct .ct-panel__kepala {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--ct-garis);
+}
+.ct .ct-panel__judul { min-width: 0; }
+.ct .ct-panel__judul small {
+    color: var(--ct-oranye);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+.ct .ct-panel__judul h4 {
+    margin: 4px 0 2px;
+    color: var(--ct-teks);
+    font-size: 17px;
+    font-weight: 600;
+}
+.ct .ct-panel__judul p {
+    margin: 0;
+    color: var(--ct-teks-redup);
+    font-size: 11.5px;
+}
+.ct .ct-panel__cari {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex: none;
+    height: 32px;
+    padding: 0 8px 0 12px;
+    border: 1px solid var(--ct-garis);
+    border-radius: 8px;
+    background: var(--ct-panel-2);
+    color: var(--ct-teks);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.ct .ct-panel__cari:hover { border-color: var(--ct-navy); }
+.ct .ct-panel__cari kbd {
+    padding: 1px 5px;
+    border: 1px solid var(--ct-garis);
+    border-radius: 4px;
+    background: var(--ct-panel);
+    color: var(--ct-teks-redup);
+    font-family: inherit;
+    font-size: 9.5px;
+    font-weight: 700;
+    box-shadow: none;
+}
+
+/* "Terakhir Dibuka" - kartu kuning, padanan "Laporan Tersemat" */
+.ct .ct-panel__terakhir {
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--ct-garis);
+}
+.ct .ct-panel__terakhir h5 {
+    margin: 0 0 8px;
+    color: var(--ct-teks);
+    font-size: 11.5px;
+    font-weight: 700;
+}
+.ct .ct-panel__terakhir-isi {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+.ct .ct-panel__sorot {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 12px;
+    border: 1px solid var(--ct-kuning);
+    border-radius: 10px;
+    background: var(--ct-kuning-lembut);
+    color: var(--ct-navy-tinta);
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+}
+.ct .ct-panel__sorot::before {
+    content: "";
+    width: 24px;
+    height: 24px;
+    flex: none;
+    border-radius: 6px;
+    background: rgba(253, 202, 42, .40);
+}
+.ct .ct-panel__sorot i { display: none; }
+.ct .ct-panel__sorot:hover { color: var(--ct-navy); text-decoration: none; border-color: var(--ct-navy); }
+
+/* Kotak-kotak menu, dua kolom, tiap kotak berpanah › */
+.ct .dmp-nav .dmp-nav__sub > .dmp-nav__sub-isi {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    overflow: visible;
+}
+
+.ct .dmp-nav .dmp-nav__anak {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 50px;
+    margin: 0;
+    padding: 10px 12px;
+    border: 1px solid var(--ct-garis);
+    border-radius: 10px;
+    background: var(--ct-panel);
+    box-shadow: 0 1px 2px rgba(26, 46, 106, .04);
+    color: var(--ct-teks);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.35;
+}
+.ct .dmp-nav .dmp-nav__anak::before { content: none; }
+.ct .dmp-nav .dmp-nav__anak::after {
+    content: "\203A";
+    margin-left: auto;
+    padding-left: 6px;
+    color: var(--ct-teks-redup);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1;
+}
+.ct .dmp-nav .dmp-nav__anak:hover {
+    border-color: var(--ct-navy);
+    background: var(--ct-panel-2);
+    color: var(--ct-navy);
+}
+.ct[data-dmp-mode="dark"] .dmp-nav .dmp-nav__anak:hover { color: var(--ct-teks); border-color: var(--ct-teks-redup); }
+.ct .dmp-nav .dmp-nav__anak.aktif {
+    border-color: var(--ct-kuning);
+    background: var(--ct-kuning-lembut);
+    color: var(--ct-navy);
+    font-weight: 700;
+}
+
+@media (max-width: 575px) {
+    .ct .dmp-nav .dmp-nav__sub > .dmp-nav__sub-isi,
+    .ct .ct-panel__terakhir-isi { grid-template-columns: 1fr; }
+    .ct .ct-panel__kepala { flex-direction: column; }
+}
+
+/* Butir grup "Alat Bantu" (dibentuk coretax.js dari tautan tunggal)
+   membawa ikonnya sendiri - dipertahankan, dikecilkan. */
+.ct .dmp-nav .ct-anak-ikon i,
+.ct .ct-samping .ct-anak-ikon i,
+.ct .ct-samping__tunggal i {
+    width: 16px;
+    flex: none;
+    color: var(--ct-kuning);
+    font-size: 13px;
+    text-align: center;
+}
+
+/* Tombol geser ‹ › - hanya muncul bila baris menu melebihi layar */
+.ct .dmp-nav .ct-geser {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 34px;
+    border: 0;
+    color: var(--ct-kuning);
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 2;
+}
+.ct .dmp-nav .ct-geser[hidden] { display: none; }
+.ct .dmp-nav .ct-geser--kiri {
+    left: 0;
+    background: linear-gradient(90deg, var(--ct-navy) 60%, transparent);
+    text-align: left;
+    padding-left: 8px;
+}
+.ct .dmp-nav .ct-geser--kanan {
+    right: 0;
+    background: linear-gradient(270deg, var(--ct-navy) 60%, transparent);
+    text-align: right;
+    padding-right: 8px;
+}
+
+
+/* -------------------------------------------------------------
+ * 4. ISI HALAMAN — digeser ke bawah header, tidak lagi ke kanan
+ * ----------------------------------------------------------- */
+
+.ct body .wrapper .page-wrap .main-content,
+.ct body .wrapper .page-wrap > .footer {
+    margin-left: 0;
+    transition: margin-left 220ms cubic-bezier(.4, 0, .2, 1);
+}
+
+.ct body .wrapper .page-wrap .main-content {
+    margin-top: var(--ct-atas);
+    padding: 22px 24px 30px;
+    background: transparent;
+}
+
+/* Tab "Buka Menu" (26 px) duduk di tepi kiri - beri ruang supaya
+   tidak menutupi tepi kartu. */
+.ct body .wrapper .page-wrap .main-content { padding-left: 40px; }
+
+@media (max-width: 991px) {
+    .ct body .wrapper .page-wrap .main-content { padding: 16px 12px 24px 34px; }
+}
+
+
+/* -------------------------------------------------------------
+ * 5. SIDEBAR SEMUA MENU + TAB "BUKA MENU"
+ *
+ * Dibangun coretax.js. Sidebar tidak menggeser isi halaman:
+ * tersembunyi sebagai tab tegak di kiri-tengah (seperti tab
+ * "Laporan" Coretax saat membuka dasbor), dan muncul DI ATAS
+ * halaman saat tab diklik.
+ *
+ * Kenapa tidak lagi menggeser isi seperti panel kiri Fase 113:
+ * dashboard DMP banyak yang lebar (tabel 12 kolom); 260 px yang
+ * dimakan panel selalu terbuka membuat tabel itu harus digulir.
+ * ----------------------------------------------------------- */
+
+/* Logo kecil 2x2 kotak - kuning dengan satu navy, seperti ikon
+   menu Coretax. */
+.ct .ct-logo4 {
+    display: inline-grid;
+    grid-template-columns: repeat(2, 6px);
+    gap: 2px;
+    flex: none;
+}
+.ct .ct-logo4 i {
+    width: 6px;
+    height: 6px;
+    border-radius: 2px;
+    background: var(--ct-kuning);
+}
+.ct .ct-logo4 i:nth-child(3) { background: var(--ct-navy); }
+
+.ct .ct-samping {
+    position: fixed;
+    top: calc(var(--ct-atas) + 10px);
+    left: 12px;
+    bottom: 12px;
+    width: 300px;
+    max-width: calc(100vw - 24px);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background: var(--ct-panel);
+    border: 1px solid var(--ct-garis);
+    border-radius: 14px;
+    box-shadow: var(--ct-bayang-lg);
+    z-index: 1037;
+    transform: translateX(calc(-100% - 24px));
+    visibility: hidden;
+    transition: transform 220ms cubic-bezier(.4, 0, .2, 1), visibility 0s linear 220ms;
+}
+.ct body.ct-samping-buka .ct-samping {
+    transform: none;
+    visibility: visible;
+    transition: transform 220ms cubic-bezier(.4, 0, .2, 1), visibility 0s;
+}
+
+/* Halaman di belakang sidebar sedikit diredupkan; klik di sana
+   menutup sidebar (coretax.js). */
+.ct body.ct-samping-buka::after {
+    content: "";
+    position: fixed;
+    top: var(--ct-atas);
+    left: 0; right: 0; bottom: 0;
+    background: rgba(15, 25, 60, .18);
+    z-index: 1036;
+}
+
+.ct .ct-samping__kepala {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 8px 9px 12px;
+    border-radius: 10px;
+    background: var(--ct-panel-2);
+}
+.ct .ct-samping__kepala b {
+    flex: 1;
+    min-width: 0;
+    color: var(--ct-teks);
+    font-size: 13px;
+    font-weight: 800;
+}
+.ct .ct-samping__tutup {
+    display: inline-grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    flex: none;
+    border: 1px solid var(--ct-garis);
+    border-radius: 6px;
+    background: var(--ct-panel);
+    color: var(--ct-teks-redup);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+}
+.ct .ct-samping__tutup:hover { color: var(--ct-navy); border-color: var(--ct-navy); }
+
+.ct .ct-samping__cari {
+    position: relative;
+    margin: 10px 0 6px;
+}
+.ct .ct-samping__cari i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ct-teks-redup);
+    font-size: 13px;
+    pointer-events: none;
+}
+.ct .ct-samping__cari input {
+    width: 100%;
+    height: 32px;
+    padding: 0 10px 0 30px;
+    border: 1px solid var(--ct-garis);
+    border-radius: 8px;
+    background: var(--ct-panel-2);
+    color: var(--ct-teks);
+    font-family: inherit;
+    font-size: 12px;
+    outline: none;
+}
+.ct .ct-samping__cari input:focus { border-color: var(--ct-navy); }
+
+.ct .ct-samping__isi {
+    position: relative;   /* offsetTop tautan dihitung dari sini (coretax.js) */
+    flex: 1;
+    overflow-y: auto;
+    padding: 4px 2px;
+    scrollbar-width: thin;
+}
+
+.ct .ct-samping__grup[hidden],
+.ct .ct-samping__tautan[hidden],
+.ct .ct-samping__tunggal[hidden] { display: none; }
+
+.ct .ct-samping__judul,
+.ct .ct-samping__tunggal {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 8px 10px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--ct-teks);
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 600;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+}
+.ct .ct-samping__judul i { width: 16px; flex: none; color: var(--ct-kuning); font-size: 13px; text-align: center; }
+.ct .ct-samping__judul span { flex: 1; min-width: 0; }
+
+/* Nama grup + "N menu" di bawahnya (Fase 113.4) - meniru kartu
+   kategori Coretax: "Ekstensifikasi / 20 menu". */
+.ct .ct-samping__nama {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+}
+.ct .ct-samping__nama b {
+    font-size: 12.5px;
+    font-weight: 600;
+}
+.ct .ct-samping__nama small {
+    margin-top: 1px;
+    color: var(--ct-teks-redup);
+    font-size: 10.5px;
+    font-weight: 500;
+}
+.ct .ct-samping__judul::after {
+    content: "\203A";
+    color: var(--ct-teks-redup);
+    font-size: 15px;
+    line-height: 1;
+    transition: transform 160ms;
+}
+.ct .ct-samping__grup.buka > .ct-samping__judul::after,
+.ct .ct-samping__grup.paksa > .ct-samping__judul::after { transform: rotate(90deg); }
+.ct .ct-samping__judul:hover,
+.ct .ct-samping__tunggal:hover {
+    background: var(--ct-panel-2);
+    color: var(--ct-navy);
+    text-decoration: none;
+}
+.ct[data-dmp-mode="dark"] .ct-samping__judul:hover,
+.ct[data-dmp-mode="dark"] .ct-samping__tunggal:hover { color: var(--ct-teks); }
+
+.ct .ct-samping__anak { display: none; padding: 2px 0 6px; }
+.ct .ct-samping__grup.buka > .ct-samping__anak,
+.ct .ct-samping__grup.paksa > .ct-samping__anak { display: block; }
+
+.ct .ct-samping__tautan {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 12px;
+    padding: 6px 10px 6px 16px;
+    border-left: 2px solid var(--ct-garis);
+    color: var(--ct-teks-redup);
+    font-size: 12px;
+    line-height: 1.4;
+    text-decoration: none;
+}
+.ct .ct-samping__tautan::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: .6;
+    transform: translateY(-50%);
+}
+.ct .ct-samping__tautan.ct-anak-ikon { padding-left: 10px; }
+.ct .ct-samping__tautan.ct-anak-ikon::before { content: none; }
+.ct .ct-samping__tautan:hover { color: var(--ct-navy); background: var(--ct-panel-2); text-decoration: none; }
+.ct[data-dmp-mode="dark"] .ct-samping__tautan:hover { color: var(--ct-teks); }
+
+/* Menu halaman ini: garis kiri kuning + latar kuning lembut,
+   seperti butir aktif di sidebar Coretax. */
+.ct .ct-samping__tautan.aktif,
+.ct .ct-samping__tunggal.aktif {
+    border-left-color: var(--ct-kuning);
+    background: var(--ct-kuning-lembut);
+    color: var(--ct-navy);
+    font-weight: 700;
+}
+
+/* Menu Rekomendasi (Fase 113.5) - padanan "Recommended Reports"
+   Coretax: 5 menu terbanyak dibuka, bernomor, di puncak sidebar. */
+.ct .ct-rekom {
+    margin: 2px 2px 8px;
+    padding: 10px 10px 8px;
+    border: 1px solid var(--ct-garis);
+    border-radius: 10px;
+    background: var(--ct-panel-2);
+}
+.ct .ct-rekom[hidden] { display: none; }
+.ct .ct-rekom__judul {
+    color: var(--ct-teks);
+    font-size: 12px;
+    font-weight: 800;
+}
+.ct .ct-rekom__ket {
+    display: block;
+    margin: 1px 0 6px;
+    color: var(--ct-teks-redup);
+    font-size: 10.5px;
+}
+.ct .ct-rekom__daftar {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: ct-rekom;
+}
+.ct .ct-rekom__daftar li { counter-increment: ct-rekom; }
+.ct .ct-rekom__tautan {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 4px;
+    border-radius: 6px;
+    color: var(--ct-navy);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.35;
+    text-decoration: none;
+}
+.ct[data-dmp-mode="dark"] .ct-rekom__tautan { color: var(--ct-teks); }
+.ct .ct-rekom__tautan::before {
+    content: counter(ct-rekom);
+    display: inline-grid;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--ct-kuning);
+    color: var(--ct-navy-tinta);
+    font-size: 10px;
+    font-weight: 800;
+}
+.ct .ct-rekom__tautan:hover { background: var(--ct-panel); text-decoration: underline; }
+.ct .ct-rekom__tautan.aktif { background: var(--ct-kuning-lembut); color: var(--ct-navy); }
+
+.ct .ct-samping__kosong {
+    margin: 0;
+    padding: 20px 10px;
+    color: var(--ct-teks-redup);
+    font-size: 12px;
+    text-align: center;
+}
+
+/* Tab tegak "Buka Menu" di kiri-tengah */
+.ct .ct-tab-menu {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1034;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 26px;
+    padding: 10px 0 8px;
+    border: 1px solid var(--ct-kuning);
+    border-left: 0;
+    border-radius: 0 10px 10px 0;
+    background: var(--ct-kuning-lembut);
+    color: var(--ct-navy);
+    font-family: inherit;
+    box-shadow: var(--ct-bayang);
+    cursor: pointer;
+    transition: width 140ms, background 140ms, opacity 160ms;
+}
+.ct .ct-tab-menu:hover { width: 30px; background: var(--ct-kuning-aktif); }
+.ct .ct-tab-menu__teks {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    white-space: nowrap;
+}
+.ct .ct-tab-menu__panah { font-size: 15px; font-weight: 800; line-height: 1; }
+.ct body.ct-samping-buka .ct-tab-menu { opacity: 0; pointer-events: none; }
+
+
+/* -------------------------------------------------------------
+ * 6. PALET PENCARIAN (Ctrl+K)
+ * ----------------------------------------------------------- */
+
+.ct .ct-palet {
+    position: fixed;
+    inset: 0;
+    z-index: 1060;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 70px 16px 16px;
+    background: rgba(15, 25, 60, .35);
+}
+.ct .ct-palet[hidden] { display: none; }
+
+.ct .ct-palet__kotak {
+    width: 100%;
+    max-width: 620px;
+    max-height: calc(100vh - 110px);
+    display: flex;
+    flex-direction: column;
+    background: var(--ct-panel);
+    border-radius: 14px;
+    box-shadow: var(--ct-bayang-lg);
+    overflow: hidden;
+    animation: ct-turun 140ms ease-out;
+}
+
+.ct .ct-palet__masukan {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--ct-garis);
+}
+.ct .ct-palet__masukan i { color: var(--ct-teks-redup); font-size: 16px; }
+.ct .ct-palet__masukan input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: var(--ct-teks);
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.ct .ct-palet__hasil {
+    flex: 1;
+    overflow-y: auto;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+}
+
+.ct .ct-palet__butir {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    color: var(--ct-teks);
+    cursor: pointer;
+}
+.ct .ct-palet__butir i { color: var(--ct-kuning); font-size: 14px; flex: none; width: 16px; text-align: center; }
+.ct .ct-palet__butir span { flex: 1; min-width: 0; font-size: 13px; font-weight: 600; }
+.ct .ct-palet__butir small {
+    flex: none;
+    max-width: 45%;
+    color: var(--ct-teks-redup);
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ct .ct-palet__butir.pilih {
+    background: var(--ct-kuning-lembut);
+    color: var(--ct-navy);
+}
+
+.ct .ct-palet__kosong {
+    padding: 22px 10px;
+    color: var(--ct-teks-redup);
+    font-size: 12.5px;
+    text-align: center;
+}
+
+.ct .ct-palet__kaki {
+    display: flex;
+    gap: 14px;
+    padding: 8px 14px;
+    border-top: 1px solid var(--ct-garis);
+    background: var(--ct-panel-2);
+    color: var(--ct-teks-redup);
+    font-size: 11px;
+}
+
+
+/* -------------------------------------------------------------
+ * 7. LAYAR MEMUAT ("Checking session" ala Coretax)
+ *
+ * Hanya yang anak LANGSUNG <body> yang boleh tampil. View yang
+ * dimuat ke dalam modal/elemen lain juga memanggil inc/head.php,
+ * sehingga membawa salinan overlay ini - salinan itu selalu
+ * disembunyikan, supaya tidak menutupi halaman induknya.
+ * ----------------------------------------------------------- */
+
+.ct .ct-muat { display: none; }
+
+.ct body > .ct-muat {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: grid;
+    place-items: center;
+    background: var(--ct-latar-muat);
+    pointer-events: none;
+    transition: opacity 250ms, visibility 250ms;
+    /* Pengaman bila coretax.js gagal dimuat: hilang sendiri. */
+    animation: ct-muat-lepas 0s linear 12s forwards;
+}
+.ct body > .ct-muat.lagi { animation-name: ct-muat-lepas-2; }
+.ct body > .ct-muat.selesai { opacity: 0; visibility: hidden; }
+
+@keyframes ct-muat-lepas   { to { opacity: 0; visibility: hidden; } }
+@keyframes ct-muat-lepas-2 { to { opacity: 0; visibility: hidden; } }
+
+.ct .ct-muat__kartu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    min-width: 300px;
+    padding: 34px 56px 30px;
+    background: var(--ct-panel);
+    border-radius: 16px;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, .09);
+}
+
+.ct .ct-muat__merek {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+.ct .ct-muat__merek img { width: 34px; height: 34px; object-fit: contain; }
+.ct .ct-muat__merek span {
+    color: var(--ct-navy);
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: .02em;
+}
+.ct[data-dmp-mode="dark"] .ct-muat__merek span { color: var(--ct-teks); }
+.ct .ct-muat__merek b { color: var(--ct-kuning); font-weight: 800; }
+
+.ct .ct-muat__putar {
+    width: 30px;
+    height: 30px;
+    margin: 4px 0 8px;
+    border: 3px solid var(--ct-garis);
+    border-top-color: var(--ct-kuning);
+    border-radius: 50%;
+    animation: ct-putar .8s linear infinite;
+}
+@keyframes ct-putar { to { transform: rotate(360deg); } }
+
+.ct .ct-muat__kartu strong { color: var(--ct-teks); font-size: 15px; font-weight: 800; }
+.ct .ct-muat__kartu small  { color: var(--ct-teks-redup); font-size: 12px; }
+
+
+/* -------------------------------------------------------------
+ * 8. KARTU
+ * ----------------------------------------------------------- */
+
+.ct .wrapper .card {
+    background: var(--ct-panel);
+    border: 1px solid var(--ct-garis);
+    border-radius: 16px;
+    box-shadow: var(--ct-bayang);
+}
+.ct .wrapper .card:hover {
+    box-shadow: 0 1px 2px rgba(26, 46, 106, .06), 0 12px 30px rgba(26, 46, 106, .10);
+}
+
+/* Garis kuning pendek di puncak kartu - ciri kartu Coretax
+   ("PERLU TINDAKAN", "MENUNGGU TINDAK LANJUT"). */
+.ct .wrapper .card > .card-header {
+    background: var(--ct-panel);
+    border-bottom: 1px solid var(--ct-garis);
+    padding: 16px 18px 12px;
+}
+.ct .wrapper .card > .card-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 16px;
+    width: 44px;
+    height: 3px;
+    border-radius: 0 0 3px 3px;
+    background: var(--ct-kuning);
+}
+
+.ct .wrapper .card .card-header h3,
+.ct .wrapper .card .card-header h5,
+.ct .wrapper .card .card-header .card-title {
+    padding-left: 0;
+    color: var(--ct-teks);
+    font-size: 13.5px;
+    font-weight: 800;
+}
+.ct .wrapper .card .card-header h3::before,
+.ct .wrapper .card .card-header h5::before,
+.ct .wrapper .card .card-header .card-title::before { content: none; }
+
+/* Kartu angka (KPI) - navy pekat seperti "1.232,67 T / Bruto 2025"
+   pada dashboard Coretax. theme.css memakai !important di sini
+   (melawan utilitas Bootstrap), jadi lapisan ini juga harus. */
+.ct .wrapper .card .card-body.bg-primary,
+.ct .wrapper .card.bg-primary,
+.ct .wrapper .card .card-body.bg-danger,
+.ct .wrapper .card.bg-danger,
+.ct .wrapper .card .card-body.bg-warning,
+.ct .wrapper .card.bg-warning {
+    background: var(--ct-navy-tabel) !important;
+    color: var(--ct-putih) !important;
+    border: 0;
+    box-shadow: inset 0 -3px 0 var(--ct-kuning);
+}
+.ct .wrapper .card .card-body.bg-danger,
+.ct .wrapper .card.bg-danger  { background: var(--ct-navy) !important; }
+.ct .wrapper .card .card-body.bg-warning,
+.ct .wrapper .card.bg-warning { background: var(--ct-navy-buka) !important; }
+
+
+/* -------------------------------------------------------------
+ * 9a. TABULATOR (Fase 112.8) — halaman rincian WP
+ *     (kanwil/vdetkat, vdetsof, vdetpaycomp3, vbyrlpr).
+ *     Tabulator menggambar tabelnya dari <div>, bukan <table>, jadi
+ *     aturan bagian 9 di bawah tidak menyentuhnya; tampilannya tetap
+ *     abu-abu bawaan Tabulator. Di sini disamakan dengan tabel biasa:
+ *     token warna yang SAMA, termasuk mode gelap.
+ * ----------------------------------------------------------- */
+
+.ct .wrapper .dmp-detail-wp > .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.ct .wrapper .dmp-detail-wp__aksi { display: flex; gap: 8px; }
+
+.ct .wrapper .tabulator {
+    background: var(--ct-panel);
+    border: 1px solid var(--ct-garis);
+    border-radius: 8px;
+    color: var(--ct-teks);
+    font-size: 13px;
+    margin-bottom: 0;
+}
+.ct .wrapper .tabulator .tabulator-header {
+    background: var(--ct-navy-tabel);
+    color: var(--ct-putih);
+    border-bottom: 2px solid var(--ct-kuning);
+}
+.ct .wrapper .tabulator .tabulator-header .tabulator-col {
+    background: var(--ct-navy-tabel);
+    border-right-color: rgba(255, 255, 255, .14);
+}
+.ct .wrapper .tabulator .tabulator-header .tabulator-col .tabulator-col-title {
+    font-size: 11.5px;
+    font-weight: 700;
+}
+.ct .wrapper .tabulator .tabulator-header .tabulator-col.tabulator-sortable:hover {
+    background: var(--ct-navy);
+}
+.ct .wrapper .tabulator .tabulator-col-sorter .tabulator-arrow { border-bottom-color: rgba(255, 255, 255, .55); }
+.ct .wrapper .tabulator .tabulator-tableholder { background: var(--ct-panel); }
+.ct .wrapper .tabulator-row { background: var(--ct-panel); color: var(--ct-teks); border-bottom-color: var(--ct-garis); }
+.ct .wrapper .tabulator-row.tabulator-row-even { background: var(--ct-baris-belang); }
+.ct .wrapper .tabulator-row.tabulator-selectable:hover { background: var(--ct-baris-sorot); }
+.ct .wrapper .tabulator-row .tabulator-cell { border-right-color: var(--ct-garis); }
+.ct .wrapper .tabulator .tabulator-footer {
+    background: var(--ct-panel-2);
+    color: var(--ct-teks);
+    border-top-color: var(--ct-garis);
+}
+.ct .wrapper .tabulator .tabulator-footer .tabulator-page {
+    background: var(--ct-panel);
+    color: var(--ct-teks);
+    border-color: var(--ct-garis);
+    border-radius: 6px;
+}
+.ct .wrapper .tabulator .tabulator-footer .tabulator-page.active {
+    background: var(--ct-navy);
+    border-color: var(--ct-navy);
+    color: var(--ct-putih);
+}
+.ct .wrapper .tabulator .tabulator-footer .tabulator-page:not(.disabled):hover {
+    background: var(--ct-kuning-lembut);
+    color: var(--ct-navy);
+}
+.ct .wrapper .tabulator .tabulator-footer .tabulator-page-size {
+    background: var(--ct-panel);
+    color: var(--ct-teks);
+    border-color: var(--ct-garis);
+    border-radius: 6px;
+}
+.ct .wrapper .tabulator .tabulator-placeholder span { color: var(--ct-teks-redup, var(--ct-teks)); }
+
+/* -------------------------------------------------------------
+ * 9b. KOTAK GULIR .dmp-table__wrap (Fase 112.10)
+ *     theme.css mengurung tabel di kotak setinggi 520 px dengan
+ *     penggulir sendiri. Di bawah kepala Coretax dua baris kotak itu
+ *     terlalu pendek: /home/lapisan (1.705 baris) hanya menampilkan
+ *     sekitar selusin baris, baris teratas "terpotong" di bawah kepala
+ *     tabel yang lengket, dan separuh layar di bawahnya kosong -
+ *     dilaporkan pemilik aplikasi 25 Sep 2026.
+ *     Kini kotaknya setinggi layar di bawah kepala aplikasi (--ct-atas),
+ *     dikurangi sedikit ruang napas. Kepala tabel tetap lengket di
+ *     dalam kotak; kotak tidak lebih tinggi dari layar, jadi penggulir
+ *     mendatarnya selalu terjangkau. Tabel pendek tidak terpengaruh
+ *     (max-height, bukan height). Cetak tetap memakai aturan theme.css.
+ * ----------------------------------------------------------- */
+
+@media screen {
+    .ct .wrapper .dmp-table__wrap {
+        max-height: calc(100vh - var(--ct-atas) - 32px);
+        min-height: 0;
+    }
+}
+
+/* Resume Pembayaran Masa (Fase 112.11): remah roti tingkat unit +
+   tautan rincian di dalam tabel. */
+.ct .wrapper .dmp-resppm-jejak {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 8px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: var(--ct-teks);
+}
+.ct .wrapper .dmp-resppm-jejak a { color: var(--ct-navy); font-weight: 600; }
+.ct .wrapper .dmp-resppm-jejak strong { color: var(--ct-navy-tinta); }
+.ct .wrapper .dmp-resppm-jejak__bantu { flex-basis: 100%; color: var(--ct-teks-redup); }
+.ct .wrapper #tableres tbody td a {
+    color: var(--ct-navy);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--ct-kuning);
+    text-underline-offset: 3px;
+}
+.ct .wrapper #tableres tbody td a:hover { background: var(--ct-kuning-lembut); }
+.ct[data-dmp-mode="dark"] .wrapper #tableres tbody td a,
+.ct[data-dmp-mode="dark"] .wrapper .dmp-resppm-jejak a { color: var(--ct-kuning); }
+
+/* -------------------------------------------------------------
+ * 9. TABEL — kepala navy, baris belang, total tebal
+ * ----------------------------------------------------------- */
+
+.ct .wrapper table thead th,
+.ct .wrapper .card table thead th,
+.ct .wrapper .dmp-table thead th {
+    background: var(--ct-navy-tabel);
+    color: var(--ct-putih);
+    border-color: rgba(255, 255, 255, .14);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: .01em;
+    vertical-align: middle;
+}
+.ct .wrapper table thead th a { color: var(--ct-putih); }
+
+/* Garis kuning tipis di bawah kepala tabel */
+.ct .wrapper table thead tr:last-child th {
+    box-shadow: inset 0 -2px 0 var(--ct-kuning);
+}
+
+.ct .wrapper table.table tbody tr:nth-child(even) > td {
+    background: var(--ct-baris-belang);
+}
+.ct .wrapper table.table tbody tr:hover > td,
+.ct .wrapper .card table tbody tr:hover td {
+    background: var(--ct-baris-sorot);
+}
+.ct .wrapper table tbody td { border-color: var(--ct-garis); }
+
+/* Bootstrap memaku .table { color: #212529 }. Di mode gelap teks itu
+   hilang di atas latar gelap - ditemukan saat uji pratinjau Fase 113. */
+.ct .wrapper .table { color: var(--ct-teks); }
+
+/* Bootstrap .table-dark (latar #343a40, teks PUTIH) - Fase 113.15.
+   Aturan di atas memaku teks semua .table menjadi gelap, sehingga di
+   tabel .table-dark baris GANJIL jadi teks gelap di atas latar gelap
+   (baris genap selamat karena latarnya sudah diterangkan aturan belang).
+   Dilaporkan di "FOLLOW THE MONEY ... WP PUSAT" (ppm/dashboard,
+   #tablekatpus). Dalam tema Coretax, .table-dark disamakan dengan tabel
+   lain: kepala navy, baris terang belang - lewat variabel, jadi mode
+   gelap tetap benar. */
+.ct .wrapper table.table-dark {
+    background-color: var(--ct-panel);
+    color: var(--ct-teks);
+}
+.ct .wrapper table.table-dark td,
+.ct .wrapper table.table-dark tbody th {
+    border-color: var(--ct-garis);
+}
+/* .table-dark.table-hover bawaan Bootstrap mengubah teks jadi PUTIH saat
+   kursor lewat - di atas baris terang teksnya lenyap. */
+.ct .wrapper table.table-dark.table-hover tbody tr:hover {
+    color: var(--ct-teks);
+}
+
+.ct .wrapper table tfoot td,
+.ct .wrapper table tfoot th {
+    background: var(--ct-panel);
+    color: var(--ct-teks);
+    font-weight: 800;
+    border-top: 2px solid var(--ct-navy-tabel);
+}
+
+
+/* -------------------------------------------------------------
+ * 10. KENDALI — tombol, isian, tab, lencana, halaman
+ * ----------------------------------------------------------- */
+
+.ct .wrapper .btn { border-radius: 8px; font-weight: 700; }
+
+.ct .wrapper .btn-primary {
+    background: var(--ct-navy);
+    border-color: var(--ct-navy);
+    color: var(--ct-putih);
+}
+.ct .wrapper .btn-primary:hover,
+.ct .wrapper .btn-primary:focus {
+    background: var(--ct-navy-gelap);
+    border-color: var(--ct-navy-gelap);
+}
+
+.ct .wrapper .btn-outline-primary {
+    color: var(--ct-navy);
+    border-color: var(--ct-navy);
+}
+.ct .wrapper .btn-outline-primary:hover {
+    background: var(--ct-navy);
+    color: var(--ct-putih);
+}
+
+.ct .wrapper .btn-warning {
+    background: var(--ct-kuning);
+    border-color: var(--ct-kuning);
+    color: var(--ct-navy-tinta);
+}
+.ct .wrapper .btn-warning:hover { background: var(--ct-kuning-aktif); }
+
+.ct .wrapper .custom-select,
+.ct .wrapper .form-control {
+    border-color: var(--ct-garis);
+    border-radius: 8px;
+}
+.ct .wrapper .custom-select:focus,
+.ct .wrapper .form-control:focus {
+    border-color: var(--ct-navy);
+    box-shadow: 0 0 0 3px rgba(26, 46, 106, .18);
+}
+
+/* Label penyaring (Kanwil, KPP, Tahun...) - kapital tebal seperti
+   "REGIONAL OFFICE / LOCAL OFFICE" pada dashboard Coretax. */
+.ct .wrapper .main-content label {
+    color: var(--ct-teks);
+    font-weight: 700;
+}
+
+/* Tab: aktif navy, lainnya abu - seperti "Unit Kerja | Jenis Pajak" */
+.ct .wrapper .nav-tabs { border-bottom: 2px solid var(--ct-navy-tabel); }
+.ct .wrapper .nav-tabs .nav-link {
+    margin-right: 4px;
+    border: 0;
+    border-radius: 8px 8px 0 0;
+    background: var(--ct-panel-2);
+    color: var(--ct-teks);
+    font-weight: 700;
+}
+.ct .wrapper .nav-tabs .nav-link:hover { background: var(--ct-garis); }
+.ct .wrapper .nav-tabs .nav-link.active,
+.ct .wrapper .nav-tabs .nav-item.show .nav-link {
+    background: var(--ct-navy-tabel);
+    color: var(--ct-putih);
+}
+
+.ct .wrapper .nav-pills .nav-link.active,
+.ct .wrapper .nav-pills .show > .nav-link {
+    background: var(--ct-navy);
+    color: var(--ct-putih);
+}
+
+.ct .wrapper .badge-primary { background: var(--ct-navy); }
+.ct .wrapper .badge-warning { background: var(--ct-kuning); color: var(--ct-navy-tinta); }
+
+.ct .wrapper .page-item.active .page-link {
+    background: var(--ct-navy);
+    border-color: var(--ct-navy);
+    color: var(--ct-putih);
+}
+.ct .wrapper .page-link { color: var(--ct-navy); }
+.ct[data-dmp-mode="dark"] .wrapper .page-link { color: var(--ct-teks); }
+
+
+/* -------------------------------------------------------------
+ * 11. FOOTER
+ * ----------------------------------------------------------- */
+
+/* Selektor sepanjang ini karena theme.min.css memberi .footer latar
+   putih lewat aturan yang lebih spesifik dari .ct .dmp-footer - di
+   uji pratinjau tampil sebagai pita putih di dasar halaman. */
+.ct body .wrapper .page-wrap > .footer.dmp-footer,
+.ct .dmp-footer {
+    background: transparent;
+    border-top: 1px solid var(--ct-garis);
+    color: var(--ct-teks-redup);
+}
+.ct .dmp-footer__kanan a { color: var(--ct-navy); }
+.ct[data-dmp-mode="dark"] .dmp-footer__kanan a { color: var(--ct-teks); }
+
+
+/* -------------------------------------------------------------
+ * 12. HALAMAN ADMIN (admin/layout.php) dan LOGIN (pages/loginv.php)
+ *
+ * Keduanya berdiri sendiri tanpa inc/head.php, jadi memasang kelas
+ * .ct dan memuat berkas ini sendiri.
+ * ----------------------------------------------------------- */
+
+.ct .dmp-adm__nav {
+    background: var(--ct-panel);
+    border-right: 1px solid var(--ct-garis);
+    color: var(--ct-teks);
+}
+.ct .dmp-adm__merek {
+    background: var(--ct-navy);
+    color: var(--ct-putih);
+}
+.ct .dmp-adm__merek small { color: rgba(255, 255, 255, .7); }
+.ct .dmp-adm__butir { color: var(--ct-teks); }
+.ct .dmp-adm__butir i { color: var(--ct-kuning); }
+.ct .dmp-adm__butir:hover { background: var(--ct-panel-2); color: var(--ct-navy); }
+.ct .dmp-adm__butir.aktif {
+    background: var(--ct-kuning-aktif);
+    color: var(--ct-navy);
+    font-weight: 700;
+}
+.ct .dmp-adm__butir.aktif i { color: var(--ct-navy); }
+.ct .dmp-adm__kaki { border-top-color: var(--ct-garis); }
+.ct .dmp-adm__kembali {
+    background: var(--ct-panel-2);
+    color: var(--ct-teks);
+}
+.ct .dmp-adm__kembali:hover { background: var(--ct-kuning-lembut); color: var(--ct-navy); }
+.ct .dmp-adm__user { color: var(--ct-teks); }
+.ct .dmp-adm__user small { color: var(--ct-teks-redup); }
+.ct .dmp-adm__kepala h1 { color: var(--ct-navy); font-weight: 800; }
+.ct[data-dmp-mode="dark"] .dmp-adm__kepala h1 { color: var(--ct-teks); }
+
+.ct .dmp-login { background: var(--ct-latar-muat); }
+.ct .dmp-login__kanan { background: var(--ct-latar-muat); }
+.ct .dmp-login__form {
+    padding: 34px 32px;
+    background: var(--ct-panel);
+    border-radius: 16px;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, .09);
+}
+.ct .dmp-login__form h1 { color: var(--ct-navy); font-weight: 800; }
+.ct[data-dmp-mode="dark"] .dmp-login__form h1 { color: var(--ct-teks); }
+.ct .dmp-login__form .dmp-btn,
+.ct .dmp-login__form button[type="submit"] {
+    background: var(--ct-navy);
+    border-color: var(--ct-navy);
+    color: var(--ct-putih);
+    border-radius: 8px;
+    font-weight: 800;
+}
+.ct .dmp-login__form .dmp-btn:hover,
+.ct .dmp-login__form button[type="submit"]:hover { background: var(--ct-navy-gelap); }
+
+
+/* -------------------------------------------------------------
+ * 12a. HALAMAN MANDIRI (Fase 112.8) — tanpa header/menu aplikasi:
+ *      errors/html/error_404.php, error_500.php, pages/select_role.php.
+ *      Kepalanya dari inc/_ct_mandiri_kepala.php. Pita navy di atas +
+ *      satu kartu putih di tengah, garis kuning di bawah kepala kartu -
+ *      bahasa rupa yang sama dengan kartu di dalam aplikasi.
+ * ----------------------------------------------------------- */
+
+.ct body.ct-mandiri {
+    min-height: 100vh;
+    margin: 0;
+    padding: 56px 16px 32px;
+    background: linear-gradient(var(--ct-navy) 0 220px, var(--ct-latar) 220px);
+    color: var(--ct-teks);
+    font-family: "Plus Jakarta Sans", "Nunito Sans", system-ui, sans-serif;
+}
+.ct .ct-mandiri__merek {
+    max-width: 900px;
+    margin: 0 auto 18px;
+    text-align: center;   /* kartu bisa selebar 620 atau 900 px - tengah selalu sejajar */
+    color: var(--ct-putih);
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: .02em;
+}
+.ct .ct-mandiri__merek b { color: var(--ct-kuning); }
+.ct .ct-mandiri__kartu {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--ct-panel);
+    border: 1px solid var(--ct-garis);
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(17, 27, 68, .18);
+    overflow: hidden;
+}
+.ct .ct-mandiri__kartu--sempit { max-width: 620px; }
+.ct .ct-mandiri__kepala {
+    padding: 20px 28px;
+    border-bottom: 3px solid var(--ct-kuning);
+}
+.ct .ct-mandiri__kepala h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--ct-navy-tinta);
+}
+.ct .ct-mandiri__kepala p { margin: 6px 0 0; font-size: 13.5px; color: var(--ct-teks-redup); }
+.ct .ct-mandiri__isi { padding: 24px 28px 28px; }
+.ct .ct-mandiri__kode {
+    font-size: 64px;
+    line-height: 1;
+    font-weight: 800;
+    color: var(--ct-navy);
+    margin-bottom: 8px;
+}
+.ct .ct-mandiri__aksi { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.ct .ct-mandiri__tombol {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: 1px solid var(--ct-navy);
+    background: var(--ct-navy);
+    color: var(--ct-putih);
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.ct .ct-mandiri__tombol:hover { background: var(--ct-navy-gelap); color: var(--ct-putih); text-decoration: none; }
+.ct .ct-mandiri__tombol--garis { background: transparent; color: var(--ct-navy); }
+.ct .ct-mandiri__tombol--garis:hover { background: var(--ct-kuning-lembut); color: var(--ct-navy); }
+.ct .ct-mandiri__tombol:disabled { opacity: .45; cursor: not-allowed; }
+.ct .ct-mandiri__rinci {
+    margin-top: 18px;
+    padding: 14px 16px;
+    background: var(--ct-panel-2);
+    border: 1px solid var(--ct-garis);
+    border-radius: 8px;
+    font-size: 12.5px;
+    text-align: left;
+}
+.ct .ct-mandiri__rinci pre { white-space: pre-wrap; margin: 8px 0 0; font-size: 12px; color: var(--ct-teks); }
+.ct .ct-mandiri__catatan {
+    display: flex;
+    gap: 10px;
+    padding: 12px 14px;
+    margin-bottom: 20px;
+    background: var(--ct-kuning-lembut);
+    border-left: 4px solid var(--ct-kuning);
+    border-radius: 6px;
+    font-size: 13.5px;
+    color: var(--ct-navy-tinta);
+}
+
+/* Pilih jabatan (select_role): dua kartu pilihan */
+.ct .ct-peran {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+.ct .ct-peran__kartu {
+    position: relative;
+    padding: 18px 20px;
+    border: 2px solid var(--ct-garis);
+    border-radius: 10px;
+    background: var(--ct-panel);
+    cursor: pointer;
+    transition: border-color .15s, box-shadow .15s, transform .15s;
+}
+.ct .ct-peran__kartu:hover { border-color: var(--ct-navy); transform: translateY(-2px); }
+.ct .ct-peran__kartu.selected {
+    border-color: var(--ct-navy);
+    background: var(--ct-panel-2);
+    box-shadow: inset 0 -3px 0 var(--ct-kuning), 0 8px 20px rgba(17, 27, 68, .12);
+}
+.ct .ct-peran__judul { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
+.ct .ct-peran__judul h5 { margin: 0; font-size: 15px; font-weight: 800; color: var(--ct-navy-tinta); }
+.ct .ct-peran__judul i { font-size: 22px; color: var(--ct-navy); margin-right: 8px; }
+.ct .ct-peran__lencana {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--ct-garis);
+    color: var(--ct-navy-tinta);
+    white-space: nowrap;
+}
+.ct .ct-peran__lencana--kuning { background: var(--ct-kuning); color: var(--ct-navy); }
+.ct .ct-peran dl { margin: 0; font-size: 13px; }
+.ct .ct-peran dt { font-weight: 700; color: var(--ct-teks-redup); font-size: 11.5px; margin-top: 8px; }
+.ct .ct-peran dd { margin: 0; color: var(--ct-teks); }
+.ct .ct-peran__tanda {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: none;
+    color: var(--ct-navy);
+}
+.ct .ct-peran__kartu.selected .ct-peran__tanda { display: block; }
+
+@media (max-width: 640px) {
+    .ct body.ct-mandiri { padding-top: 32px; }
+    .ct .ct-peran { grid-template-columns: 1fr; }
+    .ct .ct-mandiri__kepala, .ct .ct-mandiri__isi { padding-left: 18px; padding-right: 18px; }
+    .ct .ct-mandiri__aksi > * { flex: 1 1 100%; }
+}
+
+
+/* -------------------------------------------------------------
+ * 13. CETAK — hanya isi halaman
+ * ----------------------------------------------------------- */
+
+@media print {
+    .ct .ct-kepala,
+    .ct .dmp-nav,
+    .ct .ct-samping,
+    .ct .ct-tab-menu,
+    .ct .ct-muat,
+    .ct .ct-palet { display: none !important; } /* !important: bukan lawan spesifisitas - cetak memang harus mutlak bersih */
+
+    .ct body .wrapper .page-wrap .main-content,
+    .ct body.ct-samping-buka .wrapper .page-wrap .main-content {
+        margin: 0;
+        padding: 0;
+    }
+    .ct body { background: var(--ct-putih); }
+}

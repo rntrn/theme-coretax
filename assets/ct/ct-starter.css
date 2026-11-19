@@ -1,0 +1,207 @@
+/* =============================================================
+ * ct-starter.css — tambahan KHUSUS tema starter
+ *
+ * APA
+ *   Bagian yang tidak ada di DMP karena di sana ditangani hal
+ *   lain: judul halaman + remah roti, pita MODE DEMO, panel kiri
+ *   halaman login (di DMP diisi gambar logo dari admin), tombol
+ *   SSO, ikon intip sandi versi iconkit, galeri ikon.
+ *
+ * KENAPA BERKAS TERPISAH, BUKAN DITAMBAHKAN KE coretax.css
+ *   tokens.css, theme.css, dan coretax.css disalin UTUH dari DMP.
+ *   Selama tidak disunting, pembaruan dari DMP cukup disalin ulang
+ *   tanpa menggabung tangan. Semua yang baru tinggal di sini.
+ *
+ * Warna hanya lewat token (--ct-*, --dmp-*), supaya mode gelap dan
+ * pergantian tema warna ikut berlaku tanpa aturan tambahan.
+ * ============================================================= */
+
+/* ---------- Judul halaman + remah roti ---------------------- */
+.ct .ct-judul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 8px 16px;
+    margin: 4px 0 16px;
+}
+.ct .ct-judul h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--ct-navy);
+    letter-spacing: -.01em;
+}
+.ct[data-dmp-mode="dark"] .ct-judul h1 { color: var(--ct-teks); }
+.ct .ct-judul p { margin: 2px 0 0; font-size: 13px; color: var(--ct-teks-redup); }
+.ct .ct-remah {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 12px;
+    color: var(--ct-teks-redup);
+}
+.ct .ct-remah li + li::before { content: "/"; margin-right: 4px; opacity: .6; }
+.ct .ct-remah a { color: inherit; }
+.ct .ct-remah a:hover { color: var(--ct-navy-tinta); }
+.ct .ct-remah [aria-current] { color: var(--ct-teks); font-weight: 600; }
+
+/* ---------- Pesan kilat ------------------------------------- */
+.ct .ct-kilat {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    border-radius: 8px;
+    border: 1px solid var(--ct-garis);
+    background: var(--ct-panel);
+    font-size: 13px;
+}
+.ct .ct-kilat--sukses { border-color: #9fd8b5; background: #ecf8f0; color: #155c33; }
+.ct .ct-kilat--gagal  { border-color: #f0b4b4; background: #fdf0f0; color: #8a1f1f; }
+.ct[data-dmp-mode="dark"] .ct-kilat--sukses { background: rgba(46, 160, 90, .15); color: #9fe0b8; border-color: rgba(46, 160, 90, .4); }
+.ct[data-dmp-mode="dark"] .ct-kilat--gagal  { background: rgba(220, 60, 60, .15); color: #f3b0b0; border-color: rgba(220, 60, 60, .4); }
+
+/* ---------- Pita MODE DEMO ----------------------------------- */
+/* Sengaja mencolok dan tidak bisa ditutup: mode demo menerima akun
+   contoh, dan tidak boleh sampai ke produksi tanpa disadari. */
+.ct-pita-demo {
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+    z-index: 1100;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #b42318;
+    color: #fff;
+    font: 700 11px/1.6 var(--ct-font, sans-serif);
+    letter-spacing: .04em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
+    pointer-events: none;
+}
+@media print { .ct-pita-demo { display: none; } }
+
+/* ---------- Halaman login ------------------------------------ */
+/* DMP mengisi panel kiri dengan gambar logo penuh yang diunggah
+   admin. Starter mengisinya dengan logo + nama + kalimat pembuka. */
+.ct .ct-login-kiri {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    gap: 32px;
+}
+.ct .ct-login-kiri__merek { display: flex; align-items: center; gap: 12px; }
+.ct .ct-login-kiri__merek img { width: 44px; height: 44px; border-radius: 10px; background: #fff; padding: 4px; }
+.ct .ct-login-kiri__merek b { display: block; font-size: 18px; letter-spacing: .02em; }
+.ct .ct-login-kiri__merek small { display: block; opacity: .75; font-size: 12px; }
+.ct .ct-login-kiri h2 { margin: 0 0 12px; color: #fff; font-size: clamp(24px, 3vw, 36px); font-weight: 800; line-height: 1.2; }
+.ct .ct-login-kiri p { margin: 0; max-width: 460px; opacity: .85; font-size: 14px; line-height: 1.6; }
+.ct .ct-login-kiri ul { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 13px; }
+.ct .ct-login-kiri li i { color: var(--ct-kuning); margin-right: 8px; }
+.ct .ct-login-kiri__kaki { font-size: 12px; opacity: .65; }
+
+.ct .dmp-login__intip .ik { font-size: 15px; }
+.ct .dmp-login__intip .ik-eye-off { display: none; }
+.ct .dmp-login__intip[aria-pressed="true"] .ik-eye { display: none; }
+.ct .dmp-login__intip[aria-pressed="true"] .ik-eye-off { display: inline-block; }
+
+.ct .ct-atau {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 18px 0;
+    font-size: 11px;
+    color: var(--ct-teks-redup);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+}
+.ct .ct-atau::before,
+.ct .ct-atau::after { content: ""; flex: 1; height: 1px; background: var(--ct-garis); }
+
+.ct .ct-sso {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--ct-navy);
+    border-radius: 8px;
+    background: var(--ct-panel);
+    color: var(--ct-navy);
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+}
+.ct .ct-sso:hover { background: var(--ct-navy); color: #fff; text-decoration: none; }
+.ct[data-dmp-mode="dark"] .ct-sso { color: var(--ct-teks); border-color: var(--ct-garis); }
+.ct .ct-sso .ct-logo4 { flex: none; }
+
+.ct .ct-login-tutup {
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px dashed var(--ct-garis);
+    font-size: 13px;
+    color: var(--ct-teks-redup);
+    background: var(--ct-panel-2);
+}
+.ct .ct-akun-demo { margin-top: 14px; font-size: 12px; color: var(--ct-teks-redup); }
+.ct .ct-akun-demo code { font-size: 12px; }
+
+/* ---------- Galeri ikon (komponen.php) ----------------------- */
+.ct .ct-ikon-galeri {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 8px;
+}
+.ct .ct-ikon-galeri button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    border: 1px solid var(--ct-garis);
+    border-radius: 6px;
+    background: var(--ct-panel);
+    color: var(--ct-teks);
+    font-size: 12px;
+    text-align: left;
+    cursor: copy;
+}
+.ct .ct-ikon-galeri button:hover { border-color: var(--ct-navy-tinta); }
+.ct .ct-ikon-galeri i { font-size: 18px; color: var(--ct-navy-tinta); }
+
+/* ---------- Halaman galat (404/403) -------------------------- */
+.ct .ct-galat { text-align: center; padding: 48px 16px; }
+.ct .ct-galat__kode { font-size: 88px; font-weight: 800; line-height: 1; color: var(--ct-navy); opacity: .9; }
+.ct[data-dmp-mode="dark"] .ct-galat__kode { color: var(--ct-teks); }
+.ct .ct-galat p { color: var(--ct-teks-redup); }
+
+/* ---------- Potongan kode di dokumentasi -------------------- */
+.ct .ct-kode {
+    margin: 0 0 12px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: #0f1b33;
+    color: #dbe6ff;
+    font-size: 12px;
+    line-height: 1.55;
+    overflow-x: auto;
+}
+
+/* ---------- Isi dokumentasi (dokumentasi.php) ---------------- */
+.ct .ct-dok h2 { font-size: 22px; font-weight: 800; margin: 0 0 12px; color: var(--ct-navy); }
+.ct .ct-dok h3 { font-size: 17px; font-weight: 800; margin: 28px 0 10px; padding-top: 6px; color: var(--ct-navy); scroll-margin-top: 130px; }
+.ct .ct-dok h4 { font-size: 14px; font-weight: 700; margin: 18px 0 8px; scroll-margin-top: 130px; }
+.ct[data-dmp-mode="dark"] .ct-dok h2,
+.ct[data-dmp-mode="dark"] .ct-dok h3 { color: var(--ct-teks); }
+.ct .ct-dok p, .ct .ct-dok li { font-size: 13.5px; line-height: 1.65; }
+.ct .ct-dok hr { border-color: var(--ct-garis); margin: 24px 0; }
+.ct .ct-dok blockquote { margin: 12px 0; }
+.ct .ct-dok table { font-size: 13px; }

@@ -1,0 +1,127 @@
+<!doctype html>
+<html class="ct" lang="id" data-dmp-theme="biru" data-dmp-mode="light" data-dmp-palette="laut">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pengaturan Tema | CTX</title>
+    <link rel="icon" href="../../assets/ct/logo.svg">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../assets/vendor/iconkit/css/iconkit.min.css">
+        <link rel="stylesheet" href="../../assets/ct/tokens.css">
+    <link rel="stylesheet" href="../../assets/ct/theme.css">
+    <link rel="stylesheet" href="../../assets/ct/coretax.css">
+    <link rel="stylesheet" href="../../assets/ct/ct-starter.css">
+    </head>
+<body class="dmp-body dmp-scope">
+<div class="ct-pita-demo">MODE DEMO</div><div class="dmp-adm">
+    <aside class="dmp-adm__nav">
+        <div class="dmp-adm__merek">
+            <span class="dmp-adm__logo dmp-adm__logo--gambar"><img src="../../assets/ct/logo.svg" alt="" width="32" height="32"></span>
+            <div><b>Administrator</b><small>Tema Dasar Coretax</small></div>
+        </div>
+        <nav class="dmp-adm__menu">
+                            <a href="../admin/index.html" class="dmp-adm__butir">
+                    <i class="ik ik-grid"></i><span>Beranda Admin</span>
+                </a>
+                            <a href="../admin/pintu-masuk.html" class="dmp-adm__butir">
+                    <i class="ik ik-log-in"></i><span>Pintu Masuk</span>
+                </a>
+                            <a href="../admin/pengaturan.html" class="dmp-adm__butir aktif">
+                    <i class="ik ik-sliders"></i><span>Pengaturan Tema</span>
+                </a>
+                    </nav>
+        <div class="dmp-adm__kaki">
+            <a href="../dashboard.html" class="dmp-adm__kembali"><i class="ik ik-arrow-left"></i><span>Kembali ke Dashboard</span></a>
+            <div class="dmp-adm__user">
+                <span class="dmp-nav__avatar">A</span>
+                <span class="dmp-adm__user-teks"><b>ADMIN CONTOH</b><small>Administrator</small></span>
+            </div>
+        </div>
+    </aside>
+    <main class="dmp-adm__isi">
+        <header class="dmp-adm__kepala">
+            <h1>Pengaturan Tema</h1>
+            <p>Coba tema warna dan palet grafik. Bawaan seluruh pengguna diatur di config/app.php.</p>        </header>
+        <div class="dmp-card dmp-mb-4">
+    <div class="dmp-card__head"><h3 class="dmp-card__title">Tema warna</h3>
+        <p class="dmp-card__sub">Atribut <code>data-dmp-theme</code> pada &lt;html&gt;. Klik untuk mencoba.</p></div>
+    <div class="dmp-card__body dmp-flex dmp-flex-wrap dmp-gap-3">
+                    <button type="button" class="dmp-btn dmp-btn--utama" data-coba="tema" data-nilai="biru">Biru</button>
+                    <button type="button" class="dmp-btn dmp-btn--garis" data-coba="tema" data-nilai="hijau">Hijau</button>
+                    <button type="button" class="dmp-btn dmp-btn--garis" data-coba="tema" data-nilai="teal">Teal</button>
+                    <button type="button" class="dmp-btn dmp-btn--garis" data-coba="tema" data-nilai="nila">Nila</button>
+                    <button type="button" class="dmp-btn dmp-btn--garis" data-coba="tema" data-nilai="ungu">Ungu</button>
+                    <button type="button" class="dmp-btn dmp-btn--garis" data-coba="tema" data-nilai="anggrek">Anggrek</button>
+                    <button type="button" class="dmp-btn dmp-btn--garis" data-coba="tema" data-nilai="oranye">Oranye</button>
+                    <button type="button" class="dmp-btn dmp-btn--garis" data-coba="tema" data-nilai="bata">Bata</button>
+            </div>
+</div>
+<div class="dmp-card dmp-mb-4">
+    <div class="dmp-card__head"><h3 class="dmp-card__title">Mode</h3></div>
+    <div class="dmp-card__body dmp-flex dmp-gap-3">
+                    <button type="button" class="dmp-btn dmp-btn--utama" data-coba="mode" data-nilai="light">Terang</button>
+                    <button type="button" class="dmp-btn dmp-btn--garis" data-coba="mode" data-nilai="dark">Gelap</button>
+                    <button type="button" class="dmp-btn dmp-btn--garis" data-coba="mode" data-nilai="auto">Ikut sistem</button>
+            </div>
+</div>
+<div class="dmp-card dmp-mb-4">
+    <div class="dmp-card__head"><h3 class="dmp-card__title">Palet grafik</h3>
+        <p class="dmp-card__sub">Warna seri pada grafik DmpChart (<code>data-dmp-palette</code>).</p></div>
+    <div class="dmp-card__body dmp-flex dmp-flex-wrap dmp-gap-3">
+                    <button type="button" class="dmp-btn dmp-btn--utama" data-coba="palet" data-nilai="laut">Laut</button>
+                    <button type="button" class="dmp-btn dmp-btn--garis" data-coba="palet" data-nilai="bumi">Bumi</button>
+                    <button type="button" class="dmp-btn dmp-btn--garis" data-coba="palet" data-nilai="hutan">Hutan</button>
+                    <button type="button" class="dmp-btn dmp-btn--garis" data-coba="palet" data-nilai="senja">Senja</button>
+                    <button type="button" class="dmp-btn dmp-btn--garis" data-coba="palet" data-nilai="cerah">Cerah</button>
+                    <button type="button" class="dmp-btn dmp-btn--garis" data-coba="palet" data-nilai="lembut">Lembut</button>
+                    <button type="button" class="dmp-btn dmp-btn--garis" data-coba="palet" data-nilai="permen">Permen</button>
+                    <button type="button" class="dmp-btn dmp-btn--garis" data-coba="palet" data-nilai="kontras">Kontras</button>
+                    <button type="button" class="dmp-btn dmp-btn--garis" data-coba="palet" data-nilai="aman">Aman</button>
+                    <button type="button" class="dmp-btn dmp-btn--garis" data-coba="palet" data-nilai="abu">Abu</button>
+                    <button type="button" class="dmp-btn dmp-btn--garis" data-coba="palet" data-nilai="tunggal">Tunggal</button>
+            </div>
+</div>
+<div class="dmp-card dmp-mb-4">
+    <div class="dmp-card__head"><h3 class="dmp-card__title">Jadikan bawaan</h3></div>
+    <div class="dmp-card__body"><pre class="ct-kode" id="kodeBawaan"></pre>
+        <p class="dmp-help" style="margin:0">Salin ke <code>config/app.php</code> supaya berlaku untuk semua pengguna.</p></div>
+</div>
+        <footer class="dmp-adm__versi">CTX v1.0.0</footer>
+    </main>
+</div>
+<script src="../../assets/ct/dmp-urut.js" defer></script>
+<script src="../../assets/ct/ct-app.js" defer></script>
+<script>
+(function () {
+    var html = document.documentElement;
+    var csrf = "statis", url = "..\/tema-simpan.html";
+    function tulisKode() {
+        document.getElementById('kodeBawaan').textContent =
+            "'tema'  => '" + html.getAttribute('data-dmp-theme') + "',\n" +
+            "'mode'  => '" + (sessionStorage.getItem('ct_mode_pilih') || html.getAttribute('data-dmp-mode')) + "',\n" +
+            "'palet' => '" + html.getAttribute('data-dmp-palette') + "',";
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('[data-coba]'), function (b) {
+        b.addEventListener('click', function () {
+            var k = b.getAttribute('data-coba'), v = b.getAttribute('data-nilai');
+            var nyata = v === 'auto' ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : v;
+            html.setAttribute(k === 'tema' ? 'data-dmp-theme' : k === 'mode' ? 'data-dmp-mode' : 'data-dmp-palette', nyata);
+            if (k === 'mode') { try { sessionStorage.setItem('ct_mode_pilih', v); } catch (e) {} }
+            Array.prototype.forEach.call(document.querySelectorAll('[data-coba="' + k + '"]'), function (x) {
+                x.className = 'dmp-btn ' + (x === b ? 'dmp-btn--utama' : 'dmp-btn--garis');
+            });
+            var d = new FormData(); d.append(k, v); d.append('_ct', csrf);
+            fetch(url, { method: 'POST', body: d, credentials: 'same-origin' });
+            tulisKode();
+        });
+    });
+    tulisKode();
+})();
+</script>
+</body>
+</html>

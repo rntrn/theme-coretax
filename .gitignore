@@ -1,0 +1,5 @@
+# Data runtime (saklar pintu, catatan login & kunjungan) - per server, bukan kode
+/data/*.json
+/data/*.tmp
+# Hasil tools/ekspor-html.php dibuat ulang kapan saja
+# (sengaja TIDAK diabaikan: folder html/ dipakai sebagai pratinjau statis)
